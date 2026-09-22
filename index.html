@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>バランスホイール シミュレーション</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    #app {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    
+    /* キャンバス表示領域 */
+    #canvas-container {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 操作コントロールエリア（画面下部） */
+    #controls-wrapper {
+      flex-shrink: 0;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 12px 16px;
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .btn-cat {
+      padding: 10px 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border-radius: 24px;
+      border: 2px solid #1a202c;
+      background: #ffffff;
+      color: #1a202c;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-cat:active {
+      transform: scale(0.95);
+    }
+
+    /* 選択中のボタン */
+    .btn-cat.active {
+      background: var(--theme-color, #1a202c);
+      color: #ffffff;
+      border-color: #1a202c;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 満タンになったボタン */
+    .btn-cat.full {
+      border-color: var(--theme-color, #1a202c);
+    }
+
+    .btn-reset-container {
+      display: flex;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .btn-reset {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div id="canvas-container">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <div id="controls-wrapper">
+    <div class="category-grid" id="button-grid">
+      <!-- 8つのカテゴリーボタン -->
+    </div>
+    <div class="btn-reset-container">
+      <button class="btn-reset" id="btn-reset">リセット</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const buttonGrid = document.getElementById('button-grid');
+  const btnReset = document.getElementById('btn-reset');
+
+  // 8つの領域カテゴリー（「社会貢献」と「密教」を隣り合わせに配置）
+  const categories = [
+    { id: 0, name: '職業', color: '#e53e3e' },        // 赤
+    { id: 1, name: 'ファイナンス', color: '#dd6b20' },  // オレンジ
+    { id: 2, name: '社会貢献', color: '#d69e2e' },    // 黄（密教の隣）
+    { id: 3, name: '密教', color: '#38a169' },        // 緑（社会貢献の隣）
+    { id: 4, name: '知性', color: '#319795' },        // 水色
+    { id: 5, name: '人間関係', color: '#3182ce' },    // 青
+    { id: 6, name: '健康', color: '#805ad5' },        // 紫
+    { id: 7, name: '趣味', color: '#d53f8c' }         // ピンク
+  ];
+
+  // 各領域のレベル（0〜9段階）
+  let levels = new Array(8).fill(0);
+  let activeIndex = -1; // 現在選択中のカテゴリー
+
+  // 回転用変数
+  let rotationAngle = 0;
+  let isAllFull = false;
+
+  // ボタンの動的生成
+  categories.forEach((cat, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-cat';
+    btn.innerText = cat.name;
+    btn.dataset.index = index;
+    btn.style.setProperty('--theme-color', cat.color);
+
+    btn.addEventListener('click', () => {
+      // タップするごとにレベルを 1 増やす（最大 9）
+      levels[index] = (levels[index] + 1) % 10;
+      activeIndex = index;
+      
+      checkAllFull();
+      updateButtonStyles();
+    });
+
+    buttonGrid.appendChild(btn);
+  });
+
+  btnReset.addEventListener('click', () => {
+    levels = new Array(8).fill(0);
+    activeIndex = -1;
+    rotationAngle = 0;
+    isAllFull = false;
+    updateButtonStyles();
+  });
+
+  function checkAllFull() {
+    isAllFull = levels.every(lvl => lvl === 9);
+  }
+
+  function updateButtonStyles() {
+    const buttons = buttonGrid.querySelectorAll('.btn-cat');
+    buttons.forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === activeIndex);
+      btn.classList.toggle('full', levels[idx] === 9);
+    });
+  }
+
+  function resizeCanvas() {
+    const container = document.getElementById('canvas-container');
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(canvas.width, canvas.height) * 0.42;
+
+    // 全て満タンの場合、回転角を更新（速度を少しゆったりに調整）
+    if (isAllFull) {
+      rotationAngle += 0.006; 
+    }
+
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(rotationAngle);
+
+    const numSectors = 8;
+    const anglePerSector = (Math.PI * 2) / numSectors;
+
+    // --- 1. 段階レベル（全8色それぞれの塗りつぶし）描画 ---
+    for (let i = 0; i < numSectors; i++) {
+      const lvl = levels[i];
+      if (lvl > 0) {
+        // 9段階で外枠（100%）に到達するように計算
+        const fillRadius = radius * (lvl / 9);
+        const startAngle = i * anglePerSector - Math.PI / 2;
+        const endAngle = startAngle + anglePerSector;
+
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, fillRadius, startAngle, endAngle);
+        ctx.closePath();
+
+        // 該当カテゴリーごとの固有カラーをセット
+        ctx.fillStyle = categories[i].color;
+        ctx.fill();
+      }
+    }
+
+    // --- 2. 手書き風のグリッド（分割線と外円）描画 ---
+    ctx.strokeStyle = '#1a202c';
+    ctx.lineWidth = 3.5;
+    ctx.lineCap = 'round';
+
+    // 8分割の直線
+    for (let i = 0; i < numSectors; i++) {
+      const angle = i * anglePerSector - Math.PI / 2;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    // 外枠の円
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function loop() {
+    render();
+    requestAnimationFrame(loop);
+  }
+
+  resizeCanvas();
+  updateButtonStyles();
+  requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>
