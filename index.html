@@ -120,6 +120,11 @@
       font-weight: bold;
       border-radius: 16px;
       cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    
+    .btn-reset:active {
+      background-color: #e2e8f0;
     }
   </style>
 </head>
@@ -146,16 +151,16 @@
   const buttonGrid = document.getElementById('button-grid');
   const btnReset = document.getElementById('btn-reset');
 
-  // 8つの領域カテゴリー（「社会貢献」と「密教」を隣り合わせに配置）
+  // 時計回りのスムーズなグラデーション配置（社会貢献: 4時の薄い緑、密教: 5時の濃い緑）
   const categories = [
-    { id: 0, name: '職業', color: '#e53e3e' },        // 赤
-    { id: 1, name: 'ファイナンス', color: '#dd6b20' },  // オレンジ
-    { id: 2, name: '社会貢献', color: '#d69e2e' },    // 黄（密教の隣）
-    { id: 3, name: '密教', color: '#38a169' },        // 緑（社会貢献の隣）
-    { id: 4, name: '知性', color: '#319795' },        // 水色
-    { id: 5, name: '人間関係', color: '#3182ce' },    // 青
-    { id: 6, name: '健康', color: '#805ad5' },        // 紫
-    { id: 7, name: '趣味', color: '#d53f8c' }         // ピンク
+    { id: 0, name: '職業', color: '#e5a00d' },        // 12時方向: オレンジ
+    { id: 1, name: 'ファイナンス', color: '#ecc94b' },  // イエロー
+    { id: 2, name: '社会貢献', color: '#52b788' },    // 4時方向: 薄い緑系
+    { id: 3, name: '密教', color: '#1b4332' },        // 5時方向: 濃い緑系
+    { id: 4, name: '趣味', color: '#2b6cb0' },        // ディープブルー
+    { id: 5, name: '健康', color: '#3182ce' },        // ライトブルー
+    { id: 6, name: '知性', color: '#e53e3e' },        // 10時方向: 赤系
+    { id: 7, name: '人間関係', color: '#d53f8c' }     // 11時方向: ピンク系
   ];
 
   // 各領域のレベル（0〜9段階）
@@ -175,7 +180,7 @@
     btn.style.setProperty('--theme-color', cat.color);
 
     btn.addEventListener('click', () => {
-      // タップするごとにレベルを 1 増やす（最大 9）
+      // タップするごとにレベルを 1 増やす（9回で満タン、次は0へ戻る）
       levels[index] = (levels[index] + 1) % 10;
       activeIndex = index;
       
@@ -221,7 +226,7 @@
     const centerY = canvas.height / 2;
     const radius = Math.min(canvas.width, canvas.height) * 0.42;
 
-    // 全て満タンの場合、回転角を更新（速度を少しゆったりに調整）
+    // 全て満タンの場合、ゆっくり車輪が回転
     if (isAllFull) {
       rotationAngle += 0.006; 
     }
@@ -233,7 +238,7 @@
     const numSectors = 8;
     const anglePerSector = (Math.PI * 2) / numSectors;
 
-    // --- 1. 段階レベル（全8色それぞれの塗りつぶし）描画 ---
+    // --- 1. 段階レベル描画 ---
     for (let i = 0; i < numSectors; i++) {
       const lvl = levels[i];
       if (lvl > 0) {
