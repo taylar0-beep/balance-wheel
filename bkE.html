@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>JINの未来確信舎 — バランスウィール（BW）ピット診断</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans JP"', '"Inter"', 'sans-serif'],
+          },
+          colors: {
+            pit: {
+              950: '#070910',
+              900: '#0d1322',
+              800: '#161f33',
+              700: '#23304c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #070910;
+      background-image:
+        radial-gradient(at 10% 10%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+        radial-gradient(at 90% 20%, rgba(139, 92, 246, 0.10) 0px, transparent 50%),
+        radial-gradient(at 50% 95%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+      color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Custom Range Sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #1e293b;
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--thumb-color, #06b6d4);
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 12px var(--thumb-glow, rgba(6, 182, 212, 0.8));
+      transition: transform 0.12s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:active {
+      transform: scale(1.22);
+    }
+
+    /* Smooth Wizard Card Transitions */
+    .fade-enter {
+      animation: fadeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-slate-950 pb-24">
+
+  <!-- Top Navigation Bar (LINE WebView Friendly) -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-pit-950/90 backdrop-blur-md">
+    <div class="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/20">
+          <span class="font-black text-xs tracking-tighter text-white">BW</span>
+        </div>
+        <div>
+          <div class="text-[10px] font-bold tracking-wider text-cyan-400">JINの未来確信舎</div>
+          <h1 class="text-sm font-extrabold text-white leading-tight">バランスウィール・ピット診断</h1>
+        </div>
+      </div>
+
+      <!-- Discreet Demo / Reset Button -->
+      <div class="relative">
+        <button onclick="toggleDemoMenu()" class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-[11px] font-bold text-slate-300 border border-slate-700 transition flex items-center gap-1">
+          <span>⚙️ メニュー</span>
+        </button>
+        <div id="demoMenuDropdown" class="hidden absolute right-0 mt-2 w-56 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 space-y-1 text-xs">
+          <div class="px-2.5 py-1 text-[10px] font-bold text-slate-400 border-b border-slate-800">テスト用プリセット（結果へ移動）</div>
+          <button onclick="loadPresetAndJump('workaholic')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-amber-300 font-medium">① 特定領域偏重・パンク寸前型</button>
+          <button onclick="loadPresetAndJump('miniature')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-rose-300 font-medium">② 出力不足・ミニチュア車輪型</button>
+          <button onclick="loadPresetAndJump('slick')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-violet-300 font-medium">③ 現状サーキット周回型</button>
+          <button onclick="loadPresetAndJump('ideal')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-emerald-300 font-medium">④ 高出力・フルバランス型</button>
+          <div class="border-t border-slate-800 my-1"></div>
+          <button onclick="resetAllToDefault()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">🔄 すべて初期値(50%)に戻す</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Progress Bar (Visible during Steps 1-10) -->
+    <div id="wizardProgressHeader" class="hidden max-w-lg mx-auto px-4 pb-2.5">
+      <div class="flex items-center justify-between text-xs mb-1.5">
+        <span id="stepIndicatorText" class="font-bold text-cyan-300">STEP 1 / 10</span>
+        <span id="stepDomainNameMini" class="text-slate-400 font-medium">仕事・キャリア</span>
+      </div>
+      <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden flex gap-0.5 p-0.5">
+        <div id="progressBarSegments" class="w-full h-full flex gap-1"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container (Mobile-First Column) -->
+  <main class="max-w-lg mx-auto px-4 pt-5">
+
+    <!-- =================================================================== -->
+    <!-- SCREEN 0: INTRO / WELCOME SCREEN                                    -->
+    <!-- =================================================================== -->
+    <section id="screenIntro" class="space-y-6 fade-enter">
+      <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-pit-900 via-pit-900 to-slate-950 p-6 shadow-2xl space-y-5 text-center relative overflow-hidden">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 p-0.5 shadow-xl shadow-cyan-500/20">
+          <div class="w-full h-full bg-pit-950 rounded-[14px] flex items-center justify-center">
+            <!-- Tire / Wheel SVG Icon -->
+            <svg class="w-11 h-11 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="12" y1="3" x2="12" y2="9" />
+              <line x1="12" y1="15" x2="12" y2="21" />
+              <line x1="3" y1="12" x2="9" y2="12" />
+              <line x1="15" y1="12" x2="21" y2="12" />
+              <line x1="5.6" y1="5.6" x2="9.8" y2="9.8" />
+              <line x1="14.2" y1="14.2" x2="18.4" y2="18.4" />
+              <line x1="18.4" y1="5.6" x2="14.2" y2="9.8" />
+              <line x1="9.8" y1="14.2" x2="5.6" y2="18.4" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+            タイヤのことならタイヤ屋、BWなら未来確信舎
+          </span>
+          <h2 class="text-2xl font-black text-white leading-snug">
+            あなたの「人生の車輪」<br>いま綺麗に回っていますか？
+          </h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            F1マシンがどれほど高性能でも、タイヤの空気が抜けていたり、1本だけサイズが違えば真っ直ぐ走ることはできません。
+          </p>
+        </div>
+
+        <!-- How to Play Card -->
+        <div class="rounded-2xl bg-slate-950/80 border border-slate-800/90 p-4 text-left space-y-3">
+          <div class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+            <span>🏁</span>
+            <span>診断のやり方（全10領域・約1分）</span>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+              <span><strong>「〇に十字」の4つの軸（①上・②右・③下・④左）</strong>の好きな位置をタップ（またはスライド）して、直感でダイヤの形をセット！</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+              <span>「🚀 現状の外」「🌍 利他」の2つのカプセルボタンは、あてはまる時だけポンとタップ！</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+              <span>最後に、あなたの<strong>「10領域の円グラフ」</strong>と<strong>「ピット診断レポート」</strong>が表示されます！</span>
+            </li>
+          </ul>
+        </div>
+
+        <button onclick="startWizard()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 font-black text-base shadow-xl shadow-cyan-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2">
+          <span>ピット診断をスタートする</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SCREEN 1..10: WIZARD DOMAIN STEP (ZERO-SCROLL SINGLE SCREEN)        -->
+    <!-- =================================================================== -->
+    <section id="screenWizardStep" class="hidden">
+
+      <!-- Domain Card (Compact Zero-Scroll Design) -->
+      <div id="domainCard" class="rounded-3xl border border-slate-800 bg-pit-900/95 p-4 shadow-2xl space-y-3.5 fade-enter">
+
+        <!-- Compact Title & Description -->
+        <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span id="domainBadge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300">
+                THEME 01 / 10
+              </span>
+              <span id="domainSubtitle" class="text-[11px] text-slate-400 font-medium truncate">Career & Work</span>
+            </div>
+            <h2 id="domainTitle" class="text-lg font-black text-white leading-tight mt-0.5">1. 仕事・キャリア</h2>
+          </div>
+          <div class="text-right shrink-0">
+            <div class="text-[10px] text-slate-400">領域パワー</div>
+            <div id="quadrantAreaBadge" class="text-sm font-black text-cyan-300">6.3%</div>
+          </div>
+        </div>
+        <p id="domainDesc" class="text-xs text-slate-300 leading-snug">
+          社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。
+        </p>
+
+        <!-- =============================================================== -->
+        <!-- DIRECT-TOUCH CIRCLE + CROSSHAIRS (NO BULK BUTTONS)              -->
+        <!-- =============================================================== -->
+        <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 p-3 flex flex-col items-center">
+          <!-- Active Axis Hint Banner -->
+          <div id="activeAxisHint" class="w-full text-center py-1.5 px-2.5 rounded-lg bg-slate-900/90 border border-slate-800/80 text-[11px] text-slate-300 font-medium mb-1">
+            👆 十字の軸（①〜④）をタップまたはスライドして直感で調整
+          </div>
+
+          <!-- Canvas for Circle + Crosshairs + 4-Axis Diamond Polygon -->
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center select-none">
+            <canvas id="crosshairCircleCanvas" class="w-64 h-64 sm:w-72 sm:h-72 cursor-pointer touch-none"></canvas>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 2 SLEEK CAPSULE TOGGLE PILLS (現状の外 & 利他)                  -->
+        <!-- =============================================================== -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
+            <span class="font-bold text-slate-300">✨ 未来の視座スイッチ（あてはまればタップでON）</span>
+            <span>複数ON可</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <!-- Pill 1: Outside Status Quo -->
+            <button type="button" id="pillOutside" onclick="toggleCapsule('outside')"
+              class="p-2.5 rounded-2xl border text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none">
+              <div id="pillOutsideIcon" class="w-8 h-8 rounded-xl flex items-center justify-center text-base shrink-0 transition-colors">
+                🚀
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-black leading-tight" id="pillOutsideTitle">現状の外</div>
+                <div class="text-[10px] leading-tight mt-0.5 truncate" id="pillOutsideSub">達成方法がまだ未知</div>
+              </div>
+            </button>
+
+            <!-- Pill 2: Altruism / Contribution -->
+            <button type="button" id="pillAltruism" onclick="toggleCapsule('altruism')"
+              class="p-2.5 rounded-2xl border text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none">
+              <div id="pillAltruismIcon" class="w-8 h-8 rounded-xl flex items-center justify-center text-base shrink-0 transition-colors">
+                🌍
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-black leading-tight" id="pillAltruismTitle">利他・貢献</div>
+                <div class="text-[10px] leading-tight mt-0.5 truncate" id="pillAltruismSub">誰かの喜びにも繋がる</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step Navigation Buttons -->
+        <div class="flex items-center gap-2.5 pt-1">
+          <button onclick="prevStep()" id="btnPrevStep" class="w-1/3 py-3.5 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition flex items-center justify-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/></svg>
+            <span>戻る</span>
+          </button>
+          <button onclick="nextStep()" id="btnNextStep" class="w-2/3 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-sm shadow-lg shadow-cyan-500/20 active:scale-[0.99] transition flex items-center justify-center gap-1.5">
+            <span id="btnNextStepText">次のテーマへ (2/10)</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SCREEN 11: FINAL DIAGNOSTIC RESULT SCREEN                           -->
+    <!-- =================================================================== -->
+    <section id="screenResult" class="hidden space-y-6 fade-enter">
+
+      <!-- Result Hero Verdict Card -->
+      <div class="rounded-3xl border-2 border-cyan-500/50 bg-gradient-to-b from-pit-900 via-slate-900 to-pit-950 p-5 sm:p-6 shadow-2xl space-y-5">
+        <div class="flex items-center justify-between">
+          <span id="resBadge" class="px-3 py-1 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+            PIT TELEMETRY REPORT
+          </span>
+          <button onclick="goToStep(0)" class="text-xs text-slate-400 hover:text-white underline">
+            回答を微調整する
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-xs font-bold text-cyan-400">あなたのバランスウィール総合判定</div>
+          <h2 id="resTitle" class="text-xl sm:text-2xl font-black text-white leading-snug">
+            診断結果タイトル
+          </h2>
+        </div>
+
+        <!-- 3 Friendly Score Gauges -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
+            <div class="text-[11px] font-bold text-slate-400">車輪のバランス度</div>
+            <div id="scoreBalance" class="text-2xl font-black text-emerald-400 mt-1">100<span class="text-xs font-normal text-slate-400">点</span></div>
+            <div id="scoreBalanceSub" class="text-[10px] text-slate-400 mt-0.5">10等分の均等さ</div>
+          </div>
+          <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
+            <div class="text-[11px] font-bold text-slate-400">車輪の推進パワー</div>
+            <div id="scorePower" class="text-2xl font-black text-cyan-400 mt-1">6.3<span class="text-xs font-normal text-slate-400">%</span></div>
+            <div id="scorePowerSub" class="text-[10px] text-slate-400 mt-0.5">境界ゲート補正済</div>
+          </div>
+          <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
+            <div class="text-[11px] font-bold text-slate-400">現状の外・利他</div>
+            <div id="scoreHorizon" class="text-2xl font-black text-violet-400 mt-1">0<span class="text-xs font-normal text-slate-400">/20</span></div>
+            <div id="scoreHorizonSub" class="text-[10px] text-slate-400 mt-0.5">視座スイッチ数</div>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- BOUNDARY GATE (Θ & Γ) TELEMETRY SUMMARY BAR                     -->
+        <!-- =============================================================== -->
+        <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-cyan-300">⚡ コンフォートゾーン境界（変化の縁）判定</span>
+            <span id="gateSummaryBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300">10領域のゲート状態</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="rounded-xl bg-emerald-950/40 border border-emerald-500/30 p-2">
+              <div class="text-[10px] text-emerald-300 font-bold">🚀 境界突破（変化の縁）</div>
+              <div id="countSweetSpot" class="text-base font-black text-emerald-400 mt-0.5">0<span class="text-[10px] font-normal text-slate-400">領域</span></div>
+            </div>
+            <div class="rounded-xl bg-slate-900 border border-slate-700/70 p-2">
+              <div class="text-[10px] text-slate-300 font-bold">🏠 現状の快適圏内</div>
+              <div id="countComfortZone" class="text-base font-black text-slate-200 mt-0.5">10<span class="text-[10px] font-normal text-slate-400">領域</span></div>
+            </div>
+            <div class="rounded-xl bg-rose-950/40 border border-rose-500/30 p-2">
+              <div class="text-[10px] text-rose-300 font-bold">⚠️ 境界反発（急激すぎ）</div>
+              <div id="countRebound" class="text-base font-black text-rose-400 mt-0.5">0<span class="text-[10px] font-normal text-slate-400">領域</span></div>
+            </div>
+          </div>
+          <p id="gateExplanationText" class="text-[11px] text-slate-400 leading-relaxed"></p>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- PIE CHART (心のエネルギー配分) & WHEEL SHAPE RADAR               -->
+        <!-- =============================================================== -->
+        <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <div>
+              <h3 class="text-sm font-extrabold text-white">10領域のバランス構成比 ＆ 車輪の出力サイズ</h3>
+              <p class="text-[11px] text-slate-400">左の円グラフが「均等な10等分」に近く、右の十角形が「大きく外枠まで広がっている」ほど理想的な車輪です</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+            <!-- Pie Chart: Normalized Share -->
+            <div class="flex flex-col items-center">
+              <div class="text-xs font-bold text-cyan-300 mb-1">① 10領域のバランス構成比（円グラフ）</div>
+              <div class="text-[10px] text-slate-400 mb-2">外周の白メモリが「理想の10等分（各10%）」です</div>
+              <canvas id="resultPieCanvas" class="w-56 h-56"></canvas>
+            </div>
+
+            <!-- Wheel Polygon Chart: Absolute Size -->
+            <div class="flex flex-col items-center">
+              <div class="text-xs font-bold text-emerald-300 mb-1">② 車輪の出力サイズ（正十角形チャート）</div>
+              <div class="text-[10px] text-slate-400 mb-2">4要素の掛け算パワー（小さいと偽のバランス）</div>
+              <canvas id="resultWheelCanvas" class="w-56 h-56"></canvas>
+            </div>
+          </div>
+
+          <!-- 10 Domains Bar Breakdown -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-2">
+            <div class="flex justify-between text-[11px] font-bold text-slate-400">
+              <span>10領域のバランス内訳（理想構成比は各10.0%）</span>
+              <span>構成比 / 推進パワー</span>
+            </div>
+            <div id="resultDomainsList" class="space-y-1.5 text-xs"></div>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- JIN'S PIT CREW COMMENTARY (TIRE METAPHOR & SELF-CHECK LIMIT)    -->
+        <!-- =============================================================== -->
+        <div class="rounded-2xl bg-gradient-to-br from-slate-900 via-pit-900 to-cyan-950/30 border border-cyan-500/30 p-4 sm:p-5 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-sm">
+              🔧
+            </div>
+            <div>
+              <div class="text-[11px] font-bold text-cyan-400">PIT CREW TELEMETRY MESSAGE</div>
+              <div class="text-sm font-black text-white">未来確信舎 JINからのピット診断レポート</div>
+            </div>
+          </div>
+
+          <div id="resStoryBody" class="text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2.5"></div>
+
+          <!-- Weakest & Priority Domains Highlight -->
+          <div id="resBottleneckBox" class="rounded-xl bg-slate-950/90 border border-slate-800 p-3.5 space-y-1.5 text-xs"></div>
+
+          <!-- Mandatory Notice: Goal Contradictions (Blog) & True Role (Session/Mentor) -->
+          <div class="rounded-xl bg-indigo-950/50 border border-indigo-500/40 p-4 space-y-3 text-xs">
+            <div class="space-y-1">
+              <div class="font-extrabold text-cyan-300 flex items-center gap-1.5">
+                <span>🔍</span>
+                <span>ゴールの矛盾（10領域の整合性）のセルフチェックについて</span>
+              </div>
+              <p class="text-slate-300 leading-relaxed">
+                10個のゴール同士が互いに足を引っ張り合っていないか（領域間の矛盾）のセルフチェック方法（インドラ網のワーク）については、ブログの記事をご参照ください。
+              </p>
+            </div>
+
+            <div class="border-t border-indigo-500/30 pt-2.5 space-y-1">
+              <div class="font-extrabold text-indigo-300 flex items-center gap-1.5">
+                <span>⚠️</span>
+                <span>セルフチェックでは判定できない「本来果たすべき役割」について</span>
+              </div>
+              <p class="text-slate-300 leading-relaxed">
+                このアプリで判定できるのは、あくまで「タイヤが丸く均等に膨らんでいるか」という前提条件までです。あなたが世界で本来果たすべき役割（どのタイヤを履いてどこへ向かうべきか）については、人間のスコトーマ（盲点）に隠れるためセルフチェックでは判定できません。
+              </p>
+              <p class="text-cyan-300 font-bold leading-relaxed">
+                これについては、セッションまたはご自身のメンターに相談されることをお勧めします。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- COPY & SEND TO JIN NOTIFICATION (NO PRESSURE)                   -->
+        <!-- =============================================================== -->
+        <div class="rounded-2xl bg-slate-950 border border-slate-800 p-4 space-y-3 text-center">
+          <p class="text-xs font-bold text-slate-200">
+            ※診断結果のコピーがJINへ送信されます。
+          </p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            下のボタンを押すと診断結果データがコピーされますので、公式LINEのトーク画面に貼り付けてそのまま送信してください。
+          </p>
+
+          <button onclick="copyResultForLine()" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 font-black text-sm shadow-xl shadow-cyan-500/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <span>診断結果をコピーしてJINへ送信する</span>
+          </button>
+
+          <div id="copyToast" class="hidden rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 p-2.5 text-xs font-bold">
+            ✅ 診断結果をコピーしました！LINEトーク画面に「貼り付け」て送信してください。
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // =========================================================================
+    // 1. 10 DOMAINS & 4 SLIDER QUESTIONS (NO MATH JARGON ON UI)
+    // =========================================================================
+    const DOMAINS = [
+      {
+        id: 1,
+        name: '仕事・キャリア',
+        en: 'Career & Vocation',
+        color: '#06b6d4',
+        desc: '社会の中であなたの力を発揮し、周囲に価値を届ける「仕事・ライフワーク」のゴールについてイメージしてください。'
+      },
+      {
+        id: 2,
+        name: '人間関係・家族',
+        en: 'Relationships & Family',
+        color: '#3b82f6',
+        desc: '現状の枠を超えた新たな人間関係やコミュニティ、大切な家族との理想の関係についてイメージしてください。'
+      },
+      {
+        id: 3,
+        name: '生涯学習・知性',
+        en: 'Lifelong Learning',
+        color: '#6366f1',
+        desc: 'これから新しく学びたいこと、深めたい教養や知性の広がりについてイメージしてください。'
+      },
+      {
+        id: 4,
+        name: '趣味・遊び',
+        en: 'Hobbies & Play',
+        color: '#8b5cf6',
+        desc: '損得抜きで純粋に夢中になれる遊び、クリエイティブな趣味のゴールをイメージしてください。'
+      },
+      {
+        id: 5,
+        name: '社会貢献・利他',
+        en: 'Social Contribution',
+        color: '#a855f7',
+        desc: '地域や社会、世界がもっと良くなるために、あなたが貢献したいテーマをイメージしてください。'
+      },
+      {
+        id: 6,
+        name: 'ファイナンス・資産',
+        en: 'Finance & Wealth',
+        color: '#ec4899',
+        desc: 'あなたの全てのゴールを自由に実現するために必要な、経済的豊かさ・資産のゴールをイメージしてください。'
+      },
+      {
+        id: 7,
+        name: '健康・身体・美容',
+        en: 'Health, Body & Beauty',
+        color: '#f43f5e',
+        desc: '毎日を最高のエネルギーで駆け抜けるための、理想の身体・健康・美しさをイメージしてください。'
+      },
+      {
+        id: 8,
+        name: '抽象度・視座',
+        en: 'Higher Perspective',
+        color: '#f59e0b',
+        desc: '目先の損得にとらわれず、どれくらい広く高い視点から物事を見渡せているかをイメージしてください。'
+      },
+      {
+        id: 9,
+        name: 'リーダーシップ',
+        en: 'Leadership & Resonance',
+        color: '#10b981',
+        desc: '周囲の人たちの「できる確信」を自然と引き出し、一緒に未来へ進む力をイメージしてください。'
+      },
+      {
+        id: 10,
+        name: 'エソテリシティ・精神性',
+        en: 'Esotericity & Spirituality',
+        color: '#14b8a6',
+        desc: '目に見えない気の流れや、宇宙・自然全体との深い一体感（エソテリシティ・精神性）をイメージしてください。'
+      }
+    ];
+
+    // 4 Axes mapped to Top (①), Right (②), Bottom (③), Left (④) matching user's sketch
+    const QUESTIONS = [
+      {
+        key: 'A',
+        axisLabel: '① しっくり感',
+        badge: '① 上軸：しっくり感（受容度）',
+        title: 'そこへ向かう一歩が、違和感なく自然にしっくり来ますか？',
+        sub: '無理やり感や強い抵抗がなく、心が自然に受け入れられる感覚',
+        color: '#22d3ee',
+        glow: 'rgba(34, 211, 238, 0.7)'
+      },
+      {
+        key: 'P',
+        axisLabel: '② リアル感',
+        badge: '② 右軸：リアル感（臨場感）',
+        title: 'その理想の未来が、すでにそこにあるようにリアルに感じられますか？',
+        sub: '単なる言葉だけでなく、映像や空気感として手触りがある感覚',
+        color: '#34d399',
+        glow: 'rgba(52, 211, 153, 0.7)'
+      },
+      {
+        key: 'Q',
+        axisLabel: '③ ワクワク感',
+        badge: '③ 下軸：ワクワク感（望ましさ）',
+        title: '「やらなきゃ」ではなく、心の底から「そうしたい！」と思えますか？',
+        sub: '誰かからの義務ではなく、考えただけで自然とエネルギーが湧く感覚',
+        color: '#fbbf24',
+        glow: 'rgba(251, 191, 36, 0.7)'
+      },
+      {
+        key: 'E',
+        axisLabel: '④ できる確信',
+        badge: '④ 左軸：できる確信（エフィカシー）',
+        title: '「自分なら必ずそこに到達できる！」と確信していますか？',
+        sub: '過去の根拠は関係なく、未来の自分なら達成できるという揺るぎない確信',
+        color: '#a78bfa',
+        glow: 'rgba(167, 139, 250, 0.7)'
+      }
+    ];
+
+    // Wizard State: All 10 domains default to 50% for all 4 sliders
+    let currentStep = -1; // -1 = Intro, 0..9 = Domains 1..10, 10 = Result
+    let domainData = DOMAINS.map(() => ({
+      A: 50,
+      P: 50,
+      Q: 50,
+      E: 50,
+      outside: false,
+      altruism: false
+    }));
+
+    const EPSILON = 0.001;
+
+    // =========================================================================
+    // 2. HIDDEN CLPT MATHEMATICAL ENGINE (WITH BOUNDARY THRESHOLD Θ & GATE Γ_k)
+    //    - Effective Potential (§11.4): V_tilde_k = V0_k - alpha * P_k - kappa * P_k * Q_k * E_k
+    //    - Sigmoid Boundary Gate (§12.2.1): Gamma_k = 1 / (1 + exp(beta * (V_tilde_k - theta)))
+    //    - Effective Acceptance: A_eff_k = A_G_k * Gamma_k
+    //    - Manifestation: s_k^E = A_eff_k * P_k * Q_k * E_k
+    // =========================================================================
+    function calculateUnderlyingCLPT() {
+      const THETA = 0.50; // Comfort zone boundary threshold theta
+      const ALPHA = 0.42; // Presence weight
+      const KAPPA = 0.68; // Efficacy-amplified goal attraction weight
+      const BETA  = 10.0; // Sigmoid boundary sharpness near theta
+
+      const gateStates = []; // 'sweet_spot' | 'comfort_zone' | 'rebound'
+      const gamma_list = [];
+
+      const s_list = domainData.map(d => {
+        const A_G = d.A / 100;
+        const P   = d.P / 100;
+        const Q   = d.Q / 100;
+        const E   = d.E / 100;
+
+        // Baseline resistance V0: Higher when venturing Outside Status Quo or setting ambitious Q without A_G
+        const V0 = (d.outside ? 0.78 : 0.48) + 0.16 * Math.max(0, Q - A_G);
+
+        // Effective Cognitive Potential at goal g_k
+        const V_tilde = V0 - (ALPHA * P) - (KAPPA * P * Q * E);
+
+        // Sigmoid Boundary Gate Gamma_k = 1 / (1 + exp(beta * (V_tilde - theta)))
+        const gamma = 1 / (1 + Math.exp(BETA * (V_tilde - THETA)));
+        gamma_list.push(gamma);
+
+        // Classify Boundary State relative to theta
+        if (gamma < 0.62) {
+          // V_tilde > theta: Goal exceeds boundary without enough P*Q*E or A_G -> Homeostatic Rebound
+          gateStates.push('rebound');
+        } else if (d.outside && gamma >= 0.62 && (P * Q * E) >= 0.25) {
+          // Outside status quo AND successfully pulled V_tilde below theta -> Sweet Spot Breakthrough
+          gateStates.push('sweet_spot');
+        } else {
+          // Inside existing comfort zone
+          gateStates.push('comfort_zone');
+        }
+
+        // Effective Acceptance A_eff = A_G * Gamma_k
+        const A_eff = A_G * gamma;
+
+        // Domain Manifestation Score s_k^E = A_eff * P * Q * E
+        return A_eff * P * Q * E;
+      });
+
+      const totalS = s_list.reduce((acc, v) => acc + v, 0);
+
+      // 2. Normalized Pie Distribution: b_k = (s_k + eps) / sum(s_l + eps)
+      const denom = s_list.reduce((acc, v) => acc + (v + EPSILON), 0);
+      const b_list = s_list.map(s => (s + EPSILON) / denom);
+
+      // 3. KL Divergence Imbalance Penalty from uniform 1/10
+      let imbKL = 0;
+      for (let k = 0; k < 10; k++) {
+        imbKL += 0.1 * Math.log(0.1 / b_list[k]);
+      }
+      imbKL = Math.max(0, imbKL);
+
+      // Convert KL Divergence to an intuitive 0-100 Balance Score
+      const balanceScore = Math.round(100 * Math.exp(-imbKL * 2.4));
+
+      // Average of s_k (0.0% to 100.0%)
+      const avgS = totalS / 10;
+      const powerScorePct = Number((avgS * 100).toFixed(1));
+
+      // 4. Outside-TCZ & Altruism Checkboxes Count (out of 20)
+      const outsideCount = domainData.filter(d => d.outside).length;
+      const altruismCount = domainData.filter(d => d.altruism).length;
+      const checkTotal = outsideCount + altruismCount;
+
+      const sweetSpotCount = gateStates.filter(s => s === 'sweet_spot').length;
+      const comfortZoneCount = gateStates.filter(s => s === 'comfort_zone').length;
+      const reboundCount = gateStates.filter(s => s === 'rebound').length;
+
+      return {
+        s_list,
+        b_list,
+        gamma_list,
+        gateStates,
+        sweetSpotCount,
+        comfortZoneCount,
+        reboundCount,
+        totalS,
+        imbKL,
+        balanceScore,
+        powerScorePct,
+        outsideCount,
+        altruismCount,
+        checkTotal
+      };
+    }
+
+    // =========================================================================
+    // 3. WIZARD NAVIGATION LOGIC
+    // =========================================================================
+    function startWizard() {
+      goToStep(0);
+    }
+
+    function goToStep(stepIdx) {
+      currentStep = stepIdx;
+      const introEl = document.getElementById('screenIntro');
+      const stepEl = document.getElementById('screenWizardStep');
+      const resEl = document.getElementById('screenResult');
+      const progHeader = document.getElementById('wizardProgressHeader');
+
+      introEl.classList.add('hidden');
+      stepEl.classList.add('hidden');
+      resEl.classList.add('hidden');
+      progHeader.classList.add('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (stepIdx === -1) {
+        introEl.classList.remove('hidden');
+      } else if (stepIdx >= 0 && stepIdx < 10) {
+        progHeader.classList.remove('hidden');
+        stepEl.classList.remove('hidden');
+        renderProgressBar();
+        renderCurrentStepCard();
+      } else {
+        resEl.classList.remove('hidden');
+        renderFinalResults();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        goToStep(currentStep - 1);
+      } else {
+        goToStep(-1);
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 9) {
+        goToStep(currentStep + 1);
+      } else {
+        goToStep(10); // Show Final Result Screen
+      }
+    }
+
+    function renderProgressBar() {
+      document.getElementById('stepIndicatorText').textContent = `STEP ${currentStep + 1} / 10`;
+      document.getElementById('stepDomainNameMini').textContent = DOMAINS[currentStep].name;
+
+      const segContainer = document.getElementById('progressBarSegments');
+      segContainer.innerHTML = DOMAINS.map((dom, idx) => {
+        const isDone = idx < currentStep;
+        const isCurrent = idx === currentStep;
+        let bgClass = 'bg-slate-700';
+        if (isDone) bgClass = 'bg-cyan-500';
+        if (isCurrent) bgClass = 'bg-gradient-to-r from-cyan-400 to-blue-400 animate-pulse';
+        return `<button onclick="goToStep(${idx})" title="${dom.name}" class="flex-1 h-full rounded-full transition-all ${bgClass}"></button>`;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 4. STEP CARD & INTERACTIVE "CIRCLE WITH CROSSHAIRS" (〇に十字)
+    // =========================================================================
+    function renderCurrentStepCard() {
+      const dom = DOMAINS[currentStep];
+
+      // Retrigger subtle card animation
+      const card = document.getElementById('domainCard');
+      card.classList.remove('fade-enter');
+      void card.offsetWidth;
+      card.classList.add('fade-enter');
+
+      // Update Header Info
+      const badgeEl = document.getElementById('domainBadge');
+      badgeEl.textContent = `THEME ${String(dom.id).padStart(2, '0')} / 10`;
+      badgeEl.style.backgroundColor = `${dom.color}25`;
+      badgeEl.style.color = dom.color;
+
+      document.getElementById('domainSubtitle').textContent = dom.en;
+      document.getElementById('domainTitle').textContent = `${dom.id}. ${dom.name}`;
+      document.getElementById('domainDesc').textContent = dom.desc;
+
+      // Reset Axis Hint Banner
+      const hintEl = document.getElementById('activeAxisHint');
+      if (hintEl) {
+        hintEl.innerHTML = '👆 十字の軸（①しっくり・②リアル・③ワクワク・④確信）をタップして調整';
+      }
+
+      // Sync Capsule Toggle Buttons
+      renderCapsulePills();
+
+      // Update Next Button Label
+      const nextBtnText = document.getElementById('btnNextStepText');
+      if (currentStep < 9) {
+        nextBtnText.textContent = `次のテーマへ (${currentStep + 2}/10)`;
+      } else {
+        nextBtnText.textContent = 'ピット診断結果を見る！ 🏁';
+      }
+
+      // Draw the Circle with Crosshairs
+      drawCrosshairCircle();
+    }
+
+    function toggleCapsule(field) {
+      domainData[currentStep][field] = !domainData[currentStep][field];
+      renderCapsulePills();
+      drawCrosshairCircle();
+    }
+
+    function renderCapsulePills() {
+      const dVal = domainData[currentStep];
+
+      // Outside Status Quo Pill
+      const pOut = document.getElementById('pillOutside');
+      const pOutIcon = document.getElementById('pillOutsideIcon');
+      const pOutTitle = document.getElementById('pillOutsideTitle');
+      const pOutSub = document.getElementById('pillOutsideSub');
+
+      if (dVal.outside) {
+        pOut.className = 'p-2.5 rounded-2xl border-2 border-indigo-400 bg-indigo-500/20 shadow-lg shadow-indigo-500/20 text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none';
+        pOutIcon.className = 'w-8 h-8 rounded-xl bg-indigo-500 text-white flex items-center justify-center text-base shrink-0 shadow';
+        pOutTitle.className = 'text-xs font-black leading-tight text-white';
+        pOutTitle.textContent = '現状の外 ON ✓';
+        pOutSub.className = 'text-[10px] leading-tight mt-0.5 truncate text-indigo-200';
+      } else {
+        pOut.className = 'p-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 hover:border-slate-700 text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none opacity-80';
+        pOutIcon.className = 'w-8 h-8 rounded-xl bg-slate-900 text-slate-400 flex items-center justify-center text-base shrink-0';
+        pOutTitle.className = 'text-xs font-bold leading-tight text-slate-300';
+        pOutTitle.textContent = '現状の外';
+        pOutSub.className = 'text-[10px] leading-tight mt-0.5 truncate text-slate-500';
+      }
+
+      // Altruism Pill
+      const pAlt = document.getElementById('pillAltruism');
+      const pAltIcon = document.getElementById('pillAltruismIcon');
+      const pAltTitle = document.getElementById('pillAltruismTitle');
+      const pAltSub = document.getElementById('pillAltruismSub');
+
+      if (dVal.altruism) {
+        pAlt.className = 'p-2.5 rounded-2xl border-2 border-cyan-400 bg-cyan-500/20 shadow-lg shadow-cyan-500/20 text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none';
+        pAltIcon.className = 'w-8 h-8 rounded-xl bg-cyan-400 text-slate-950 flex items-center justify-center text-base shrink-0 shadow';
+        pAltTitle.className = 'text-xs font-black leading-tight text-white';
+        pAltTitle.textContent = '利他・貢献 ON ✓';
+        pAltSub.className = 'text-[10px] leading-tight mt-0.5 truncate text-cyan-200';
+      } else {
+        pAlt.className = 'p-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 hover:border-slate-700 text-left transition-all active:scale-[0.98] flex items-center gap-2.5 select-none opacity-80';
+        pAltIcon.className = 'w-8 h-8 rounded-xl bg-slate-900 text-slate-400 flex items-center justify-center text-base shrink-0';
+        pAltTitle.className = 'text-xs font-bold leading-tight text-slate-300';
+        pAltTitle.textContent = '利他・貢献';
+        pAltSub.className = 'text-[10px] leading-tight mt-0.5 truncate text-slate-500';
+      }
+    }
+
+    // =========================================================================
+    // Draw "Circle with Crosshairs & 4-Axis Diamond" (Exact match to user's sketch)
+    // Axis ① Top (12 o'clock): A
+    // Axis ② Right (3 o'clock): P
+    // Axis ③ Bottom (6 o'clock): Q
+    // Axis ④ Left (9 o'clock): E
+    // =========================================================================
+    function drawCrosshairCircle() {
+      const canvas = document.getElementById('crosshairCircleCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 288;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const maxR = size * 0.34; // Leaves generous room outside the circle for ①, ②, ③, ④ labels
+
+      const dVal = domainData[currentStep];
+      const domColor = DOMAINS[currentStep].color;
+
+      // Compute real-time CLPT manifestation for this domain (incorporating boundary gate Gamma_k)
+      const mNow = calculateUnderlyingCLPT();
+      const productPowerPct = (mNow.s_list[currentStep] * 100).toFixed(1);
+      const areaBadge = document.getElementById('quadrantAreaBadge');
+      if (areaBadge) {
+        areaBadge.textContent = `${productPowerPct}%`;
+      }
+
+      // 1. Draw Outer Circle & 50% Guide Ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.stroke();
+
+      // 50% Default Reference Ring (dashed)
+      ctx.beginPath();
+      ctx.arc(cx, cy, maxR * 0.5, 0, Math.PI * 2);
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 2. Draw Vertical & Horizontal Crosshair Axes inside the Circle
+      ctx.beginPath();
+      // Vertical axis (① Top to ③ Bottom)
+      ctx.moveTo(cx, cy - maxR);
+      ctx.lineTo(cx, cy + maxR);
+      // Horizontal axis (④ Left to ② Right)
+      ctx.moveTo(cx - maxR, cy);
+      ctx.lineTo(cx + maxR, cy);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(226, 232, 240, 0.75)';
+      ctx.stroke();
+
+      // Axis ticks at 25%, 50%, 75%
+      [0.25, 0.5, 0.75].forEach(t => {
+        const d = maxR * t;
+        ctx.beginPath();
+        ctx.moveTo(cx - 4, cy - d); ctx.lineTo(cx + 4, cy - d);
+        ctx.moveTo(cx - 4, cy + d); ctx.lineTo(cx + 4, cy + d);
+        ctx.moveTo(cx - d, cy - 4); ctx.lineTo(cx - d, cy + 4);
+        ctx.moveTo(cx + d, cy - 4); ctx.lineTo(cx + d, cy + 4);
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        ctx.stroke();
+      });
+
+      // 3. Calculate the 4 Vertex Coordinates on the Cross Axes
+      const pTop = {
+        key: 'A',
+        val: dVal.A,
+        x: cx,
+        y: cy - (dVal.A / 100) * maxR,
+        color: '#22d3ee',
+        label: '①',
+        subLabel: 'しっくり',
+        lx: cx,
+        ly: cy - maxR - 23
+      };
+      const pRight = {
+        key: 'P',
+        val: dVal.P,
+        x: cx + (dVal.P / 100) * maxR,
+        y: cy,
+        color: '#34d399',
+        label: '②',
+        subLabel: 'リアル',
+        lx: cx + maxR + 26,
+        ly: cy
+      };
+      const pBottom = {
+        key: 'Q',
+        val: dVal.Q,
+        x: cx,
+        y: cy + (dVal.Q / 100) * maxR,
+        color: '#fbbf24',
+        label: '③',
+        subLabel: 'ワクワク',
+        lx: cx,
+        ly: cy + maxR + 23
+      };
+      const pLeft = {
+        key: 'E',
+        val: dVal.E,
+        x: cx - (dVal.E / 100) * maxR,
+        y: cy,
+        color: '#a78bfa',
+        label: '④',
+        subLabel: 'できる確信',
+        lx: cx - maxR - 26,
+        ly: cy
+      };
+
+      const pts = [pTop, pRight, pBottom, pLeft];
+
+      // 4. Connect the 4 Points with Straight Lines to Form the Quadrilateral (Diamond)
+      ctx.beginPath();
+      ctx.moveTo(pTop.x, pTop.y);
+      ctx.lineTo(pRight.x, pRight.y);
+      ctx.lineTo(pBottom.x, pBottom.y);
+      ctx.lineTo(pLeft.x, pLeft.y);
+      ctx.closePath();
+
+      const polyGrad = ctx.createRadialGradient(cx, cy, 4, cx, cy, maxR);
+      polyGrad.addColorStop(0, `${domColor}95`);
+      polyGrad.addColorStop(1, 'rgba(34, 211, 238, 0.30)');
+      ctx.fillStyle = polyGrad;
+      ctx.fill();
+
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.stroke();
+
+      // 5. Draw Active Axis Segments from Center to Vertex + Large Finger-Friendly Handles
+      pts.forEach(pt => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(pt.x, pt.y);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = pt.color;
+        ctx.stroke();
+
+        // Outer Glow Halo around Thumb Handle
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = `${pt.color}33`;
+        ctx.fill();
+
+        // Draggable Handle Circle on Axis
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 9.5, 0, Math.PI * 2);
+        ctx.fillStyle = pt.color;
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
+        // Outer Axis Labels (① Top, ② Right, ③ Bottom, ④ Left)
+        ctx.fillStyle = pt.color;
+        ctx.font = '900 13px "Noto Sans JP", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${pt.label}${pt.val}%`, pt.lx, pt.ly - 6);
+
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = 'bold 10px "Noto Sans JP", sans-serif';
+        ctx.fillText(pt.subLabel, pt.lx, pt.ly + 8);
+      });
+
+      // Center Intersection Dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f8fafc';
+      ctx.fill();
+    }
+
+    // Direct Touch/Drag on the 4 Crosshair Axes (① Top, ② Right, ③ Bottom, ④ Left)
+    (function setupCircleTouchInteraction() {
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('crosshairCircleCanvas');
+        if (!canvas) return;
+        let activeAxisKey = null;
+
+        const axisMeta = {
+          A: { name: '① しっくり感（自然に受け入れられる）', color: '#22d3ee' },
+          P: { name: '② リアル感（すでにそこにある臨場感）', color: '#34d399' },
+          Q: { name: '③ ワクワク感（心の底からそうしたい）', color: '#fbbf24' },
+          E: { name: '④ できる確信（自分なら達成できる）', color: '#a78bfa' }
+        };
+
+        function pickNearestAxis(x, y) {
+          if (Math.abs(y) >= Math.abs(x)) {
+            return y <= 0 ? 'A' : 'Q';
+          } else {
+            return x >= 0 ? 'P' : 'E';
+          }
+        }
+
+        function handlePointer(e, isStart) {
+          const rect = canvas.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          const x = clientX - rect.left - rect.width / 2;
+          const y = clientY - rect.top - rect.height / 2;
+          const maxR = rect.width * 0.34;
+
+          if (isStart || !activeAxisKey) {
+            activeAxisKey = pickNearestAxis(x, y);
+          }
+
+          let projDist = 0;
+          if (activeAxisKey === 'A') projDist = Math.max(0, -y);
+          else if (activeAxisKey === 'P') projDist = Math.max(0, x);
+          else if (activeAxisKey === 'Q') projDist = Math.max(0, y);
+          else if (activeAxisKey === 'E') projDist = Math.max(0, -x);
+
+          // Snap to 5% increments for smooth, satisfying feel
+          const rawPct = Math.min(100, Math.max(5, Math.round((projDist / maxR) * 100)));
+          const pct = Math.round(rawPct / 5) * 5;
+
+          domainData[currentStep][activeAxisKey] = pct;
+
+          const hintEl = document.getElementById('activeAxisHint');
+          if (hintEl && axisMeta[activeAxisKey]) {
+            hintEl.innerHTML = `<span style="color:${axisMeta[activeAxisKey].color}; font-weight:900;">${axisMeta[activeAxisKey].name}：${pct}%</span>`;
+          }
+
+          drawCrosshairCircle();
+        }
+
+        canvas.addEventListener('mousedown', e => { handlePointer(e, true); });
+        window.addEventListener('mousemove', e => { if (activeAxisKey) handlePointer(e, false); });
+        window.addEventListener('mouseup', () => { activeAxisKey = null; });
+
+        canvas.addEventListener('touchstart', e => { handlePointer(e, true); e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchmove', e => { if (activeAxisKey) handlePointer(e, false); e.preventDefault(); }, { passive: false });
+        window.addEventListener('touchend', () => { activeAxisKey = null; });
+      });
+    })();
+
+    // =========================================================================
+    // 5. FINAL RESULT SCREEN RENDERING (NO FORMULAS, NO 100m METAPHOR)
+    // =========================================================================
+    function renderFinalResults() {
+      const m = calculateUnderlyingCLPT();
+
+      // Update 3 Top Score Cards
+      document.getElementById('scoreBalance').innerHTML = `${m.balanceScore}<span class="text-xs font-normal text-slate-400">点</span>`;
+      document.getElementById('scorePower').innerHTML = `${m.powerScorePct}<span class="text-xs font-normal text-slate-400">%</span>`;
+      document.getElementById('scoreHorizon').innerHTML = `${m.checkTotal}<span class="text-xs font-normal text-slate-400">/20</span>`;
+
+      // Update Boundary Gate (Theta & Gamma) Summary Bar
+      document.getElementById('countSweetSpot').innerHTML = `${m.sweetSpotCount}<span class="text-[10px] font-normal text-slate-400">領域</span>`;
+      document.getElementById('countComfortZone').innerHTML = `${m.comfortZoneCount}<span class="text-[10px] font-normal text-slate-400">領域</span>`;
+      document.getElementById('countRebound').innerHTML = `${m.reboundCount}<span class="text-[10px] font-normal text-slate-400">領域</span>`;
+
+      const gateExpEl = document.getElementById('gateExplanationText');
+      if (m.reboundCount > 0) {
+        gateExpEl.innerHTML = `⚠️ <strong>${m.reboundCount}つの領域</strong>で「現状の外のゴールに対して、しっくり感・リアル感・確信が追いつかず、無意識の反発（急ブレーキ）」が起きています。リアリティと確信を高めることで境界を突破できます。`;
+      } else if (m.sweetSpotCount >= 5) {
+        gateExpEl.innerHTML = `✨ <strong>${m.sweetSpotCount}つの領域</strong>が「現状の快適圏の境界」を心地よく突破し、未来側へホメオスタシスが書き換わるスイートスポットに入っています！`;
+      } else {
+        gateExpEl.innerHTML = `🏠 多くの領域が「今の延長線の快適圏内」に収まっています。「現状の外」のゴールを置き、4つの軸（しっくり・リアル・ワクワク・確信）を高めることで境界を突破できます。`;
+      }
+
+      // Draw Result Pie & Wheel Charts
+      drawResultPieChart(m.b_list);
+      drawResultWheelChart(m.s_list);
+
+      // Render 10 Domains Breakdown List
+      const listEl = document.getElementById('resultDomainsList');
+      listEl.innerHTML = DOMAINS.map((dom, idx) => {
+        const sharePct = (m.b_list[idx] * 100).toFixed(1);
+        const dVal = domainData[idx];
+        const domPowerPct = (m.s_list[idx] * 100).toFixed(1);
+        const isStarved = m.b_list[idx] < 0.055;
+        const gState = m.gateStates[idx];
+        let gateTag = '';
+        if (gState === 'sweet_spot') {
+          gateTag = '<span class="px-1.5 py-0.5 text-[9px] rounded bg-emerald-500/20 text-emerald-300 font-bold">境界突破</span>';
+        } else if (gState === 'rebound') {
+          gateTag = '<span class="px-1.5 py-0.5 text-[9px] rounded bg-rose-500/20 text-rose-300 font-bold">境界反発</span>';
+        }
+        return `
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border ${isStarved ? 'border-rose-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dom.color}"></span>
+              <span class="font-bold text-slate-100 truncate">${dom.id}. ${dom.name}</span>
+              ${gateTag}
+              ${dVal.outside ? '<span class="px-1.5 py-0.5 text-[9px] rounded bg-indigo-500/20 text-indigo-300 font-bold">現状の外</span>' : ''}
+              ${dVal.altruism ? '<span class="px-1.5 py-0.5 text-[9px] rounded bg-cyan-500/20 text-cyan-300 font-bold">利他</span>' : ''}
+            </div>
+            <div class="flex items-center gap-3 shrink-0 font-bold">
+              <span class="${isStarved ? 'text-rose-400' : 'text-emerald-300'}">${sharePct}%</span>
+              <span class="text-[11px] text-slate-400 w-20 text-right">出力 ${domPowerPct}%</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Identify Strongest & Weakest Domains
+      const ranked = DOMAINS.map((d, i) => ({
+        ...d,
+        s: m.s_list[i],
+        b: m.b_list[i],
+        raw: domainData[i]
+      })).sort((a, b) => a.s - b.s);
+
+      const weakest1 = ranked[0];
+      const weakest2 = ranked[1];
+      const strongest = ranked[ranked.length - 1];
+
+      // Determine Verdict Story (Tire & Alignment Metaphor, NO 100m metaphor)
+      let badgeText = '';
+      let badgeClass = '';
+      let titleText = '';
+      let storyParagraphs = [];
+
+      if (m.powerScorePct < 20 && m.balanceScore >= 75) {
+        // Case 1: Miniature Wheel / False Balance (e.g., default 50% across all -> power 6.3%)
+        badgeText = '要ピットイン // 空気圧・推進パワー不足';
+        badgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+        titleText = '【ミニチュア車輪タイプ】円グラフは10等分ですが、タイヤ全体の空気圧（推進パワー）が小さくまとまっています！';
+        storyParagraphs = [
+          `左の円グラフ（バランス度 <strong>${m.balanceScore}点</strong>）だけを見ると綺麗に10等分されていますが、右の正十角形チャートを見ると、車輪の推進パワーが平均 <strong>${m.powerScorePct}%</strong> と小さく縮こまっていることが分かります。`,
+          `4つの軸（①しっくり感・②リアル感・③ワクワク感・④できる確信）は「掛け算」で効いてくるため、すべてが50%（半分）だと、実際の推進パワーは「0.5×0.5×0.5×0.5＝<strong>6.25%</strong>」まで落ちてしまいます。`,
+          `これは「バランスが整っている」のではなく、<strong>「まだ本気でアクセルを踏める現状の外のゴールを置いていないため、歪みも生じていない状態」</strong>です。ピットインで全領域に確信の空気圧を充填し、車輪のサイズそのものを一気に拡張しましょう！`
+        ];
+      } else if (m.balanceScore < 68) {
+        // Case 2: Lopsided Wheel / Flat Tire in specific domains
+        badgeText = 'ピットイン推奨 // アライメント偏り警報';
+        badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        titleText = `【片輪パンク警報】「${strongest.name}」が突出する一方、「${weakest1.name}・${weakest2.name}」の空気圧が抜けています！`;
+        storyParagraphs = [
+          `あなたが力を入れている<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>のエネルギーは非常に高いですが、一方で<strong>「${weakest1.name}（${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（${(weakest2.b*100).toFixed(1)}%）」</strong>がしぼんでしまっています。`,
+          `人生のバランスウィールは10領域すべてで1つの車輪です。特定の領域だけ空気圧が抜けていたり、4つの軸のどれか1つでも欠けている領域があると、そこが強烈な引き戻し（ホメオスタシスのブレーキ）となり、せっかく頑張っている「${strongest.name}」の加速まで止めてしまいます。`,
+          `手薄になっている領域にも心からワクワクするゴールを設定し、10領域すべてのタイヤの空気圧を揃えるピット作業を行うことで、車輪全体が見違えるほど軽く転がり始めます！`
+        ];
+      } else if (m.checkTotal < 12) {
+        // Case 3: Balanced & Powered, BUT Low Checkboxes (Spinning in Status Quo Circuit)
+        badgeText = '視座アップ推奨 // 現状サーキット周回タイプ';
+        badgeClass = 'bg-violet-500/20 text-violet-300 border-violet-500/40';
+        titleText = '【スリックタイヤの罠】車輪は丸く出力も高いですが、「今の延長線のコース」を周回している可能性があります！';
+        storyParagraphs = [
+          `10領域のバランス度（<strong>${m.balanceScore}点</strong>）も車輪の推進パワー（<strong>${m.powerScorePct}%</strong>）も高い水準にありますが、「現状の外・利他性チェック（<strong>${m.checkTotal}/20項目</strong>）」にまだ大きな伸びしろがあります。`,
+          `F1のタイヤで例えるなら、<strong>「タイヤは丸くて空気圧も十分だけど、すでに走り慣れた安全な舗装路（現状のコンフォートゾーン）だけを周回している状態」</strong>です。`,
+          `タイヤが丸いのは前提に過ぎません。「いま自分の周りで雪が降っていなくても、どこかで大雪に立ち往生して困っている人を助けに行くために雪用タイヤに履き替える」——そんな<strong>現状の外の利他的なゴール</strong>が加わった瞬間、あなたの車輪は別次元のフィールドへ跳び出します！`
+        ];
+      } else {
+        // Case 4: High Balance, High Power, High Checkboxes (Still emphasize A_LUB self-check limit)
+        badgeText = '高出力バランス // さらなる高次役割へ';
+        badgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+        titleText = '【フルスペック車輪】10領域のバランスと推進パワーが揃っています！次は「本来果たすべき役割」の照合へ。';
+        storyParagraphs = [
+          `バランス度（<strong>${m.balanceScore}点</strong>）、推進パワー（<strong>${m.powerScorePct}%</strong>）、そして現状の外・利他性への意識（<strong>${m.checkTotal}/20項目</strong>）のすべてが高いレベルで揃っています！`,
+          `ご自身の意識の上では、10領域すべてに強いエネルギーが通った素晴らしい車輪です。`,
+          `ただし、<strong>「車輪が丸く均等に回っていること」と、「いま履いているタイヤが、あなたが本来果たすべき役割と本当に合致しているか」は別問題</strong>です。自分一人では気づけないスコトーマ（盲点）の外側にある役割については、ぜひ当ピットの個別セッション、またはご自身のメンターに相談してみてください！`
+        ];
+      }
+
+      const badgeEl = document.getElementById('resBadge');
+      badgeEl.className = `px-3 py-1 rounded-full text-xs font-black border ${badgeClass}`;
+      badgeEl.textContent = badgeText;
+      document.getElementById('resTitle').textContent = titleText;
+      document.getElementById('resStoryBody').innerHTML = storyParagraphs.map(p => `<p>${p}</p>`).join('');
+
+      // Bottleneck Box
+      document.getElementById('resBottleneckBox').innerHTML = `
+        <div class="font-bold text-amber-300 mb-1">🔧 今回のセルフチェックで見つかった「優先チューニング領域」</div>
+        <div class="text-slate-300">
+          ・<strong>${weakest1.id}. ${weakest1.name}</strong>（構成比 ${(weakest1.b*100).toFixed(1)}% / 出力 ${(weakest1.s*100).toFixed(1)}%）：4つの軸（①〜④）のうち一番凹んでいる軸を引き上げるだけで、掛け算の出力が一気に跳ね上がります。
+        </div>
+        <div class="text-slate-300">
+          ・<strong>${weakest2.id}. ${weakest2.name}</strong>（構成比 ${(weakest2.b*100).toFixed(1)}% / 出力 ${(weakest2.s*100).toFixed(1)}%）：手薄になっているこの領域にワクワクするゴールを置くと、車輪全体のブレが消えていきます。
+        </div>
+      `;
+    }
+
+    function drawResultPieChart(b_list) {
+      const canvas = document.getElementById('resultPieCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 224;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const outerR = size * 0.42;
+      const innerR = size * 0.20;
+
+      let startAngle = -Math.PI / 2;
+      b_list.forEach((share, idx) => {
+        const slice = share * Math.PI * 2;
+        const endAngle = startAngle + slice;
+        const dom = DOMAINS[idx];
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, startAngle, endAngle);
+        ctx.arc(cx, cy, innerR, endAngle, startAngle, true);
+        ctx.closePath();
+
+        ctx.fillStyle = dom.color;
+        ctx.fill();
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = '#070910';
+        ctx.stroke();
+
+        if (share >= 0.06) {
+          const mid = startAngle + slice / 2;
+          const lr = (outerR + innerR) / 2;
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 10px "Noto Sans JP", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(dom.name.slice(0, 2), cx + Math.cos(mid) * lr, cy + Math.sin(mid) * lr);
+        }
+        startAngle = endAngle;
+      });
+
+      // 10 Equal Ideal Ticks on Outer Ring
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(a) * (outerR + 2), cy + Math.sin(a) * (outerR + 2));
+        ctx.lineTo(cx + Math.cos(a) * (outerR + 7), cy + Math.sin(a) * (outerR + 7));
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = 'bold 10px "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('理想10等分', cx, cy);
+    }
+
+    function drawResultWheelChart(s_list) {
+      const canvas = document.getElementById('resultWheelCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 224;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const maxR = size * 0.36;
+
+      // Concentric Decagons
+      [0.25, 0.5, 0.75, 1.0].forEach(lv => {
+        const r = maxR * lv;
+        ctx.beginPath();
+        for (let i = 0; i < 10; i++) {
+          const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+          const x = cx + Math.cos(a) * r;
+          const y = cy + Math.sin(a) * r;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = lv === 1.0 ? 'rgba(16, 185, 129, 0.45)' : 'rgba(148, 163, 184, 0.16)';
+        ctx.lineWidth = lv === 1.0 ? 1.5 : 1;
+        ctx.stroke();
+      });
+
+      // Spokes & Short Labels
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+        ctx.stroke();
+
+        const lx = cx + Math.cos(a) * (maxR + 15);
+        const ly = cy + Math.sin(a) * (maxR + 15);
+        ctx.fillStyle = DOMAINS[i].color;
+        ctx.font = 'bold 9px "Noto Sans JP", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(DOMAINS[i].name.slice(0, 2), lx, ly);
+      }
+
+      // Draw Wheel Shape Polygon (plotting actual product s_k from 0 to 100%)
+      ctx.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        const rRatio = Math.max(0.05, s_list[i]);
+        const x = cx + Math.cos(a) * (maxR * rRatio);
+        const y = cy + Math.sin(a) * (maxR * rRatio);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(6, 182, 212, 0.30)';
+      ctx.fill();
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = '#22d3ee';
+      ctx.stroke();
+    }
+
+    // =========================================================================
+    // 6. MENU PRESETS, RESET & LINE CLIPBOARD SHARE
+    // =========================================================================
+    function toggleDemoMenu() {
+      const m = document.getElementById('demoMenuDropdown');
+      m.classList.toggle('hidden');
+    }
+
+    function resetAllToDefault() {
+      domainData = DOMAINS.map(() => ({
+        A: 50,
+        P: 50,
+        Q: 50,
+        E: 50,
+        outside: false,
+        altruism: false
+      }));
+      document.getElementById('demoMenuDropdown').classList.add('hidden');
+      goToStep(0);
+    }
+
+    function loadPresetAndJump(type) {
+      document.getElementById('demoMenuDropdown').classList.add('hidden');
+      if (type === 'workaholic') {
+        domainData = [
+          { A: 90, P: 95, Q: 90, E: 90, outside: true,  altruism: true },  // 1. 仕事
+          { A: 35, P: 30, Q: 45, E: 35, outside: false, altruism: false }, // 2. 家族
+          { A: 75, P: 70, Q: 80, E: 70, outside: true,  altruism: false }, // 3. 学習
+          { A: 25, P: 20, Q: 40, E: 30, outside: false, altruism: false }, // 4. 趣味
+          { A: 45, P: 40, Q: 55, E: 45, outside: false, altruism: true },  // 5. 社会貢献
+          { A: 85, P: 90, Q: 85, E: 85, outside: true,  altruism: false }, // 6. 資産
+          { A: 40, P: 35, Q: 50, E: 40, outside: false, altruism: false }, // 7. 健康
+          { A: 65, P: 60, Q: 70, E: 60, outside: true,  altruism: true },  // 8. 抽象度
+          { A: 80, P: 75, Q: 80, E: 75, outside: true,  altruism: true },  // 9. リーダーシップ
+          { A: 25, P: 20, Q: 35, E: 25, outside: false, altruism: false }  // 10. 精神性
+        ];
+      } else if (type === 'miniature') {
+        domainData = DOMAINS.map(() => ({ A: 50, P: 50, Q: 50, E: 50, outside: false, altruism: false }));
+      } else if (type === 'slick') {
+        domainData = DOMAINS.map(() => ({ A: 85, P: 85, Q: 85, E: 85, outside: false, altruism: false }));
+      } else if (type === 'ideal') {
+        domainData = DOMAINS.map(() => ({ A: 90, P: 90, Q: 92, E: 90, outside: true, altruism: true }));
+      }
+      goToStep(10);
+    }
+
+    function copyResultForLine() {
+      const m = calculateUnderlyingCLPT();
+      const title = document.getElementById('resTitle').textContent.trim();
+      const lines = [
+        '【JINの未来確信舎 — BWピット診断シート】',
+        `🏁 判定: ${title}`,
+        `・車輪のバランス度: ${m.balanceScore}点 / 100点`,
+        `・車輪の推進パワー: ${m.powerScorePct}%`,
+        `・現状の外・利他チェック: ${m.checkTotal} / 20項目`,
+        `・境界判定: 突破${m.sweetSpotCount} / 快適圏${m.comfortZoneCount} / 反発${m.reboundCount}`,
+        '--- 10領域のバランス構成比 (推進パワー) ---'
+      ];
+      DOMAINS.forEach((d, idx) => {
+        const sharePct = (m.b_list[idx] * 100).toFixed(1);
+        const pwrPct = (m.s_list[idx] * 100).toFixed(1);
+        const gLabel = m.gateStates[idx] === 'sweet_spot' ? '境界突破' : (m.gateStates[idx] === 'rebound' ? '境界反発' : '快適圏');
+        const flags = [
+          gLabel,
+          domainData[idx].outside ? '現状の外' : '',
+          domainData[idx].altruism ? '利他' : ''
+        ].filter(Boolean).join('/');
+        lines.push(`${d.id}. ${d.name}: 構成比${sharePct}% (出力${pwrPct}%) [${flags}]`);
+      });
+
+      const ta = document.createElement('textarea');
+      ta.value = lines.join('\n');
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+
+      const toast = document.getElementById('copyToast');
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 5000);
+    }
+  </script>
+</body>
+</html>
