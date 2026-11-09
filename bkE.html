@@ -541,8 +541,8 @@
     const QUESTIONS = [
       {
         key: 'A',
-        axisLabel: '① しっくり感',
-        badge: '① 上軸：しっくり感（受容度）',
+        axisLabel: '① しっくりくる感',
+        badge: '① 上軸：しっくりくる感（受容度）',
         title: 'そこへ向かう一歩が、違和感なく自然にしっくり来ますか？',
         sub: '無理やり感や強い抵抗がなく、心が自然に受け入れられる感覚',
         color: '#22d3ee',
@@ -559,8 +559,8 @@
       },
       {
         key: 'Q',
-        axisLabel: '③ ワクワク感',
-        badge: '③ 下軸：ワクワク感（望ましさ）',
+        axisLabel: '③ 心から向かいたい感',
+        badge: '③ 下軸：心から向かいたい感（望ましさ）',
         title: '「やらなきゃ」ではなく、心の底から「そうしたい！」と思えますか？',
         sub: '誰かからの義務ではなく、考えただけで自然とエネルギーが湧く感覚',
         color: '#fbbf24',
@@ -778,7 +778,7 @@
       // Reset Axis Hint Banner
       const hintEl = document.getElementById('activeAxisHint');
       if (hintEl) {
-        hintEl.innerHTML = '👆 十字の軸（①しっくり・②リアル・③ワクワク・④確信）をタップして調整';
+        hintEl.innerHTML = '👆 十字の軸（①しっくりくる・②リアル・③心から向かいたい・④確信）をタップして調整';
       }
 
       // Sync Capsule Toggle Buttons
@@ -931,7 +931,7 @@
         y: cy - (dVal.A / 100) * maxR,
         color: '#22d3ee',
         label: '①',
-        subLabel: 'しっくり',
+        subLabel: 'しっくりくる',
         lx: cx,
         ly: cy - maxR - 23
       };
@@ -953,7 +953,7 @@
         y: cy + (dVal.Q / 100) * maxR,
         color: '#fbbf24',
         label: '③',
-        subLabel: 'ワクワク',
+        subLabel: '心から向かいたい',
         lx: cx,
         ly: cy + maxR + 23
       };
@@ -1040,7 +1040,7 @@
         let activeAxisKey = null;
 
         const axisMeta = {
-          A: { name: '① しっくり感（自然に受け入れられる）', color: '#22d3ee' },
+          A: { name: '① しっくりくる感（自然に受け入れられる）', color: '#22d3ee' },
           P: { name: '② リアル感（すでにそこにある臨場感）', color: '#34d399' },
           Q: { name: '③ ワクワク感（心の底からそうしたい）', color: '#fbbf24' },
           E: { name: '④ できる確信（自分なら達成できる）', color: '#a78bfa' }
@@ -1114,11 +1114,11 @@
 
       const gateExpEl = document.getElementById('gateExplanationText');
       if (m.reboundCount > 0) {
-        gateExpEl.innerHTML = `⚠️ <strong>${m.reboundCount}つの領域</strong>で「現状の外のゴールに対して、しっくり感・リアル感・確信が追いつかず、無意識の反発（急ブレーキ）」が起きています。リアリティと確信を高めることで境界を突破できます。`;
+        gateExpEl.innerHTML = `⚠️ <strong>${m.reboundCount}つの領域</strong>で「現状の外のゴールに対して、しっくりくる感・リアル感・確信が追いつかず、無意識の反発（急ブレーキ）」が起きています。リアリティと確信を高めることで境界を突破できます。`;
       } else if (m.sweetSpotCount >= 5) {
         gateExpEl.innerHTML = `✨ <strong>${m.sweetSpotCount}つの領域</strong>が「現状の快適圏の境界」を心地よく突破し、未来側へホメオスタシスが書き換わるスイートスポットに入っています！`;
       } else {
-        gateExpEl.innerHTML = `🏠 多くの領域が「今の延長線の快適圏内」に収まっています。「現状の外」のゴールを置き、4つの軸（しっくり・リアル・ワクワク・確信）を高めることで境界を突破できます。`;
+        gateExpEl.innerHTML = `🏠 多くの領域が「今の延長線の快適圏内」に収まっています。「現状の外」のゴールを置き、4つの軸（しっくりくる・リアル・心から向かいたい・確信）を高めることで境界を突破できます。`;
       }
 
       // Draw Result Pie & Wheel Charts
@@ -1181,7 +1181,7 @@
         titleText = '【ミニチュア車輪タイプ】円グラフは10等分ですが、タイヤ全体の空気圧（推進パワー）が小さくまとまっています！';
         storyParagraphs = [
           `左の円グラフ（バランス度 <strong>${m.balanceScore}点</strong>）だけを見ると綺麗に10等分されていますが、右の正十角形チャートを見ると、車輪の推進パワーが平均 <strong>${m.powerScorePct}%</strong> と小さく縮こまっていることが分かります。`,
-          `4つの軸（①しっくり感・②リアル感・③ワクワク感・④できる確信）は「掛け算」で効いてくるため、すべてが50%（半分）だと、実際の推進パワーは「0.5×0.5×0.5×0.5＝<strong>6.25%</strong>」まで落ちてしまいます。`,
+          `4つの軸（①しっくりくる感・②リアル感・③心から向かいたい感・④できる確信）は「掛け算」で効いてくるため、すべてが50%（半分）だと、実際の推進パワーは「0.5×0.5×0.5×0.5＝<strong>6.25%</strong>」まで落ちてしまいます。`,
           `これは「バランスが整っている」のではなく、<strong>「まだ本気でアクセルを踏める現状の外のゴールを置いていないため、歪みも生じていない状態」</strong>です。ピットインで全領域に確信の空気圧を充填し、車輪のサイズそのものを一気に拡張しましょう！`
         ];
       } else if (m.balanceScore < 68) {
