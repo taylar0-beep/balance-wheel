@@ -131,11 +131,14 @@
   <!-- Main Container (Mobile-First Column) -->
   <main class="max-w-lg mx-auto px-4 pt-5">
 
-    <!-- SCREEN 0: INTRO / WELCOME SCREEN -->
+    <!-- =================================================================== -->
+    <!-- SCREEN 0: INTRO / WELCOME SCREEN                                    -->
+    <!-- =================================================================== -->
     <section id="screenIntro" class="space-y-6 fade-enter">
       <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-pit-900 via-pit-900 to-slate-950 p-6 shadow-2xl space-y-5 text-center relative overflow-hidden">
         <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 p-0.5 shadow-xl shadow-cyan-500/20">
           <div class="w-full h-full bg-pit-950 rounded-[14px] flex items-center justify-center">
+            <!-- Tire / Wheel SVG Icon -->
             <svg class="w-11 h-11 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <circle cx="12" cy="12" r="9" />
               <circle cx="12" cy="12" r="3" />
@@ -192,9 +195,15 @@
       </div>
     </section>
 
-    <!-- SCREEN 1..10: WIZARD DOMAIN STEP -->
+    <!-- =================================================================== -->
+    <!-- SCREEN 1..10: WIZARD DOMAIN STEP                                    -->
+    <!-- =================================================================== -->
     <section id="screenWizardStep" class="hidden">
+
+      <!-- Domain Card -->
       <div id="domainCard" class="rounded-3xl border border-slate-800 bg-pit-900/95 p-4 shadow-2xl space-y-3.5 fade-enter">
+
+        <!-- Compact Title & Description -->
         <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
           <div class="min-w-0">
             <div class="flex items-center gap-2">
@@ -214,17 +223,22 @@
           社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。
         </p>
 
-        <!-- DIRECT-TOUCH CIRCLE + CROSSHAIRS -->
+        <!-- =============================================================== -->
+        <!-- DIRECT-TOUCH CIRCLE + CROSSHAIRS (NO BULK BUTTONS)              -->
+        <!-- =============================================================== -->
         <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 p-3 flex flex-col items-center">
+          <!-- Active Axis Hint Banner -->
           <div id="activeAxisHint" class="w-full text-center py-2 px-3 rounded-lg bg-slate-900/90 border border-slate-800/80 text-xs sm:text-sm text-slate-200 font-medium mb-1">
             👆 十字の軸（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）をタップ
           </div>
 
+          <!-- Canvas for Circle + Crosshairs + 4-Axis Diamond Polygon -->
           <div class="relative w-72 h-72 flex items-center justify-center select-none">
             <canvas id="crosshairCircleCanvas" class="w-72 h-72 cursor-pointer touch-none"></canvas>
           </div>
         </div>
 
+        <!-- Step Navigation Buttons (No repetitive checkboxes!) -->
         <div class="flex items-center gap-2.5 pt-1">
           <button onclick="prevStep()" id="btnPrevStep" class="w-1/3 py-3.5 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base transition flex items-center justify-center gap-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/></svg>
@@ -235,10 +249,13 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
+
       </div>
     </section>
 
-    <!-- SCREEN 10.5: FINAL PUNCTURE CHECK -->
+    <!-- =================================================================== -->
+    <!-- SCREEN 10.5: FINAL 1-SCREEN PUNCTURE CHECK (現状の外 一括確認)       -->
+    <!-- =================================================================== -->
     <section id="screenGateCheck" class="hidden space-y-5 fade-enter">
       <div class="rounded-3xl border border-slate-800 bg-pit-900/95 p-5 shadow-2xl space-y-4">
         <div class="space-y-1.5">
@@ -271,8 +288,12 @@
       </div>
     </section>
 
-    <!-- SCREEN 11: FINAL DIAGNOSTIC RESULT SCREEN -->
+    <!-- =================================================================== -->
+    <!-- SCREEN 11: FINAL DIAGNOSTIC RESULT SCREEN                           -->
+    <!-- =================================================================== -->
     <section id="screenResult" class="hidden space-y-6 fade-enter">
+
+      <!-- Result Hero Verdict Card -->
       <div class="rounded-3xl border-2 border-cyan-500/50 bg-gradient-to-b from-pit-900 via-slate-900 to-pit-950 p-5 sm:p-6 shadow-2xl space-y-5">
         <div class="flex items-center justify-between">
           <span id="resBadge" class="px-3.5 py-1 rounded-full text-sm font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
@@ -290,7 +311,7 @@
           </h2>
         </div>
 
-        <!-- 3 Friendly Score Gauges -->
+        <!-- 3 Friendly Score Gauges (Zero arbitrary constants) -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
             <div class="text-xs font-bold text-slate-300">不均衡ズレ (Imb)</div>
@@ -309,7 +330,9 @@
           </div>
         </div>
 
-        <!-- PIE CHART & WHEEL SHAPE RADAR -->
+        <!-- =============================================================== -->
+        <!-- PIE CHART & WHEEL SHAPE RADAR (STACKED VERTICALLY)              -->
+        <!-- =============================================================== -->
         <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 space-y-5">
           <div class="border-b border-slate-800 pb-3">
             <h3 class="text-base font-extrabold text-white">10領域の心理的バランス分布（円グラフ）＆ 顕現パワー</h3>
@@ -317,12 +340,14 @@
           </div>
 
           <div class="flex flex-col gap-6 items-center">
+            <!-- Chart 1: Pie Chart (Normalized Share) -->
             <div class="w-full rounded-xl bg-slate-900/60 border border-slate-800/80 p-4 flex flex-col items-center">
               <div class="text-sm font-bold text-cyan-300 mb-1">① 心理的バランス構成比（円グラフ）</div>
               <div class="text-xs text-slate-300 mb-3">外周の白メモリが「理想の10等分（各10%）」です</div>
               <canvas id="resultPieCanvas" class="w-64 h-64"></canvas>
             </div>
 
+            <!-- Chart 2: Wheel Polygon Chart (Absolute Size) -->
             <div class="w-full rounded-xl bg-slate-900/60 border border-slate-800/80 p-4 flex flex-col items-center">
               <div class="text-sm font-bold text-cyan-300 mb-1">② 車輪の出力サイズ（正十角形チャート）</div>
               <div class="text-xs text-slate-300 mb-3">4要素の掛け算パワー（小さいと偽のバランス）</div>
@@ -330,6 +355,7 @@
             </div>
           </div>
 
+          <!-- 10 Domains Bar Breakdown -->
           <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
             <div class="flex justify-between text-xs font-bold text-slate-300">
               <span>10領域の心理的バランス内訳（理想構成比は各10.0%）</span>
@@ -339,7 +365,9 @@
           </div>
         </div>
 
-        <!-- COMMENTARY -->
+        <!-- =============================================================== -->
+        <!-- JIN'S PIT CREW COMMENTARY (HONEST SCOPE & SELF-CHECK LIMITS)    -->
+        <!-- =============================================================== -->
         <div class="rounded-2xl bg-gradient-to-br from-slate-900 via-pit-900 to-cyan-950/30 border border-cyan-500/30 p-4 sm:p-5 space-y-4">
           <div class="flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-base">
@@ -353,9 +381,10 @@
 
           <div id="resStoryBody" class="text-sm sm:text-base text-slate-200 leading-relaxed space-y-3"></div>
 
+          <!-- Weakest & Priority Domains Highlight -->
           <div id="resBottleneckBox" class="rounded-xl bg-slate-950/90 border border-slate-800 p-4 space-y-2 text-sm"></div>
 
-          <!-- Honest Scope Disclosure -->
+          <!-- Honest Scope Disclosure: What this app measures vs What requires Blog / Session / Mentor -->
           <div class="rounded-xl bg-indigo-950/50 border border-indigo-500/40 p-4 space-y-3.5 text-sm">
             <div class="space-y-1.5">
               <div class="font-extrabold text-emerald-300 flex items-center gap-1.5">
@@ -392,7 +421,9 @@
           </div>
         </div>
 
-        <!-- LINE COPY NOTIFICATION -->
+        <!-- =============================================================== -->
+        <!-- COPY & SEND TO JIN NOTIFICATION (NO PRESSURE)                   -->
+        <!-- =============================================================== -->
         <div class="rounded-2xl bg-slate-950 border border-slate-800 p-4 space-y-3 text-center">
           <p class="text-sm font-bold text-slate-200">
             ※診断結果のコピーがJINへ送信されます。
@@ -412,6 +443,7 @@
         </div>
 
       </div>
+
     </section>
 
   </main>
@@ -419,6 +451,10 @@
   <script>
     // =========================================================================
     // 0. LAUNCH / ADMIN CONFIGURATION
+    //    - Set SHOW_ADMIN_MENU = false for public launch (hides ⚙️ button)
+    //    - Administrators can still reveal it anytime by:
+    //      (A) Adding "?admin=1" to the URL, OR
+    //      (B) Tapping the top-left "BW" icon 5 times quickly.
     // =========================================================================
     const SHOW_ADMIN_MENU = false;
     let secretTapCount = 0;
@@ -480,13 +516,18 @@
       P: 50,
       Q: 50,
       E: 50,
-      isInside: false
+      isInside: false // Default: user assumes Outside Status Quo; flags true if inside
     }));
 
     // =========================================================================
     // 2. PURE CLPT §10.4 PSYCHOLOGICAL BALANCE VECTOR ENGINE
+    //    ZERO arbitrary constants:
+    //    - 4-Factor Manifestation (§10.4): s_k^E = A_{P,k} * P_k * Q_k^+ * E_k
+    //    - Psychological Balance Vector (§10.4): b_k^E = (s_k^E + eps) / sum(s_l^E + eps)
+    //    - KL Divergence Imbalance (§10.6): Imb_BW^E = sum_{k=1}^{10} 0.1 * ln(0.1 / b_k^E)
     // =========================================================================
     function calculateUnderlyingCLPT() {
+      // 1. Exact 4-Factor Product (§10.4): s_k^E = A_{P,k} * P_k * Q_k^+ * E_k
       const s_list = domainData.map(d => {
         const A = d.A / 100;
         const P = d.P / 100;
@@ -496,23 +537,31 @@
       });
 
       const totalS = s_list.reduce((acc, v) => acc + v, 0);
+
+      // 2. Exact Normalized Psychological Balance Vector (§10.4):
+      //    b_k^E = (s_k^E + eps) / sum(s_l^E + eps)
       const denom = s_list.reduce((acc, v) => acc + (v + EPSILON), 0);
       const b_list = s_list.map(s => (s + EPSILON) / denom);
 
+      // 3. Exact KL Divergence Imbalance (§10.6):
+      //    Imb_BW^E = sum_{k=1}^{10} (1/10) * ln((1/10) / b_k^E)
       let imbKL = 0;
       for (let k = 0; k < 10; k++) {
         imbKL += 0.1 * Math.log(0.1 / b_list[k]);
       }
       imbKL = Math.max(0, imbKL);
 
+      // Average of s_k^E (0.0% to 100.0%)
       const avgS = totalS / 10;
       const powerScorePct = Number((avgS * 100).toFixed(1));
 
+      // Average of each of the 4 independent axes across 10 domains (0 to 100)
       const avgA = domainData.reduce((acc, d) => acc + d.A, 0) / 10;
       const avgP = domainData.reduce((acc, d) => acc + d.P, 0) / 10;
       const avgQ = domainData.reduce((acc, d) => acc + d.Q, 0) / 10;
       const avgE = domainData.reduce((acc, d) => acc + d.E, 0) / 10;
 
+      // 4. Inside-Status-Quo Puncture Count
       const insideDomains = DOMAINS.filter((_, i) => domainData[i].isInside);
       const outsideCount = 10 - insideDomains.length;
 
@@ -531,6 +580,7 @@
       };
     }
 
+    // Helper: Diagnose a single domain's 4-axis pattern based on §11.4 P/Q/E & §10.4 A_P
     function diagnoseDomainAxisPattern(dVal) {
       const { A, P, Q, E } = dVal;
       const minVal = Math.min(A, P, Q, E);
@@ -540,4 +590,800 @@
         return { tag: '🔥 強く向かう（4軸充足）', tagColor: 'text-emerald-300 bg-emerald-500/15', advice: '4つの感覚（しっくり・リアル・向かいたい・できる確信）がすべて高く、未来のコンフォートゾーンへ強く駆動しています。' };
       }
       if (P >= 65 && Q >= 65 && E <= minVal + 5 && E < 65) {
-        return { tag: '💭 憧れ・焦り（できる確信不足）', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}\%)と向かいたい気持ち(${Q}%)は高い
+        return { tag: '💭 憧れ・焦り（できる確信不足）', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}%)と向かいたい気持ち(${Q}%)は高いのに、「④できる確信(${E}%)」がボトルネックになり、「憧れ・焦り・自分にはまだ無理かも」というブレーキが生じています。到達して安定して住める確信（エフィカシー）を引き上げることが最優先です。` };
+      }
+      if (Q >= 65 && E >= 65 && P <= minVal + 5 && P < 65) {
+        return { tag: '📝 机上の空論（リアル感不足）', tagColor: 'text-sky-300 bg-sky-500/15', advice: `向かいたい気持ち(${Q}%)とできる確信(${E}%)は高いものの、「②リアル感(${P}%)」が伴っていないため、頭の中だけの「机上の空論（いつかできたらいいな）」に留まっています。すでにそこに住んでいる五感の臨場感を高めましょう。` };
+      }
+      if ((P >= 60 || E >= 60) && Q <= minVal + 5 && Q < 65) {
+        return { tag: '⛽ 義務感・have to（望ましさ不足）', tagColor: 'text-orange-300 bg-orange-500/15', advice: `リアルさや達成能力はあるのに、「③心から向かいたい(${Q}%)」が低いため、「やらなければならない（have to）」の義務感でエネルギーが漏れています。本心からワクワクするゴールへ再設定しましょう。` };
+      }
+      if (A <= minVal + 5 && A < 65 && maxVal - A >= 15) {
+        return { tag: '🧭 借り物ゴール感（しっくり感不足）', tagColor: 'text-indigo-300 bg-indigo-500/15', advice: `「①しっくりくる(${A}%)」が最も低く、現在の自分から見てゴールがしっくり受容できていません（他人の基準や借り物のゴールの可能性があります）。自分自身の感覚にしっくり馴染む言葉・映像にチューニングしましょう。` };
+      }
+      return { tag: '🎈 空気圧不足（全体的に控えめ）', tagColor: 'text-amber-300 bg-amber-500/15', advice: `4軸のうち最も低い軸（${minVal}%）が掛け算全体の足を引っ張っています。まずは「③心から向かいたい」と「④できる確信」の空気圧をグッと高めましょう。` };
+    }
+
+    // =========================================================================
+    // 3. WIZARD NAVIGATION LOGIC
+    // =========================================================================
+    function startWizard() {
+      goToStep(0);
+    }
+
+    function goToStep(stepIdx) {
+      currentStep = stepIdx;
+      const introEl = document.getElementById('screenIntro');
+      const stepEl = document.getElementById('screenWizardStep');
+      const gateEl = document.getElementById('screenGateCheck');
+      const resEl = document.getElementById('screenResult');
+      const progHeader = document.getElementById('wizardProgressHeader');
+
+      introEl.classList.add('hidden');
+      stepEl.classList.add('hidden');
+      gateEl.classList.add('hidden');
+      resEl.classList.add('hidden');
+      progHeader.classList.add('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (stepIdx === -1) {
+        introEl.classList.remove('hidden');
+      } else if (stepIdx >= 0 && stepIdx < 10) {
+        progHeader.classList.remove('hidden');
+        stepEl.classList.remove('hidden');
+        renderProgressBar();
+        renderCurrentStepCard();
+      } else if (stepIdx === 10) {
+        gateEl.classList.remove('hidden');
+        renderGateCheckScreen();
+      } else {
+        resEl.classList.remove('hidden');
+        renderFinalResults();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        goToStep(currentStep - 1);
+      } else {
+        goToStep(-1);
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 9) {
+        goToStep(currentStep + 1);
+      } else {
+        goToStep(10); // Show Final 1-Screen Puncture Check before Results
+      }
+    }
+
+    function renderProgressBar() {
+      document.getElementById('stepIndicatorText').textContent = `STEP ${currentStep + 1} / 10`;
+      document.getElementById('stepDomainNameMini').textContent = DOMAINS[currentStep].name;
+
+      const segContainer = document.getElementById('progressBarSegments');
+      segContainer.innerHTML = DOMAINS.map((dom, idx) => {
+        const isDone = idx < currentStep;
+        const isCurrent = idx === currentStep;
+        let bgClass = 'bg-slate-700';
+        if (isDone) bgClass = 'bg-cyan-500';
+        if (isCurrent) bgClass = 'bg-gradient-to-r from-cyan-400 to-blue-400 animate-pulse';
+        return `<button onclick="goToStep(${idx})" title="${dom.name}" class="flex-1 h-full rounded-full transition-all ${bgClass}"></button>`;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 4. STEP CARD & INTERACTIVE "CIRCLE WITH CROSSHAIRS" (〇に十字)
+    // =========================================================================
+    function renderCurrentStepCard() {
+      const dom = DOMAINS[currentStep];
+
+      // Retrigger subtle card animation
+      const card = document.getElementById('domainCard');
+      card.classList.remove('fade-enter');
+      void card.offsetWidth;
+      card.classList.add('fade-enter');
+
+      // Update Header Info
+      const badgeEl = document.getElementById('domainBadge');
+      badgeEl.textContent = `THEME ${String(dom.id).padStart(2, '0')} / 10`;
+      badgeEl.style.backgroundColor = `${dom.color}25`;
+      badgeEl.style.color = dom.color;
+
+      document.getElementById('domainSubtitle').textContent = dom.en;
+      document.getElementById('domainTitle').textContent = `${dom.id}. ${dom.name}`;
+      document.getElementById('domainDesc').textContent = dom.desc;
+
+      // Reset Axis Hint Banner
+      const hintEl = document.getElementById('activeAxisHint');
+      if (hintEl) {
+        hintEl.innerHTML = '👆 十字の軸（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）をタップ';
+      }
+
+      // Update Next Button Label
+      const nextBtnText = document.getElementById('btnNextStepText');
+      if (currentStep < 9) {
+        nextBtnText.textContent = `次のテーマへ (${currentStep + 2}/10)`;
+      } else {
+        nextBtnText.textContent = '最終確認へ進む 🏁';
+      }
+
+      // Draw the Circle with Crosshairs
+      drawCrosshairCircle();
+    }
+
+    function renderGateCheckScreen() {
+      const grid = document.getElementById('insideDomainGrid');
+      if (!grid) return;
+      grid.innerHTML = DOMAINS.map((dom, idx) => {
+        const inside = domainData[idx].isInside;
+        return `
+          <button type="button" onclick="toggleInsideDomain(${idx})"
+            class="p-3 rounded-xl border text-left transition flex items-center justify-between gap-2 ${
+              inside
+                ? 'border-rose-500 bg-rose-500/20 text-rose-200 font-bold'
+                : 'border-slate-800 bg-slate-900/90 text-slate-200 hover:border-slate-700'
+            }">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dom.color}"></span>
+              <span class="text-xs sm:text-sm truncate">${dom.id}. ${dom.name}</span>
+            </div>
+            <span class="text-xs px-2 py-0.5 rounded shrink-0 ${inside ? 'bg-rose-500 text-white font-black' : 'bg-emerald-500/20 text-emerald-300 font-bold'}">
+              ${inside ? '現状の内側' : '現状の外'}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleInsideDomain(idx) {
+      domainData[idx].isInside = !domainData[idx].isInside;
+      renderGateCheckScreen();
+    }
+
+    // =========================================================================
+    // Draw "Circle with Crosshairs & 4-Axis Diamond" (Exact match to user's sketch)
+    // Axis ① Top (12 o'clock): A
+    // Axis ② Right (3 o'clock): P
+    // Axis ③ Bottom (6 o'clock): Q
+    // Axis ④ Left (9 o'clock): E
+    // =========================================================================
+    function drawCrosshairCircle() {
+      const canvas = document.getElementById('crosshairCircleCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 288;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const maxR = size * 0.34; // Leaves generous room outside the circle for ①, ②, ③, ④ labels
+
+      const dVal = domainData[currentStep];
+      const domColor = DOMAINS[currentStep].color;
+
+      // Compute real-time CLPT manifestation for this domain (incorporating boundary gate Gamma_k)
+      const mNow = calculateUnderlyingCLPT();
+      const productPowerPct = (mNow.s_list[currentStep] * 100).toFixed(1);
+      const areaBadge = document.getElementById('quadrantAreaBadge');
+      if (areaBadge) {
+        areaBadge.textContent = `${productPowerPct}%`;
+      }
+
+      // 1. Draw Outer Circle & 50% Guide Ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.stroke();
+
+      // 50% Default Reference Ring (dashed)
+      ctx.beginPath();
+      ctx.arc(cx, cy, maxR * 0.5, 0, Math.PI * 2);
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 2. Draw Vertical & Horizontal Crosshair Axes inside the Circle
+      ctx.beginPath();
+      // Vertical axis (① Top to ③ Bottom)
+      ctx.moveTo(cx, cy - maxR);
+      ctx.lineTo(cx, cy + maxR);
+      // Horizontal axis (④ Left to ② Right)
+      ctx.moveTo(cx - maxR, cy);
+      ctx.lineTo(cx + maxR, cy);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(226, 232, 240, 0.75)';
+      ctx.stroke();
+
+      // Axis ticks at 25%, 50%, 75%
+      [0.25, 0.5, 0.75].forEach(t => {
+        const d = maxR * t;
+        ctx.beginPath();
+        ctx.moveTo(cx - 4, cy - d); ctx.lineTo(cx + 4, cy - d);
+        ctx.moveTo(cx - 4, cy + d); ctx.lineTo(cx + 4, cy + d);
+        ctx.moveTo(cx - d, cy - 4); ctx.lineTo(cx - d, cy + 4);
+        ctx.moveTo(cx + d, cy - 4); ctx.lineTo(cx + d, cy + 4);
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        ctx.stroke();
+      });
+
+      // 3. Calculate the 4 Vertex Coordinates on the Cross Axes
+      const pTop = {
+        key: 'A',
+        val: dVal.A,
+        x: cx,
+        y: cy - (dVal.A / 100) * maxR,
+        color: '#22d3ee',
+        label: '①',
+        subLabel: 'しっくりくる',
+        lx: cx,
+        ly: cy - maxR - 23
+      };
+      const pRight = {
+        key: 'P',
+        val: dVal.P,
+        x: cx + (dVal.P / 100) * maxR,
+        y: cy,
+        color: '#34d399',
+        label: '②',
+        subLabel: 'リアル感',
+        lx: cx + maxR + 26,
+        ly: cy
+      };
+      const pBottom = {
+        key: 'Q',
+        val: dVal.Q,
+        x: cx,
+        y: cy + (dVal.Q / 100) * maxR,
+        color: '#fbbf24',
+        label: '③',
+        subLabel: '心から向かいたい',
+        lx: cx,
+        ly: cy + maxR + 23
+      };
+      const pLeft = {
+        key: 'E',
+        val: dVal.E,
+        x: cx - (dVal.E / 100) * maxR,
+        y: cy,
+        color: '#a78bfa',
+        label: '④',
+        subLabel: 'できる確信',
+        lx: cx - maxR - 26,
+        ly: cy
+      };
+
+      const pts = [pTop, pRight, pBottom, pLeft];
+
+      // 4. Connect the 4 Points with Straight Lines to Form the Quadrilateral (Diamond)
+      ctx.beginPath();
+      ctx.moveTo(pTop.x, pTop.y);
+      ctx.lineTo(pRight.x, pRight.y);
+      ctx.lineTo(pBottom.x, pBottom.y);
+      ctx.lineTo(pLeft.x, pLeft.y);
+      ctx.closePath();
+
+      const polyGrad = ctx.createRadialGradient(cx, cy, 4, cx, cy, maxR);
+      polyGrad.addColorStop(0, `${domColor}95`);
+      polyGrad.addColorStop(1, 'rgba(34, 211, 238, 0.30)');
+      ctx.fillStyle = polyGrad;
+      ctx.fill();
+
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.stroke();
+
+      // 5. Draw Active Axis Segments from Center to Vertex + Large Finger-Friendly Handles
+      pts.forEach(pt => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(pt.x, pt.y);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = pt.color;
+        ctx.stroke();
+
+        // Outer Glow Halo around Thumb Handle
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = `${pt.color}33`;
+        ctx.fill();
+
+        // Draggable Handle Circle on Axis
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 9.5, 0, Math.PI * 2);
+        ctx.fillStyle = pt.color;
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
+        // Outer Axis Labels (① Top, ② Right, ③ Bottom, ④ Left)
+        ctx.fillStyle = pt.color;
+        ctx.font = '900 14px "Noto Sans JP", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${pt.label}${pt.val}%`, pt.lx, pt.ly - 7);
+
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = 'bold 11.5px "Noto Sans JP", sans-serif';
+        ctx.fillText(pt.subLabel, pt.lx, pt.ly + 9);
+      });
+
+      // Center Intersection Dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f8fafc';
+      ctx.fill();
+    }
+
+    // Direct Touch/Drag on the 4 Crosshair Axes (① Top, ② Right, ③ Bottom, ④ Left)
+    (function setupCircleTouchInteraction() {
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('crosshairCircleCanvas');
+        if (!canvas) return;
+        let activeAxisKey = null;
+
+        const axisMeta = {
+          A: { name: '① しっくりくる（自然に受け入れられる）', color: '#22d3ee' },
+          P: { name: '② リアル感（すでにそこにある臨場感）', color: '#34d399' },
+          Q: { name: '③ 心から向かいたい（内側から湧く望ましさ）', color: '#fbbf24' },
+          E: { name: '④ できる確信（自分なら達成できる）', color: '#a78bfa' }
+        };
+
+        function pickNearestAxis(x, y) {
+          if (Math.abs(y) >= Math.abs(x)) {
+            return y <= 0 ? 'A' : 'Q';
+          } else {
+            return x >= 0 ? 'P' : 'E';
+          }
+        }
+
+        function handlePointer(e, isStart) {
+          const rect = canvas.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          const x = clientX - rect.left - rect.width / 2;
+          const y = clientY - rect.top - rect.height / 2;
+          const maxR = rect.width * 0.34;
+
+          if (isStart || !activeAxisKey) {
+            activeAxisKey = pickNearestAxis(x, y);
+          }
+
+          let projDist = 0;
+          if (activeAxisKey === 'A') projDist = Math.max(0, -y);
+          else if (activeAxisKey === 'P') projDist = Math.max(0, x);
+          else if (activeAxisKey === 'Q') projDist = Math.max(0, y);
+          else if (activeAxisKey === 'E') projDist = Math.max(0, -x);
+
+          // Snap to 5% increments for smooth, satisfying feel
+          const rawPct = Math.min(100, Math.max(5, Math.round((projDist / maxR) * 100)));
+          const pct = Math.round(rawPct / 5) * 5;
+
+          domainData[currentStep][activeAxisKey] = pct;
+
+          const hintEl = document.getElementById('activeAxisHint');
+          if (hintEl && axisMeta[activeAxisKey]) {
+            hintEl.innerHTML = `<span style="color:${axisMeta[activeAxisKey].color}; font-weight:900;">${axisMeta[activeAxisKey].name}：${pct}%</span>`;
+          }
+
+          drawCrosshairCircle();
+        }
+
+        canvas.addEventListener('mousedown', e => { handlePointer(e, true); });
+        window.addEventListener('mousemove', e => { if (activeAxisKey) handlePointer(e, false); });
+        window.addEventListener('mouseup', () => { activeAxisKey = null; });
+
+        canvas.addEventListener('touchstart', e => { handlePointer(e, true); e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchmove', e => { if (activeAxisKey) handlePointer(e, false); e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchend', () => { activeAxisKey = null; });
+      });
+    })();
+
+    // =========================================================================
+    // 5. FINAL RESULT SCREEN RENDERING (§10.4 PSYCHOLOGICAL BALANCE VECTOR)
+    // =========================================================================
+    function renderFinalResults() {
+      const m = calculateUnderlyingCLPT();
+
+      // Update 3 Top Score Cards (Zero arbitrary constants)
+      document.getElementById('scoreBalance').textContent = m.imbKL.toFixed(3);
+      document.getElementById('scorePower').innerHTML = `${m.powerScorePct}<span class="text-sm font-normal text-slate-400">%</span>`;
+      document.getElementById('scoreHorizon').innerHTML = `${m.outsideCount}<span class="text-sm font-normal text-slate-400">/10</span>`;
+
+      // Draw Result Pie (b_k^E) & Wheel (s_k^E) Charts
+      drawResultPieChart(m.b_list);
+      drawResultWheelChart(m.s_list);
+
+      // Render 10 Domains Breakdown List
+      const listEl = document.getElementById('resultDomainsList');
+      listEl.innerHTML = DOMAINS.map((dom, idx) => {
+        const sharePct = (m.b_list[idx] * 100).toFixed(1);
+        const dVal = domainData[idx];
+        const domPowerPct = (m.s_list[idx] * 100).toFixed(1);
+        const isStarved = m.b_list[idx] < 0.055;
+        const axisDiag = diagnoseDomainAxisPattern(dVal);
+        return `
+          <div class="p-3 rounded-xl bg-slate-900/90 border ${dVal.isInside || isStarved ? 'border-rose-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 min-w-0 flex-wrap">
+              <span class="w-3 h-3 rounded-full shrink-0" style="background:${dom.color}"></span>
+              <span class="font-bold text-slate-100 truncate">${dom.id}. ${dom.name}</span>
+              ${dVal.isInside ? '<span class="px-2 py-0.5 text-xs rounded bg-rose-500/20 text-rose-300 font-bold">⚠️ 現状の内側</span>' : '<span class="px-2 py-0.5 text-xs rounded bg-emerald-500/15 text-emerald-300 font-bold">現状の外</span>'}
+              <span class="px-2 py-0.5 text-xs rounded font-bold ${axisDiag.tagColor}">${axisDiag.tag}</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0 font-bold">
+              <span class="${isStarved ? 'text-rose-400' : 'text-emerald-300'}">${sharePct}%</span>
+              <span class="text-xs text-slate-300 w-24 text-right">出力 ${domPowerPct}%</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Identify Strongest & Weakest Domains
+      const ranked = DOMAINS.map((d, i) => ({
+        ...d,
+        s: m.s_list[i],
+        b: m.b_list[i],
+        raw: domainData[i],
+        diag: diagnoseDomainAxisPattern(domainData[i])
+      })).sort((a, b) => a.s - b.s);
+
+      const weakest1 = ranked[0];
+      const weakest2 = ranked[1];
+      const strongest = ranked[ranked.length - 1];
+
+      // =====================================================================
+      // 8 DISTINCT VERDICT REPORT TYPES BASED ON §10.4 & §11.4 (A, P, Q, E)
+      // =====================================================================
+      let badgeText = '';
+      let badgeClass = '';
+      let titleText = '';
+      let storyParagraphs = [];
+
+      const minAvgAxis = Math.min(m.avgA, m.avgP, m.avgQ, m.avgE);
+      const maxAvgAxis = Math.max(m.avgA, m.avgP, m.avgQ, m.avgE);
+      const axisSpread = maxAvgAxis - minAvgAxis;
+
+      if (m.insideDomains.length > 0) {
+        // [TYPE 1] Puncture Warning: 1 or more domains inside Status Quo
+        const insideNames = m.insideDomains.map(d => `「${d.name}」`).join('・');
+        badgeText = 'TYPE 01 // パンク警報（現状の内側混入型）';
+        badgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+        titleText = `【パンク警報】${insideNames}が「現状の内側」になっています！1つでも現状の内側があると車輪はパンクします。`;
+        storyParagraphs = [
+          `ゴールは10領域すべてが「現状の外側」である必要があります。どれだけ他の領域の出力が高くても、<strong>${insideNames}</strong>に「今の延長線（現状の内側）」が混ざっていると、無意識のホメオスタシスが現状維持へ引き戻され、そこからタイヤがパンクしてしまいます。`,
+          `まずは現状の内側に留まっている領域のゴールを、<strong>「今のやり方の延長では達成方法が全く分からない未来（現状の外）」</strong>へと設定し直しましょう！`
+        ];
+      } else if (m.imbKL > 0.15) {
+        // [TYPE 2] High Imbalance (KL divergence > 0.15): One-Wheel Spin
+        badgeText = 'TYPE 02 // 片輪スピン（アライメント偏り型）';
+        badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        titleText = `【片輪スピン警報】「${strongest.name}」にエネルギーが集中し、「${weakest1.name}・${weakest2.name}」が手薄になっています！`;
+        storyParagraphs = [
+          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に強い臨場感とエネルギーが注がれている一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>の存在感が薄くなっています（不均衡ズレ Imb = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
+          `心理的バランスとは「時計の時間配分」ではなく、<strong>10領域すべてのゴールが心の中で均等なリアリティと確信を持って存在している状態</strong>です。手薄になっている領域にも心から向かいたいゴールを設定し、円グラフを均等な10等分（各10%・Imb = 0）へ近づけましょう！`
+        ];
+      } else if (m.avgP >= 62 && m.avgQ >= 62 && m.avgE === minAvgAxis && axisSpread >= 12) {
+        // [TYPE 3] §11.4 P High, Q High, E Low -> Yearning / Anxiety / Self-Doubt (憧れ・焦り・空回り型)
+        badgeText = 'TYPE 03 // 憧れ・焦り（エフィカシー不足型）';
+        badgeClass = 'bg-pink-500/20 text-pink-300 border-pink-500/40';
+        titleText = '【憧れ・焦りモード】未来のリアル感と「向かいたい気持ち」は高いのに、「自分にはできる確信」がブレーキになっています！';
+        storyParagraphs = [
+          `あなたの4軸平均を見ると、<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>と<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>が高い一方で、<strong>「④できる確信・エフィカシー（平均 ${m.avgE.toFixed(0)}%）」</strong>が一番低くなっています。`,
+          `理想の未来がリアルに思い描けて、心からそこへ向かいたいのに「自分にはまだ無理かもしれない」と感じているとき、心の中ではその未来が<strong>「憧れ」「焦り」「不安」</strong>に変わり、無意識がアクセルとブレーキを同時に踏んでしまいます。`,
+          `あなたに必要なのは「やり方（How）を探すこと」ではなく、<strong>「自分はその未来へ到達できるし、そこに当たり前に住み続けられる」という自己評価（エフィカシー）を徹底的に引き上げること</strong>です！`
+        ];
+      } else if (m.avgQ >= 62 && m.avgE >= 62 && m.avgP === minAvgAxis && axisSpread >= 12) {
+        // [TYPE 4] §11.4 P Low, Q High, E High -> Armchair Theory (机上の空論・リアリティ不足型)
+        badgeText = 'TYPE 04 // 机上の空論（リアリティ不足型）';
+        badgeClass = 'bg-sky-500/20 text-sky-300 border-sky-500/40';
+        titleText = '【机上の空論モード】「向かいたい気持ち」と「できる確信」は高いのに、未来の「リアル感（臨場感）」がまだ追いついていません！';
+        storyParagraphs = [
+          `あなたの4軸平均では、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>と<strong>「④できる確信（平均 ${m.avgE.toFixed(0)}%）」</strong>がしっかり備わっている一方で、<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>がボトルネックになっています。`,
+          `「自分なら達成できそうだし、望ましい」と思っていても、その未来世界が「いま目の前の現実」よりリアルに感じられていなければ、脳のホメオスタシスは現在の快適圏に留まり続け、ゴールは<strong>「机上の空論（頭で考えただけの計画）」</strong>になってしまいます。`,
+          `すでにそのゴールを達成した世界で「どんな景色を見ているか、誰とどんな会話をしているか、どんな身体感覚か」を五感で味わい、<strong>現在の現実よりも未来側の臨場感を高く書き換えましょう！</strong>`
+        ];
+      } else if ((m.avgP >= 60 || m.avgE >= 60) && m.avgQ === minAvgAxis && axisSpread >= 12) {
+        // [TYPE 5] §11.4 Q+ Low -> Have-to / Obligation (義務感・ガス欠型)
+        badgeText = 'TYPE 05 // 義務感・ガス欠（want to 不足型）';
+        badgeClass = 'bg-orange-500/20 text-orange-300 border-orange-500/40';
+        titleText = '【義務感・ガス欠モード】達成する力やリアルさはあるのに、「心から向かいたい（want to）」のガソリンが不足しています！';
+        storyParagraphs = [
+          `あなたの4軸平均を見ると、リアル感（${m.avgP.toFixed(0)}%）やできる確信（${m.avgE.toFixed(0)}%）に対して、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>が最も低くなっています。`,
+          `どれだけ達成可能でリアルな目標であっても、内側から湧き上がる「心からそこへ向かいたい！」という価値（want to）が低ければ、それは<strong>「やらなければならない（have to）の義務」</strong>になり、走るほどエネルギーが消耗してしまいます。`,
+          `世間の常識や「こうあるべき」を一度すべて脇に置き、<strong>「誰に止められても思わずやってしまうほど、自分が心から望む未来」</strong>へとゴールを更新しましょう！`
+        ];
+      } else if (m.avgA === minAvgAxis && axisSpread >= 12 && m.avgA < 68) {
+        // [TYPE 6] §10.4 A_{P,k} Low -> Borrowed Goal / Acceptance Gap (借り物ゴール・違和感型)
+        badgeText = 'TYPE 06 // 借り物ゴール（しっくり感不足型）';
+        badgeClass = 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40';
+        titleText = '【借り物ゴール警報】意欲や確信はあるものの、ゴールが今の自分に「しっくりくる（受容できる）」感覚が薄くなっています！';
+        storyParagraphs = [
+          `あなたの4軸平均では、他の軸に比べて<strong>「①しっくりくる（平均 ${m.avgA.toFixed(0)}%）」</strong>が最も低くなっています。`,
+          `頭では「すごいゴールだ」「達成したい」と思っていても、自分の身体感覚としてしっくり受け入れられていない（他人の成功モデルや借り物の言葉をそのまま置いている）とき、無意識の境界で強い違和感や抵抗が生まれます。`,
+          `現在の自分の延長線ではない「現状の外」でありながらも、<strong>思い出せば自然と背筋が伸びて身体が馴染むような「自分自身の言葉・映像」</strong>でゴールを再設計しましょう！`
+        ];
+      } else if (m.powerScorePct < 24) {
+        // [TYPE 7] Balanced ratio b_k^E, but overall low product s_k^E (空気圧不足・ミニチュア車輪型)
+        badgeText = 'TYPE 07 // 空気圧不足（ミニチュア車輪型）';
+        badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        titleText = '【ミニチュア車輪タイプ】円グラフは10等分に見えますが、4軸の掛け算パワー（空気圧）がまだ小さくまとまっています！';
+        storyParagraphs = [
+          `円グラフの不均衡ズレ（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）は小さく均等に見えますが、正十角形チャートの推進パワー（平均 <strong>${m.powerScorePct}%</strong>）が中心に小さく縮こまっています。`,
+          `4つの感覚（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）は<strong>掛け算</strong>で働くため、すべて50%だと推進パワーは <strong>6.25%</strong>（すべて60%でも <strong>13.0%</strong>）しか出ません。「全部そこそこ同じくらい控えめだから、比率上は10等分に見えている」という状態です。`,
+          `まずは各領域で「③心から向かいたい」と「④できる確信」の空気圧を80%以上へグッと高め、車輪そのものを大きく膨らませましょう！`
+        ];
+      } else {
+        // [TYPE 8] All 10 Outside Status Quo, Low Imb, High Power across all 4 axes
+        badgeText = 'TYPE 08 // 高出力フルバランス（高次役割フェーズ）';
+        badgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+        titleText = '【フルスペック車輪】全10領域が「現状の外」に設定され、4軸の掛け算パワーと10等分バランスが高い次元で揃っています！';
+        storyParagraphs = [
+          `10領域すべてが「現状の外」に設定され、不均衡ズレ（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
+          `リアル感（平均 ${m.avgP.toFixed(0)}%）・望ましさ（平均 ${m.avgQ.toFixed(0)}%）・エフィカシー（平均 ${m.avgE.toFixed(0)}%）の3条件が同時に満たされており、未来のコンフォートゾーンへ向かって強力に自動収束していく状態です。`,
+          `ただし、<strong>「車輪が丸く均等に膨らんでいること」と、「いま履いているタイヤが、あなたが世界で本来果たすべき役割と本当に合致しているか」は別問題</strong>です。自分一人では気づけないスコトーマ（盲点）の外側にある役割については、セッションまたはご自身のメンターに相談されることをお勧めします。`
+        ];
+      }
+
+      const badgeEl = document.getElementById('resBadge');
+      badgeEl.className = `px-3.5 py-1 rounded-full text-sm font-black border ${badgeClass}`;
+      badgeEl.textContent = badgeText;
+      document.getElementById('resTitle').textContent = titleText;
+      document.getElementById('resStoryBody').innerHTML = storyParagraphs.map(p => `<p>${p}</p>`).join('');
+
+      // Bottleneck Box with 4-Axis Specific Feedback
+      document.getElementById('resBottleneckBox').innerHTML = `
+        <div class="font-bold text-amber-300 mb-2 text-base">🔧 4項目の入力バランスから見た「優先チューニング領域」</div>
+        <div class="space-y-2.5 text-slate-200 leading-relaxed">
+          <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+            <div class="font-bold text-white flex items-center justify-between flex-wrap gap-1">
+              <span>・${weakest1.id}. ${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}% / 出力 ${(weakest1.s*100).toFixed(1)}%）</span>
+              <span class="text-xs px-2 py-0.5 rounded ${weakest1.diag.tagColor}">${weakest1.diag.tag}</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">${weakest1.diag.advice}</p>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+            <div class="font-bold text-white flex items-center justify-between flex-wrap gap-1">
+              <span>・${weakest2.id}. ${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}% / 出力 ${(weakest2.s*100).toFixed(1)}%）</span>
+              <span class="text-xs px-2 py-0.5 rounded ${weakest2.diag.tagColor}">${weakest2.diag.tag}</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">${weakest2.diag.advice}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function drawResultPieChart(b_list) {
+      const canvas = document.getElementById('resultPieCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 256;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const outerR = size * 0.42;
+      const innerR = size * 0.20;
+
+      let startAngle = -Math.PI / 2;
+      b_list.forEach((share, idx) => {
+        const slice = share * Math.PI * 2;
+        const endAngle = startAngle + slice;
+        const dom = DOMAINS[idx];
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, startAngle, endAngle);
+        ctx.arc(cx, cy, innerR, endAngle, startAngle, true);
+        ctx.closePath();
+
+        ctx.fillStyle = dom.color;
+        ctx.fill();
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = '#070910';
+        ctx.stroke();
+
+        if (share >= 0.06) {
+          const mid = startAngle + slice / 2;
+          const lr = (outerR + innerR) / 2;
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 12px "Noto Sans JP", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(dom.name.slice(0, 2), cx + Math.cos(mid) * lr, cy + Math.sin(mid) * lr);
+        }
+        startAngle = endAngle;
+      });
+
+      // 10 Equal Ideal Ticks on Outer Ring
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(a) * (outerR + 2), cy + Math.sin(a) * (outerR + 2));
+        ctx.lineTo(cx + Math.cos(a) * (outerR + 7), cy + Math.sin(a) * (outerR + 7));
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = 'bold 12px "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('理想10等分', cx, cy);
+    }
+
+    function drawResultWheelChart(s_list) {
+      const canvas = document.getElementById('resultWheelCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const size = 256;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, size, size);
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const maxR = size * 0.36;
+
+      // Concentric Decagons
+      [0.25, 0.5, 0.75, 1.0].forEach(lv => {
+        const r = maxR * lv;
+        ctx.beginPath();
+        for (let i = 0; i < 10; i++) {
+          const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+          const x = cx + Math.cos(a) * r;
+          const y = cy + Math.sin(a) * r;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = lv === 1.0 ? 'rgba(16, 185, 129, 0.45)' : 'rgba(148, 163, 184, 0.16)';
+        ctx.lineWidth = lv === 1.0 ? 1.5 : 1;
+        ctx.stroke();
+      });
+
+      // Spokes & Short Labels
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+        ctx.stroke();
+
+        const lx = cx + Math.cos(a) * (maxR + 18);
+        const ly = cy + Math.sin(a) * (maxR + 18);
+        ctx.fillStyle = DOMAINS[i].color;
+        ctx.font = 'bold 11px "Noto Sans JP", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(DOMAINS[i].name.slice(0, 2), lx, ly);
+      }
+
+      // Draw Wheel Shape Polygon (plotting actual product s_k from 0 to 100%)
+      ctx.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI * 2) / 10;
+        const rRatio = Math.max(0.05, s_list[i]);
+        const x = cx + Math.cos(a) * (maxR * rRatio);
+        const y = cy + Math.sin(a) * (maxR * rRatio);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(6, 182, 212, 0.30)';
+      ctx.fill();
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = '#22d3ee';
+      ctx.stroke();
+    }
+
+    // =========================================================================
+    // 6. MENU PRESETS, RESET & LINE CLIPBOARD SHARE
+    // =========================================================================
+    function toggleDemoMenu() {
+      const m = document.getElementById('demoMenuDropdown');
+      m.classList.toggle('hidden');
+    }
+
+    function resetAllToDefault() {
+      domainData = DOMAINS.map(() => ({
+        A: 50,
+        P: 50,
+        Q: 50,
+        E: 50,
+        isInside: false
+      }));
+      document.getElementById('demoMenuDropdown').classList.add('hidden');
+      goToStep(0);
+    }
+
+    function loadPresetAndJump(type) {
+      document.getElementById('demoMenuDropdown').classList.add('hidden');
+      if (type === 'workaholic') {
+        domainData = [
+          { A: 90, P: 95, Q: 90, E: 90, isInside: false }, // 1. 仕事
+          { A: 35, P: 30, Q: 45, E: 35, isInside: false }, // 2. 人間関係・家族
+          { A: 75, P: 70, Q: 80, E: 70, isInside: false }, // 3. 学習
+          { A: 25, P: 20, Q: 40, E: 30, isInside: false }, // 4. 趣味
+          { A: 45, P: 40, Q: 55, E: 45, isInside: false }, // 5. 社会貢献
+          { A: 85, P: 90, Q: 85, E: 85, isInside: false }, // 6. 資産
+          { A: 40, P: 35, Q: 50, E: 40, isInside: false }, // 7. 健康
+          { A: 65, P: 60, Q: 70, E: 60, isInside: false }, // 8. 抽象度
+          { A: 80, P: 75, Q: 80, E: 75, isInside: false }, // 9. リーダーシップ
+          { A: 25, P: 20, Q: 35, E: 25, isInside: false }  // 10. 精神性
+        ];
+      } else if (type === 'miniature') {
+        domainData = DOMAINS.map(() => ({ A: 50, P: 50, Q: 50, E: 50, isInside: false }));
+      } else if (type === 'yearning') {
+        // P high, Q high, E low -> 憧れ・焦り型
+        domainData = DOMAINS.map(() => ({ A: 75, P: 85, Q: 90, E: 40, isInside: false }));
+      } else if (type === 'armchair') {
+        // Q high, E high, P low -> 机上の空論型
+        domainData = DOMAINS.map(() => ({ A: 75, P: 40, Q: 85, E: 85, isInside: false }));
+      } else if (type === 'haveto') {
+        // P high, E high, Q low -> 義務感・ガス欠型
+        domainData = DOMAINS.map(() => ({ A: 75, P: 80, Q: 40, E: 85, isInside: false }));
+      } else if (type === 'disconnected') {
+        // A low, P/Q/E high -> 借り物ゴール違和感型
+        domainData = DOMAINS.map(() => ({ A: 40, P: 80, Q: 85, E: 80, isInside: false }));
+      } else if (type === 'slick') {
+        domainData = DOMAINS.map((_, idx) => ({ A: 85, P: 85, Q: 85, E: 85, isInside: idx === 1 || idx === 6 }));
+      } else if (type === 'ideal') {
+        domainData = DOMAINS.map(() => ({ A: 90, P: 90, Q: 92, E: 90, isInside: false }));
+      }
+      goToStep(11);
+    }
+
+    function copyResultForLine() {
+      const m = calculateUnderlyingCLPT();
+      const title = document.getElementById('resTitle').textContent.trim();
+      const lines = [
+        '【JINの未来確信舎 — BWピット診断シート】',
+        `🏁 判定: ${title}`,
+        `・不均衡ズレ (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
+        `・車輪の推進パワー: ${m.powerScorePct}%`,
+        `・現状の外クリア: ${m.outsideCount} / 10領域`,
+        '--- 10領域の心理的バランス構成比 (推進パワー) ---'
+      ];
+      DOMAINS.forEach((d, idx) => {
+        const sharePct = (m.b_list[idx] * 100).toFixed(1);
+        const pwrPct = (m.s_list[idx] * 100).toFixed(1);
+        const flagStr = domainData[idx].isInside ? ' [⚠️現状の内側]' : ' [現状の外]';
+        lines.push(`${d.id}. ${d.name}: 構成比${sharePct}% (出力${pwrPct}%)${flagStr}`);
+      });
+
+      const ta = document.createElement('textarea');
+      ta.value = lines.join('\n');
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+
+      const toast = document.getElementById('copyToast');
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 5000);
+    }
+  </script>
+</body>
+</html>
