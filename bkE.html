@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>JINの未来確信舎 — バランスウィール（BW）ピット診断</title>
+  <title>未来確信舎 — バランスウィール（BW）ピット診断</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <script>
@@ -89,7 +89,7 @@
           <span class="font-black text-sm tracking-tighter text-white">BW</span>
         </div>
         <div>
-          <div class="text-xs font-bold tracking-wider text-cyan-400">JINの未来確信舎</div>
+          <div class="text-xs font-bold tracking-wider text-cyan-400">未来確信舎</div>
           <h1 class="text-base font-extrabold text-white leading-tight">バランスウィール・ピット診断</h1>
         </div>
       </div>
@@ -120,7 +120,7 @@
     <div id="wizardProgressHeader" class="hidden max-w-lg mx-auto px-4 pb-2.5">
       <div class="flex items-center justify-between text-sm mb-1.5">
         <span id="stepIndicatorText" class="font-bold text-cyan-300">STEP 1 / 10</span>
-        <span id="stepDomainNameMini" class="text-slate-300 font-medium">仕事・キャリア</span>
+        <span id="stepDomainNameMini" class="text-slate-300 font-medium">仕事・職業</span>
       </div>
       <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden flex gap-0.5 p-0.5">
         <div id="progressBarSegments" class="w-full h-full flex gap-1"></div>
@@ -212,7 +212,7 @@
               </span>
               <span id="domainSubtitle" class="text-xs text-slate-400 font-medium truncate">Career & Work</span>
             </div>
-            <h2 id="domainTitle" class="text-xl font-black text-white leading-tight mt-0.5">1. 仕事・キャリア</h2>
+            <h2 id="domainTitle" class="text-xl font-black text-white leading-tight mt-0.5">1. 仕事・職業</h2>
           </div>
           <div class="text-right shrink-0">
             <div class="text-xs text-slate-400">領域パワー</div>
@@ -375,7 +375,7 @@
             </div>
             <div>
               <div class="text-xs font-bold text-cyan-400">PIT CREW TELEMETRY MESSAGE</div>
-              <div class="text-base font-black text-white">未来確信舎 JINからのピット診断レポート</div>
+              <div class="text-base font-black text-white">未来確信舎 からのピット診断レポート</div>
             </div>
           </div>
 
@@ -499,16 +499,16 @@
     let currentStep = -1;
 
     const DOMAINS = [
-      { id: 1,  name: '仕事・キャリア',         en: 'Career & Work',           color: '#06b6d4', desc: '社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。' },
+      { id: 1,  name: '仕事・職業',         en: 'Career & Work',           color: '#06b6d4', desc: '社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。' },
       { id: 2,  name: '人間関係・家族',         en: 'Relationships & Family',  color: '#ec4899', desc: '家族やパートナー、これから出会う仲間との理想的な関係性のゴールをイメージしてください。' },
-      { id: 3,  name: '生涯学習・知性',         en: 'Lifelong Learning',       color: '#3b82f6', desc: '未知の分野の探求や教養、知的好奇心を満たす学びのゴールをイメージしてください。' },
+      { id: 3,  name: '知性・生涯学習',         en: 'Lifelong Learning',       color: '#3b82f6', desc: '未知の分野の探求や教養、知的好奇心を満たす学びのゴールをイメージしてください。' },
       { id: 4,  name: '趣味・遊び',             en: 'Hobbies & Play',          color: '#f59e0b', desc: '損得抜きで純粋に没頭し、人生を味わい尽くす遊び・趣味のゴールをイメージしてください。' },
       { id: 5,  name: '社会貢献・地域',         en: 'Social Contribution',     color: '#10b981', desc: '自分の活動を通じて地域や社会、未来の世代へ還元していくゴールをイメージしてください。' },
       { id: 6,  name: 'ファイナンス・資産',     en: 'Finance & Wealth',        color: '#eab308', desc: '理想の活動やライフスタイルを自在に支える経済・資産規模のゴールをイメージしてください。' },
-      { id: 7,  name: '健康・身体・美容',       en: 'Health & Vitality',       color: '#22c55e', desc: '高いエネルギーと若々しさ、心地よい身体状態を保つゴールをイメージしてください。' },
-      { id: 8,  name: '抽象度・視座',           en: 'Higher Abstraction',      color: '#8b5cf6', desc: 'より広い視野と高い抽象度から世界や物事を俯瞰するゴールをイメージしてください。' },
+      { id: 7,  name: '健康・美容',       en: 'Health & Vitality',       color: '#22c55e', desc: '高いエネルギーと若々しさ、心地よい身体状態を保つゴールをイメージしてください。' },
+      { id: 8,  name: '抽象度・利他',           en: 'Higher Abstraction',      color: '#8b5cf6', desc: 'より広い視野と高い抽象度から世界や物事を俯瞰するゴールをイメージしてください。' },
       { id: 9,  name: 'リーダーシップ',         en: 'Leadership',              color: '#6366f1', desc: '周囲の人々の確信（エフィカシー）を自然に引き上げる存在としてのゴールをイメージしてください。' },
-      { id: 10, name: 'エソテリシティ・精神性', en: 'Esotericity & Spirit',    color: '#a855f7', desc: '宇宙や生命の大きな流れと調和し、深い精神性を体現するゴールをイメージしてください。' }
+      { id: 10, name: 'エソテリシティ', en: 'Esotericity & Spirit',    color: '#a855f7', desc: '宇宙や生命の大きな流れと調和し、深い精神性を体現するゴールをイメージしてください。' }
     ];
 
     let domainData = DOMAINS.map(() => ({
@@ -1331,7 +1331,7 @@
           { A: 40, P: 35, Q: 50, E: 40, isInside: false }, // 7. 健康
           { A: 65, P: 60, Q: 70, E: 60, isInside: false }, // 8. 抽象度
           { A: 80, P: 75, Q: 80, E: 75, isInside: false }, // 9. リーダーシップ
-          { A: 25, P: 20, Q: 35, E: 25, isInside: false }  // 10. 精神性
+          { A: 25, P: 20, Q: 35, E: 25, isInside: false }  // 10. 密教
         ];
       } else if (type === 'miniature') {
         domainData = DOMAINS.map(() => ({ A: 50, P: 50, Q: 50, E: 50, isInside: false }));
@@ -1359,7 +1359,7 @@
       const m = calculateUnderlyingCLPT();
       const title = document.getElementById('resTitle').textContent.trim();
       const lines = [
-        '【JINの未来確信舎 — BWピット診断シート】',
+        '【未来確信舎 — BWピット診断シート】',
         `🏁 判定: ${title}`,
         `・不均衡ズレ (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
         `・車輪の推進パワー: ${m.powerScorePct}%`,
