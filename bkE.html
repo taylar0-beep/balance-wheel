@@ -302,7 +302,7 @@
         <!-- 3 Friendly Score Gauges (Zero arbitrary constants) -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
-            <div class="text-xs font-bold text-slate-300">バランス距離 (Imb)</div>
+            <div class="text-xs font-bold text-slate-300">バランス距離 (I)</div>
             <div id="scoreBalance" class="text-2xl font-black text-emerald-400 mt-1">0.000</div>
             <div id="scoreBalanceSub" class="text-xs text-slate-400 mt-0.5">0に近いほど10等分</div>
           </div>
@@ -329,7 +329,7 @@
             <!-- Chart 1: Pie Chart (Normalized Share) -->
             <div class="w-full rounded-xl bg-slate-900/60 border border-slate-800/80 p-4 flex flex-col items-center">
               <div class="text-sm font-bold text-cyan-300 mb-1">① 未来臨場感の配分バランス（円グラフ）</div>
-              <div class="text-xs text-slate-300 mb-3">外周の白メモリが「理想の10等分（各10%）」です</div>
+              <div class="text-xs text-slate-300 mb-3">外周の白メモリが10等分です</div>
               <canvas id="resultPieCanvas" class="w-64 h-64"></canvas>
             </div>
 
@@ -1050,7 +1050,7 @@
         badgeClass = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
         titleText = `【エネルギーの集中と伸びしろ】「${strongest.name}」に強い情熱が注がれています。ここに「${weakest1.name}・${weakest2.name}」の未来が加わると、車輪はさらに大きく回り始めます！`;
         storyParagraphs = [
-          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に素晴らしい臨場感とエネルギーが注がれています。一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>には、まだ手つかずの大きな余白が残っています（バランス距離 Imb = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
+          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に素晴らしい臨場感とエネルギーが注がれています。一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>には、まだ手つかずの大きな余白が残っています（バランス距離 I = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
           `10領域のすべてにあなたが心から望むゴールを配置したとき、特定の領域だけでなく人生全体の車輪が互いに引き合い、驚くほどスムーズに自動収束し始めます。いま余白がある領域にこそ、新しい未来を自由に描いてみましょう！`
         ];
       } else if (m.avgP >= 62 && m.avgQ >= 62 && m.avgE === minAvgAxis && axisSpread >= 12) {
@@ -1099,7 +1099,7 @@
         badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
         titleText = '【出力拡大フェーズ】10領域のバランスが綺麗に整っています！ここから車輪全体のサイズ（4軸の掛け算パワー）を大きく広げていける段階です！';
         storyParagraphs = [
-          `円グラフのバランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）が小さく、10領域を偏りなく見渡せる素晴らしい土台があります。ここからさらに楽しくなるのは、正十角形チャートの推進パワー（現在平均 <strong>${m.powerScorePct}%</strong>）を大きく膨らませていくプロセスです。`,
+          `円グラフのバランス距離（I = <strong>${m.imbKL.toFixed(3)}</strong>）が小さく、10領域を偏りなく見渡せる素晴らしい土台があります。ここからさらに楽しくなるのは、正十角形チャートの推進パワー（現在平均 <strong>${m.powerScorePct}%</strong>）を大きく膨らませていくプロセスです。`,
           `4つの感覚（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）は<strong>掛け算</strong>で働くため、それぞれの軸を少しずつ引き上げるだけで、車輪全体の推進力は一気に何倍にも拡大します。`,
           `まずはあなたが一番ワクワクする領域から、「③心から向かいたい」と「④できる確信」のメモリを80%以上へ自由に広げてみましょう！`
         ];
@@ -1109,7 +1109,7 @@
         badgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
         titleText = '【フルスペック車輪】全10領域が「現状の外」に描かれ、4軸の掛け算パワーと10等分バランスが高い次元で調和しています！';
         storyParagraphs = [
-          `10領域すべてが「現状の外」に設定され、バランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
+          `10領域すべてが「現状の外」に設定され、バランス距離（I = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
           `リアル感（平均 ${m.avgP.toFixed(0)}%）・望ましさ（平均 ${m.avgQ.toFixed(0)}%）・エフィカシー（平均 ${m.avgE.toFixed(0)}%）の3条件が同時に満たされており、あなたが選んだ未来のコンフォートゾーンへ向かって力強く自動収束していく状態です。`,
           `この段階からさらに視座を高めるポイントは、<strong>「いま描いている10領域のゴール群を束ねる『より高次の役割（利他・社会への機能提供）』としてどんな新しい地平が見えるか」</strong>です。自分一人では見えにくいスコトーマ（盲点）の外側にある役割については、セッションまたはご自身のメンターとの壁打ちを通じてさらに自由に探求されることをお勧めします。`
         ];
@@ -1300,7 +1300,7 @@
       ctx.fillStyle = '#e2e8f0';
       ctx.font = 'bold 12px "Inter", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('理想10等分', cx, cy);
+      ctx.fillText('BW', cx, cy);
     }
 
     function drawResultWheelChart(s_list) {
@@ -1435,7 +1435,7 @@
       const lines = [
         '【未来確信舎 — BW未来臨場感チャート】',
         `🧭 チャート結果: ${title}`,
-        `・バランス距離 (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
+        `・バランス距離 (I): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
         `・車輪の推進パワー: ${m.powerScorePct}%`,
         `・現状の外の領域: ${m.outsideCount} / 10領域`,
         '--- 10領域の未来臨場感構成比 (推進パワー) ---'
