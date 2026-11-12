@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>未来確信舎 — バランスウィール（BW）ピット診断</title>
+  <title>未来確信舎 — バランスウィール・未来臨場感チャート</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <script>
@@ -83,221 +83,209 @@
 
   <!-- Top Navigation Bar (Non-sticky to maximize viewport space) -->
   <header class="border-b border-slate-800/80 bg-pit-950/90">
-    <div class="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <div onclick="handleLogoSecretTap()" title="5回タップで管理者メニュー切替" class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/20 cursor-pointer select-none active:scale-95 transition">
-          <span class="font-black text-sm tracking-tighter text-white">BW</span>
+    <div class="max-w-lg mx-auto px-4 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div onclick="handleLogoSecretTap()" title="5回タップで管理者メニュー切替" class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/20 cursor-pointer select-none active:scale-95 transition">
+          <span class="font-black text-xs tracking-tighter text-white">BW</span>
         </div>
         <div>
-          <div class="text-xs font-bold tracking-wider text-cyan-400">未来確信舎</div>
-          <h1 class="text-base font-extrabold text-white leading-tight">バランスウィール・ピット診断</h1>
+          <div class="text-[10px] font-bold tracking-wider text-cyan-400">未来確信舎</div>
+          <h1 class="text-sm font-extrabold text-white leading-tight">バランスウィール・未来臨場感チャート</h1>
         </div>
       </div>
 
-      <!-- Discreet Demo / Reset Button (Hidden by default for launch; unlocked via ?admin=1 or 5 taps on BW logo) -->
+      <!-- Discreet Demo / Reset Button -->
       <div id="adminMenuContainer" class="relative hidden">
-        <button onclick="toggleDemoMenu()" class="px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 transition flex items-center gap-1">
-          <span>⚙️ メニュー</span>
+        <button onclick="toggleDemoMenu()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 transition flex items-center gap-1">
+          <span>⚙️</span>
         </button>
         <div id="demoMenuDropdown" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 space-y-1 text-sm max-h-[80vh] overflow-y-auto">
-          <div class="px-2.5 py-1 text-xs font-bold text-slate-400 border-b border-slate-800">管理者用プリセット（全8種の判定）</div>
-          <button onclick="loadPresetAndJump('slick')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-rose-300 font-medium">① パンク警報（現状の内側混入）</button>
-          <button onclick="loadPresetAndJump('workaholic')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-amber-300 font-medium">② 片輪スピン（領域間の偏り大）</button>
-          <button onclick="loadPresetAndJump('yearning')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-pink-300 font-medium">③ 憧れ・焦り（P・Q高 / E低）</button>
-          <button onclick="loadPresetAndJump('armchair')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-sky-300 font-medium">④ 机上の空論（Q・E高 / P低）</button>
-          <button onclick="loadPresetAndJump('haveto')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-orange-300 font-medium">⑤ 義務感・ガス欠（P・E高 / Q低）</button>
-          <button onclick="loadPresetAndJump('disconnected')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-indigo-300 font-medium">⑥ 借り物ゴール違和感（A低）</button>
-          <button onclick="loadPresetAndJump('miniature')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 font-medium">⑦ 空気圧不足（ミニチュア車輪）</button>
+          <div class="px-2.5 py-1 text-xs font-bold text-slate-400 border-b border-slate-800">管理者用プリセット（全8種のマップ）</div>
+          <button onclick="loadPresetAndJump('slick')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-rose-300 font-medium">① さらなる飛躍の余白（現状の内側）</button>
+          <button onclick="loadPresetAndJump('workaholic')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-amber-300 font-medium">② エネルギーの集中と伸びしろ</button>
+          <button onclick="loadPresetAndJump('yearning')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-pink-300 font-medium">③ エフィカシー開花の好機（E伸びしろ）</button>
+          <button onclick="loadPresetAndJump('armchair')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-sky-300 font-medium">④ 臨場感アップデートの好機（P伸びしろ）</button>
+          <button onclick="loadPresetAndJump('haveto')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-orange-300 font-medium">⑤ 本音のwant to解放フェーズ（Q伸びしろ）</button>
+          <button onclick="loadPresetAndJump('disconnected')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-indigo-300 font-medium">⑥ 自己決定へのチューニング（A伸びしろ）</button>
+          <button onclick="loadPresetAndJump('miniature')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 font-medium">⑦ 出力拡大フェーズ（車輪のサイズ拡大）</button>
           <button onclick="loadPresetAndJump('ideal')" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-emerald-300 font-medium">⑧ 高出力・フルバランス型</button>
           <div class="border-t border-slate-800 my-1"></div>
           <button onclick="resetAllToDefault()" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300">🔄 すべて初期値(50%)に戻す</button>
-          <button onclick="hideAdminMenu()" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-rose-400 font-bold">🔒 管理者メニューを隠す（本番表示）</button>
+          <button onclick="hideAdminMenu()" class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-slate-800 text-rose-400 font-bold">🔒 管理者メニューを隠す</button>
         </div>
       </div>
     </div>
 
     <!-- Step Progress Bar (Visible during Steps 1-10) -->
-    <div id="wizardProgressHeader" class="hidden max-w-lg mx-auto px-4 pb-2.5">
-      <div class="flex items-center justify-between text-sm mb-1.5">
+    <div id="wizardProgressHeader" class="hidden max-w-lg mx-auto px-4 pb-1.5">
+      <div class="flex items-center justify-between text-xs mb-1">
         <span id="stepIndicatorText" class="font-bold text-cyan-300">STEP 1 / 10</span>
         <span id="stepDomainNameMini" class="text-slate-300 font-medium">仕事・職業</span>
       </div>
-      <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden flex gap-0.5 p-0.5">
+      <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden flex gap-0.5 p-0.5">
         <div id="progressBarSegments" class="w-full h-full flex gap-1"></div>
       </div>
     </div>
   </header>
 
   <!-- Main Container (Mobile-First Column) -->
-  <main class="max-w-lg mx-auto px-4 pt-5">
+  <main class="max-w-lg mx-auto px-3.5 pt-2 sm:pt-3">
 
-    <!-- =================================================================== -->
-    <!-- SCREEN 0: INTRO / WELCOME SCREEN                                    -->
-    <!-- =================================================================== -->
-    <section id="screenIntro" class="space-y-6 fade-enter">
-      <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-pit-900 via-pit-900 to-slate-950 p-6 shadow-2xl space-y-5 text-center relative overflow-hidden">
-        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 p-0.5 shadow-xl shadow-cyan-500/20">
+    <!-- SCREEN 0: INTRO / WELCOME SCREEN -->
+    <section id="screenIntro" class="space-y-4 fade-enter">
+      <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-pit-900 via-pit-900 to-slate-950 p-5 shadow-2xl space-y-4 text-center relative overflow-hidden">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 p-0.5 shadow-xl shadow-cyan-500/20">
           <div class="w-full h-full bg-pit-950 rounded-[14px] flex items-center justify-center">
-            <!-- Tire / Wheel SVG Icon -->
-            <svg class="w-11 h-11 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <svg class="w-9 h-9 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <circle cx="12" cy="12" r="9" />
               <circle cx="12" cy="12" r="3" />
               <line x1="12" y1="3" x2="12" y2="9" />
               <line x1="12" y1="15" x2="12" y2="21" />
               <line x1="3" y1="12" x2="9" y2="12" />
               <line x1="15" y1="12" x2="21" y2="12" />
-              <line x1="5.6" y1="5.6" x2="9.8" y2="9.8" />
-              <line x1="14.2" y1="14.2" x2="18.4" y2="18.4" />
-              <line x1="18.4" y1="5.6" x2="14.2" y2="9.8" />
-              <line x1="9.8" y1="14.2" x2="5.6" y2="18.4" />
             </svg>
           </div>
         </div>
 
-        <div class="space-y-2">
-          <span class="inline-block px-3.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-sm font-bold">
+        <div class="space-y-1.5">
+          <span class="inline-block px-3 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
             タイヤのことならタイヤ屋、BWなら未来確信舎
           </span>
-          <h2 class="text-2xl font-black text-white leading-snug">
-            あなたの「人生の車輪」<br>いま綺麗に回っていますか？
+          <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
+            あなたの「未来へ渡る車輪」<br>いまどんな形をしていますか？
           </h2>
-          <p class="text-base text-slate-300 leading-relaxed">
-            F1マシンがどれほど高性能でも、タイヤの空気が抜けていたり、1本だけサイズが違えば真っ直ぐ走ることはできません。
+          <p class="text-sm text-slate-300 leading-relaxed">
+            F1のピットは「壊れた車を修理する場所」ではなく、トップを走るドライバーが<strong>自らの意志でさらに異次元のスピードを出すために新しいタイヤ（未来のゴール）へと履き替える作戦室</strong>です。
           </p>
         </div>
 
-        <!-- How to Play Card -->
-        <div class="rounded-2xl bg-slate-950/80 border border-slate-800/90 p-4 text-left space-y-3">
-          <div class="text-sm font-bold text-cyan-400 flex items-center gap-1.5">
-            <span>🏁</span>
-            <span>診断のやり方（全10領域・約1分）</span>
+        <!-- Ethic Declaration Banner on Intro -->
+        <div class="rounded-2xl bg-indigo-950/40 border border-indigo-500/30 p-3 text-left space-y-1">
+          <div class="text-xs font-extrabold text-indigo-300 flex items-center gap-1.5">
+            <span>🛡️</span>
+            <span>未来確信舎のスタンス（尊厳と自己決定の尊重）</span>
           </div>
-          <ul class="text-sm text-slate-200 space-y-2.5 leading-relaxed">
+          <p class="text-xs text-slate-200 leading-relaxed">
+            このチャートはあなたを「評価・修正」するためのものではありません。どの領域にどんな未来を描き、どの順番で橋を架けるかを決める主権は100%あなた自身にあります。
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-slate-950/80 border border-slate-800/90 p-3.5 text-left space-y-2.5">
+          <div class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+            <span>🏁</span>
+            <span>未来臨場感チャートの描き方（全10領域・約1分）</span>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-200 space-y-2 leading-relaxed">
             <li class="flex items-start gap-2">
-              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">1</span>
-              <span>各領域で<strong>「現状の外のゴール（達成方法がまだ分からない未来）」</strong>を思い浮かべます。</span>
+              <span class="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">1</span>
+              <span>各領域で<strong>「現状の外のゴール」</strong>をイメージします。</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">2</span>
-              <span><strong>「〇に十字」の4つの軸（①〜④）</strong>の好きな位置をタップして、直感でダイヤの形をセット！</span>
+              <span class="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">2</span>
+              <span><strong>「〇に十字」の軸（①〜④）</strong>をタップして直感でセット！</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">3</span>
-              <span>最後に<strong>「10領域の円グラフ」</strong>と<strong>「ピット診断レポート」</strong>が表示されます！</span>
+              <span class="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">3</span>
+              <span>最後に<strong>「未来臨場感チャート」</strong>と<strong>「未来設計レポート」</strong>が表示されます。</span>
             </li>
           </ul>
         </div>
 
-        <button onclick="startWizard()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 font-black text-base shadow-xl shadow-cyan-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2">
-          <span>ピット診断をスタートする</span>
+        <button onclick="startWizard()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 font-black text-base shadow-xl shadow-cyan-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2">
+          <span>未来臨場感チャートを描き始める</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </button>
       </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SCREEN 1..10: WIZARD DOMAIN STEP                                    -->
-    <!-- =================================================================== -->
+    <!-- SCREEN 1..10: WIZARD DOMAIN STEP (COMPACT 1-SCREEN FOR IPHONE SE) -->
     <section id="screenWizardStep" class="hidden">
-
-      <!-- Domain Card -->
-      <div id="domainCard" class="rounded-3xl border border-slate-800 bg-pit-900/95 p-4 shadow-2xl space-y-3.5 fade-enter">
-
-        <!-- Compact Title & Description -->
-        <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
+      <div id="domainCard" class="rounded-2xl border border-slate-800 bg-pit-900/95 p-3 sm:p-4 shadow-2xl space-y-2 fade-enter">
+        <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-1.5">
           <div class="min-w-0">
-            <div class="flex items-center gap-2">
-              <span id="domainBadge" class="px-2.5 py-0.5 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300">
+            <div class="flex items-center gap-1.5">
+              <span id="domainBadge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300">
                 THEME 01 / 10
               </span>
-              <span id="domainSubtitle" class="text-xs text-slate-400 font-medium truncate">Career & Work</span>
+              <span id="domainSubtitle" class="text-[10px] text-slate-400 font-medium truncate">Occupation & Work</span>
             </div>
-            <h2 id="domainTitle" class="text-xl font-black text-white leading-tight mt-0.5">1. 仕事・職業</h2>
+            <h2 id="domainTitle" class="text-base sm:text-lg font-black text-white leading-tight mt-0.5">1. 仕事・職業</h2>
           </div>
           <div class="text-right shrink-0">
-            <div class="text-xs text-slate-400">領域パワー</div>
-            <div id="quadrantAreaBadge" class="text-base font-black text-cyan-300">6.3%</div>
+            <div class="text-[10px] text-slate-400">領域パワー</div>
+            <div id="quadrantAreaBadge" class="text-sm font-black text-cyan-300">6.3%</div>
           </div>
         </div>
-        <p id="domainDesc" class="text-sm text-slate-200 leading-relaxed">
+
+        <p id="domainDesc" class="text-xs text-slate-300 leading-snug line-clamp-2">
           社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。
         </p>
 
-        <!-- =============================================================== -->
-        <!-- DIRECT-TOUCH CIRCLE + CROSSHAIRS (NO BULK BUTTONS)              -->
-        <!-- =============================================================== -->
-        <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 p-3 flex flex-col items-center">
-          <!-- Active Axis Hint Banner -->
-          <div id="activeAxisHint" class="w-full text-center py-2 px-3 rounded-lg bg-slate-900/90 border border-slate-800/80 text-xs sm:text-sm text-slate-200 font-medium mb-1">
-            👆 十字の軸（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）をタップ
+        <!-- COMPACT DIRECT-TOUCH CIRCLE + CROSSHAIRS -->
+        <div class="rounded-xl bg-slate-950/90 border border-slate-800/90 p-1.5 sm:p-2 flex flex-col items-center">
+          <div id="activeAxisHint" class="w-full text-center py-1 px-2 rounded-md bg-slate-900/90 border border-slate-800/80 text-[11px] text-slate-200 font-medium mb-1">
+            👆 十字の軸（①しっくり・②リアル・③向かいたい・④確信）をタップ
           </div>
 
-          <!-- Canvas for Circle + Crosshairs + 4-Axis Diamond Polygon -->
-          <div class="relative w-72 h-72 flex items-center justify-center select-none">
-            <canvas id="crosshairCircleCanvas" class="w-72 h-72 cursor-pointer touch-none"></canvas>
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center select-none">
+            <canvas id="crosshairCircleCanvas" class="w-56 h-56 sm:w-64 sm:h-64 cursor-pointer touch-none"></canvas>
           </div>
         </div>
 
-        <!-- Step Navigation Buttons (No repetitive checkboxes!) -->
-        <div class="flex items-center gap-2.5 pt-1">
-          <button onclick="prevStep()" id="btnPrevStep" class="w-1/3 py-3.5 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base transition flex items-center justify-center gap-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/></svg>
+        <div class="flex items-center gap-2 pt-0.5">
+          <button onclick="prevStep()" id="btnPrevStep" class="w-1/3 py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition flex items-center justify-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/></svg>
             <span>戻る</span>
           </button>
-          <button onclick="nextStep()" id="btnNextStep" class="w-2/3 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-base shadow-lg shadow-cyan-500/20 active:scale-[0.99] transition flex items-center justify-center gap-1.5">
+          <button onclick="nextStep()" id="btnNextStep" class="w-2/3 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-sm shadow-md shadow-cyan-500/20 active:scale-[0.99] transition flex items-center justify-center gap-1">
             <span id="btnNextStepText">次のテーマへ (2/10)</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
-
       </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SCREEN 10.5: FINAL 1-SCREEN PUNCTURE CHECK (現状の外 一括確認)       -->
-    <!-- =================================================================== -->
-    <section id="screenGateCheck" class="hidden space-y-5 fade-enter">
-      <div class="rounded-3xl border border-slate-800 bg-pit-900/95 p-5 shadow-2xl space-y-4">
-        <div class="space-y-1.5">
-          <span class="px-3 py-0.5 rounded-full text-xs font-black bg-amber-500/20 text-amber-300">
-            FINAL PIT CHECK
+    <!-- SCREEN 10.5: FINAL HORIZON CHECK -->
+    <section id="screenGateCheck" class="hidden space-y-4 fade-enter">
+      <div class="rounded-3xl border border-slate-800 bg-pit-900/95 p-4 sm:p-5 shadow-2xl space-y-3.5">
+        <div class="space-y-1">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300">
+            FINAL HORIZON CHECK
           </span>
-          <h2 class="text-xl font-black text-white leading-snug">
-            最後に1つだけ確認：パンクの原因（現状の内側）は混ざっていませんか？
+          <h2 class="text-lg font-black text-white leading-snug">
+            最後に確認：これから「現状の外」へ大きく広げたい領域はありますか？
           </h2>
-          <p class="text-sm text-slate-300 leading-relaxed">
-            ゴールは10領域すべてが<strong>「現状の外側（今の延長線上にない未来）」</strong>である必要があります。1つでも「現状の内側（やり方が分かる・今の延長）」があると、そこから車輪がパンクします。
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            10領域すべてを「現状の外側（今の延長線上にない未来）」に置くことで、車輪全体がさらに軽やかに回り始めます。もし「今はまだ現状の延長線上にあるかも」と感じる領域があれば、そこが今回最大の伸びしろになります。
           </p>
         </div>
 
-        <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3.5 space-y-2.5">
-          <div class="text-xs font-bold text-amber-300">
-            👇 もし「まだ現状の内側（今の延長）かも…」と思う領域があればタップしてください（なければそのまま結果へ！）
+        <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 space-y-2">
+          <div class="text-xs font-bold text-cyan-300">
+            👇 「まだ現状の内側（今の延長）かも…」と感じる領域があればタップ（なければそのままチャート完成へ！）
           </div>
-          <div id="insideDomainGrid" class="grid grid-cols-2 gap-2"></div>
+          <div id="insideDomainGrid" class="grid grid-cols-2 gap-1.5 sm:gap-2"></div>
         </div>
 
-        <div class="flex items-center gap-2.5 pt-1">
-          <button onclick="goToStep(9)" class="w-1/3 py-3.5 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base transition flex items-center justify-center gap-1">
+        <div class="flex items-center gap-2 pt-1">
+          <button onclick="goToStep(9)" class="w-1/3 py-3 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition flex items-center justify-center gap-1">
             <span>戻る</span>
           </button>
-          <button onclick="goToStep(11)" class="w-2/3 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 text-slate-950 font-black text-base shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-1.5">
-            <span>ピット診断結果を見る！ 🏁</span>
+          <button onclick="goToStep(11)" class="w-2/3 py-3 px-3 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 text-slate-950 font-black text-sm shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-1">
+            <span>未来臨場感チャートを見る！ 🏁</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SCREEN 11: FINAL DIAGNOSTIC RESULT SCREEN                           -->
-    <!-- =================================================================== -->
-    <section id="screenResult" class="hidden space-y-6 fade-enter">
+    <!-- SCREEN 11: FINAL TELEMETRY RESULT SCREEN (SCROLLABLE) -->
+    <section id="screenResult" class="hidden space-y-5 fade-enter">
 
       <!-- Result Hero Verdict Card -->
       <div class="rounded-3xl border-2 border-cyan-500/50 bg-gradient-to-b from-pit-900 via-slate-900 to-pit-950 p-5 sm:p-6 shadow-2xl space-y-5">
         <div class="flex items-center justify-between">
           <span id="resBadge" class="px-3.5 py-1 rounded-full text-sm font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-            PIT TELEMETRY REPORT
+            FUTURE PRESENCE CHART
           </span>
           <button onclick="goToStep(0)" class="text-sm text-slate-300 hover:text-white underline">
             回答を微調整する
@@ -305,16 +293,16 @@
         </div>
 
         <div class="space-y-2">
-          <div class="text-sm font-bold text-cyan-400">あなたのバランスウィール総合判定</div>
+          <div class="text-sm font-bold text-cyan-400">あなたのバランスウィール・未来臨場感チャート</div>
           <h2 id="resTitle" class="text-xl sm:text-2xl font-black text-white leading-snug">
-            診断結果タイトル
+            未来臨場感チャートタイトル
           </h2>
         </div>
 
         <!-- 3 Friendly Score Gauges (Zero arbitrary constants) -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
-            <div class="text-xs font-bold text-slate-300">不均衡ズレ (Imb)</div>
+            <div class="text-xs font-bold text-slate-300">バランス距離 (Imb)</div>
             <div id="scoreBalance" class="text-2xl font-black text-emerald-400 mt-1">0.000</div>
             <div id="scoreBalanceSub" class="text-xs text-slate-400 mt-0.5">0に近いほど10等分</div>
           </div>
@@ -324,25 +312,23 @@
             <div id="scorePowerSub" class="text-xs text-slate-400 mt-0.5">4要素の掛け算平均</div>
           </div>
           <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
-            <div class="text-xs font-bold text-slate-300">現状の外クリア</div>
+            <div class="text-xs font-bold text-slate-300">現状の外の領域</div>
             <div id="scoreHorizon" class="text-2xl font-black text-violet-400 mt-1">10<span class="text-sm font-normal text-slate-400">/10</span></div>
-            <div id="scoreHorizonSub" class="text-xs text-slate-400 mt-0.5">1つでも欠けるとパンク</div>
+            <div id="scoreHorizonSub" class="text-xs text-slate-400 mt-0.5">全領域が未来への橋</div>
           </div>
         </div>
 
-        <!-- =============================================================== -->
-        <!-- PIE CHART & WHEEL SHAPE RADAR (STACKED VERTICALLY)              -->
-        <!-- =============================================================== -->
+        <!-- PIE CHART & WHEEL SHAPE RADAR (STACKED VERTICALLY) -->
         <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 space-y-5">
           <div class="border-b border-slate-800 pb-3">
-            <h3 class="text-base font-extrabold text-white">10領域の心理的バランス分布（円グラフ）＆ 顕現パワー</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">4つの質問の掛け算から算出した「いま心の中で各領域が占めているエネルギー配分」と「車輪のサイズ」です</p>
+            <h3 class="text-base font-extrabold text-white">10領域の未来臨場感チャート（円グラフ ＆ 出力サイズ）</h3>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">バランスウィールとは時計の時間配分ではなく、10領域すべてにどれだけ「未来のゴールの臨場感と確信」が分散・存在しているかを表す構造です</p>
           </div>
 
           <div class="flex flex-col gap-6 items-center">
             <!-- Chart 1: Pie Chart (Normalized Share) -->
             <div class="w-full rounded-xl bg-slate-900/60 border border-slate-800/80 p-4 flex flex-col items-center">
-              <div class="text-sm font-bold text-cyan-300 mb-1">① 心理的バランス構成比（円グラフ）</div>
+              <div class="text-sm font-bold text-cyan-300 mb-1">① 未来臨場感の配分バランス（円グラフ）</div>
               <div class="text-xs text-slate-300 mb-3">外周の白メモリが「理想の10等分（各10%）」です</div>
               <canvas id="resultPieCanvas" class="w-64 h-64"></canvas>
             </div>
@@ -350,7 +336,7 @@
             <!-- Chart 2: Wheel Polygon Chart (Absolute Size) -->
             <div class="w-full rounded-xl bg-slate-900/60 border border-slate-800/80 p-4 flex flex-col items-center">
               <div class="text-sm font-bold text-cyan-300 mb-1">② 車輪の出力サイズ（正十角形チャート）</div>
-              <div class="text-xs text-slate-300 mb-3">4要素の掛け算パワー（小さいと偽のバランス）</div>
+              <div class="text-xs text-slate-300 mb-3">4要素の掛け算パワー（各領域の推進エネルギー）</div>
               <canvas id="resultWheelCanvas" class="w-64 h-64"></canvas>
             </div>
           </div>
@@ -358,33 +344,37 @@
           <!-- 10 Domains Bar Breakdown -->
           <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
             <div class="flex justify-between text-xs font-bold text-slate-300">
-              <span>10領域の心理的バランス内訳（理想構成比は各10.0%）</span>
+              <span>10領域の未来臨場感内訳（理想構成比は各10.0%）</span>
               <span>構成比 / 推進パワー</span>
             </div>
             <div id="resultDomainsList" class="space-y-2 text-sm"></div>
           </div>
         </div>
 
-        <!-- =============================================================== -->
-        <!-- JIN'S PIT CREW COMMENTARY (HONEST SCOPE & SELF-CHECK LIMITS)    -->
-        <!-- =============================================================== -->
+        <!-- JIN'S PIT CREW COMMENTARY -->
         <div class="rounded-2xl bg-gradient-to-br from-slate-900 via-pit-900 to-cyan-950/30 border border-cyan-500/30 p-4 sm:p-5 space-y-4">
           <div class="flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-base">
-              🔧
+              🧭
             </div>
             <div>
-              <div class="text-xs font-bold text-cyan-400">PIT CREW TELEMETRY MESSAGE</div>
-              <div class="text-base font-black text-white">未来確信舎 からのピット診断レポート</div>
+              <div class="text-xs font-bold text-cyan-400">FUTURE PRESENCE TELEMETRY</div>
+              <div class="text-base font-black text-white">未来確信舎 JINからの未来設計レポート</div>
             </div>
+          </div>
+
+          <!-- Ethic Declaration Box inside Report -->
+          <div class="rounded-xl bg-slate-950/80 border border-cyan-500/25 p-3.5 text-xs sm:text-sm text-slate-200 leading-relaxed">
+            <span class="font-bold text-cyan-300">🛡️ 未来確信舎のスタンス：</span>
+            このチャートはあなたを「評価・修正」するためのものではありません。いま手薄に見える領域は「欠点」ではなく、<strong>これからあなたが自らの意志で自由に新しい未来を描ける「伸びしろ（余白）」</strong>です。
           </div>
 
           <div id="resStoryBody" class="text-sm sm:text-base text-slate-200 leading-relaxed space-y-3"></div>
 
-          <!-- Weakest & Priority Domains Highlight -->
+          <!-- Growth Opportunity Domains Highlight -->
           <div id="resBottleneckBox" class="rounded-xl bg-slate-950/90 border border-slate-800 p-4 space-y-2 text-sm"></div>
 
-          <!-- Honest Scope Disclosure: What this app measures vs What requires Blog / Session / Mentor -->
+          <!-- Honest Scope Disclosure -->
           <div class="rounded-xl bg-indigo-950/50 border border-indigo-500/40 p-4 space-y-3.5 text-sm">
             <div class="space-y-1.5">
               <div class="font-extrabold text-emerald-300 flex items-center gap-1.5">
@@ -392,7 +382,7 @@
                 <span>このアプリで分かること・分からないこと（正直な測定範囲）</span>
               </div>
               <p class="text-slate-200 leading-relaxed">
-                このアプリの設問から正確に算出できるのは、4つの感覚の掛け算から導かれる<strong>「10領域の心理的バランス配分（偏り）」</strong>のみです。無意識の抵抗値やしきい値（どこから現状維持のブレーキがかかるか）などは、アンケートの設問からは算出できません。
+                このアプリの設問から正確に算出できるのは、4つの感覚の掛け算から導かれる<strong>「10領域への未来臨場感の分散（バランス配分）」</strong>のみです。無意識のしきい値などは、アンケートの設問からは算出できません。
               </p>
             </div>
 
@@ -402,43 +392,41 @@
                 <span>ゴールの矛盾（10領域の整合性）のセルフチェックについて</span>
               </div>
               <p class="text-slate-200 leading-relaxed">
-                ゴールの矛盾のセルフチェック方法については、ブログの記事をご参照ください。
+                10領域のゴール同士が互いに支え合っているか（矛盾していないか）のセルフチェック方法については、ブログの記事をご参照ください。
               </p>
             </div>
 
             <div class="border-t border-indigo-500/30 pt-3 space-y-1.5">
               <div class="font-extrabold text-indigo-300 flex items-center gap-1.5">
-                <span>⚠️</span>
-                <span>セルフチェックでは判定できない「本来果たすべき役割」について</span>
+                <span>🌱</span>
+                <span>高次の自己像への「統合」と「本来果たすべき役割」について</span>
               </div>
               <p class="text-slate-200 leading-relaxed">
-                タイヤが丸く均等に膨らんでいることは前提条件に過ぎません。あなたが世界で本来果たすべき役割（どのタイヤを履いてどこへ向かうべきか）については、人間のスコトーマ（盲点）に隠れるためセルフチェックでは判定できません。
+                バランスウィールとは、人生全体に未来ゴールの臨場感を分散させ、それらを<strong>より高次の自己像（人生の意味・本来果たすべき役割）へと統合するための構造</strong>です。この高次の役割については、人間のスコトーマ（盲点）に隠れるため自分一人では見えにくい性質があります。
               </p>
               <p class="text-cyan-300 font-bold leading-relaxed">
-                これについては、セッションまたはご自身のメンターに相談されることをお勧めします。
+                10領域のゴールをより高次の未来へと統合していくための壁打ちとして、セッションまたはご自身のメンターに相談されることをお勧めします。
               </p>
             </div>
           </div>
         </div>
 
-        <!-- =============================================================== -->
-        <!-- COPY & SEND TO JIN NOTIFICATION (NO PRESSURE)                   -->
-        <!-- =============================================================== -->
+        <!-- LINE COPY NOTIFICATION -->
         <div class="rounded-2xl bg-slate-950 border border-slate-800 p-4 space-y-3 text-center">
           <p class="text-sm font-bold text-slate-200">
-            ※診断結果のコピーがJINへ送信されます。
+            ※未来臨場感チャートの結果コピーがJINへ送信されます。
           </p>
           <p class="text-xs text-slate-300 leading-relaxed">
-            下のボタンを押すと診断結果データがコピーされますので、公式LINEのトーク画面に貼り付けてそのまま送信してください。
+            下のボタンを押すと結果データがコピーされますので、公式LINEのトーク画面に貼り付けてそのまま送信してください。
           </p>
 
           <button onclick="copyResultForLine()" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 font-black text-base shadow-xl shadow-cyan-500/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
-            <span>診断結果をコピーしてJINへ送信する</span>
+            <span>チャート結果をコピーしてJINへ送信する</span>
           </button>
 
           <div id="copyToast" class="hidden rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 p-3 text-sm font-bold">
-            ✅ 診断結果をコピーしました！LINEトーク画面に「貼り付け」て送信してください。
+            ✅ 結果データをコピーしました！LINEトーク画面に「貼り付け」て送信してください。
           </div>
         </div>
 
@@ -451,10 +439,6 @@
   <script>
     // =========================================================================
     // 0. LAUNCH / ADMIN CONFIGURATION
-    //    - Set SHOW_ADMIN_MENU = false for public launch (hides ⚙️ button)
-    //    - Administrators can still reveal it anytime by:
-    //      (A) Adding "?admin=1" to the URL, OR
-    //      (B) Tapping the top-left "BW" icon 5 times quickly.
     // =========================================================================
     const SHOW_ADMIN_MENU = false;
     let secretTapCount = 0;
@@ -499,16 +483,16 @@
     let currentStep = -1;
 
     const DOMAINS = [
-      { id: 1,  name: '仕事・職業',         en: 'Career & Work',           color: '#06b6d4', desc: '社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。' },
+      { id: 1,  name: '仕事・職業',             en: 'Occupation & Work',       color: '#06b6d4', desc: '社会の中で自分の力を発揮し、価値を生み出す活動のゴールについてイメージしてください。' },
       { id: 2,  name: '人間関係・家族',         en: 'Relationships & Family',  color: '#ec4899', desc: '家族やパートナー、これから出会う仲間との理想的な関係性のゴールをイメージしてください。' },
       { id: 3,  name: '知性・生涯学習',         en: 'Lifelong Learning',       color: '#3b82f6', desc: '未知の分野の探求や教養、知的好奇心を満たす学びのゴールをイメージしてください。' },
       { id: 4,  name: '趣味・遊び',             en: 'Hobbies & Play',          color: '#f59e0b', desc: '損得抜きで純粋に没頭し、人生を味わい尽くす遊び・趣味のゴールをイメージしてください。' },
       { id: 5,  name: '社会貢献・地域',         en: 'Social Contribution',     color: '#10b981', desc: '自分の活動を通じて地域や社会、未来の世代へ還元していくゴールをイメージしてください。' },
       { id: 6,  name: 'ファイナンス・資産',     en: 'Finance & Wealth',        color: '#eab308', desc: '理想の活動やライフスタイルを自在に支える経済・資産規模のゴールをイメージしてください。' },
-      { id: 7,  name: '健康・美容',       en: 'Health & Vitality',       color: '#22c55e', desc: '高いエネルギーと若々しさ、心地よい身体状態を保つゴールをイメージしてください。' },
-      { id: 8,  name: '抽象度・利他',           en: 'Higher Abstraction',      color: '#8b5cf6', desc: 'より広い視野と高い抽象度から世界や物事を俯瞰するゴールをイメージしてください。' },
+      { id: 7,  name: '健康・美容',             en: 'Health & Beauty',         color: '#22c55e', desc: '高いエネルギーと若々しさ、心地よい身体状態を保つゴールをイメージしてください。' },
+      { id: 8,  name: '抽象度・利他',           en: 'Altruism & Abstraction',  color: '#8b5cf6', desc: 'より広い視野と高い抽象度から世界や物事を俯瞰するゴールをイメージしてください。' },
       { id: 9,  name: 'リーダーシップ',         en: 'Leadership',              color: '#6366f1', desc: '周囲の人々の確信（エフィカシー）を自然に引き上げる存在としてのゴールをイメージしてください。' },
-      { id: 10, name: 'エソテリシティ', en: 'Esotericity & Spirit',    color: '#a855f7', desc: '宇宙や生命の大きな流れと調和し、深い精神性を体現するゴールをイメージしてください。' }
+      { id: 10, name: 'エソテリシティ・密教',   en: 'Esotericity',             color: '#a855f7', desc: '宇宙や生命の大きな流れと調和し、深い精神性を体現するゴールをイメージしてください。' }
     ];
 
     let domainData = DOMAINS.map(() => ({
@@ -580,28 +564,28 @@
       };
     }
 
-    // Helper: Diagnose a single domain's 4-axis pattern based on §11.4 P/Q/E & §10.4 A_P
+    // Helper: Diagnose a single domain's 4-axis pattern based on §11.4 P/Q/E & §10.4 A_P & §17 Ethic
     function diagnoseDomainAxisPattern(dVal) {
       const { A, P, Q, E } = dVal;
       const minVal = Math.min(A, P, Q, E);
       const maxVal = Math.max(A, P, Q, E);
 
       if (minVal >= 75) {
-        return { tag: '🔥 強く向かう（4軸充足）', tagColor: 'text-emerald-300 bg-emerald-500/15', advice: '4つの感覚（しっくり・リアル・向かいたい・できる確信）がすべて高く、未来のコンフォートゾーンへ強く駆動しています。' };
+        return { tag: '🔥 強く向かう（4軸充足）', tagColor: 'text-emerald-300 bg-emerald-500/15', advice: '4つの感覚（しっくり・リアル・向かいたい・できる確信）がすべて高く、あなたが選んだ未来のコンフォートゾーンへ力強く駆動しています。' };
       }
       if (P >= 65 && Q >= 65 && E <= minVal + 5 && E < 65) {
-        return { tag: '💭 憧れ・焦り（できる確信不足）', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}%)と向かいたい気持ち(${Q}%)は高いのに、「④できる確信(${E}%)」がボトルネックになり、「憧れ・焦り・自分にはまだ無理かも」というブレーキが生じています。到達して安定して住める確信（エフィカシー）を引き上げることが最優先です。` };
+        return { tag: '🌱 確信（エフィカシー）開花の余白', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}%)と向かいたい気持ち(${Q}%)がすでに豊かに備わっています。あとは「④できる確信(${E}%)」——自分ならその未来へ到達し当たり前に住み続けられるという感覚を添えるだけで、一気に推進力が開花します。` };
       }
       if (Q >= 65 && E >= 65 && P <= minVal + 5 && P < 65) {
-        return { tag: '📝 机上の空論（リアル感不足）', tagColor: 'text-sky-300 bg-sky-500/15', advice: `向かいたい気持ち(${Q}%)とできる確信(${E}%)は高いものの、「②リアル感(${P}%)」が伴っていないため、頭の中だけの「机上の空論（いつかできたらいいな）」に留まっています。すでにそこに住んでいる五感の臨場感を高めましょう。` };
+        return { tag: '✨ 臨場感アップデートの好機', tagColor: 'text-sky-300 bg-sky-500/15', advice: `向かいたい気持ち(${Q}%)とできる確信(${E}%)がしっかり整っています。あとは「②リアル感(${P}%)」として、すでにその未来に住んでいる五感の風景を味わうほど、現実が自然に動き出します。` };
       }
       if ((P >= 60 || E >= 60) && Q <= minVal + 5 && Q < 65) {
-        return { tag: '⛽ 義務感・have to（望ましさ不足）', tagColor: 'text-orange-300 bg-orange-500/15', advice: `リアルさや達成能力はあるのに、「③心から向かいたい(${Q}%)」が低いため、「やらなければならない（have to）」の義務感でエネルギーが漏れています。本心からワクワクするゴールへ再設定しましょう。` };
+        return { tag: '💫 本音のwant toを描く余白', tagColor: 'text-orange-300 bg-orange-500/15', advice: `リアルさや達成する力は十分にあります。「③心から向かいたい(${Q}%)」をさらに満たすために、「やるべき」を手放してあなた自身が心からワクワクする未来を自由に選び直せるタイミングです。` };
       }
       if (A <= minVal + 5 && A < 65 && maxVal - A >= 15) {
-        return { tag: '🧭 借り物ゴール感（しっくり感不足）', tagColor: 'text-indigo-300 bg-indigo-500/15', advice: `「①しっくりくる(${A}%)」が最も低く、現在の自分から見てゴールがしっくり受容できていません（他人の基準や借り物のゴールの可能性があります）。自分自身の感覚にしっくり馴染む言葉・映像にチューニングしましょう。` };
+        return { tag: '🧭 自分らしい言葉へ馴染ませる余白', tagColor: 'text-indigo-300 bg-indigo-500/15', advice: `意欲や確信は高い状態です。「①しっくりくる(${A}%)」をさらに高めるために、外側の基準ではなく、あなた自身の身体感覚に自然としっくり馴染む言葉や映像へと自由にデザインし直してみましょう。` };
       }
-      return { tag: '🎈 空気圧不足（全体的に控えめ）', tagColor: 'text-amber-300 bg-amber-500/15', advice: `4軸のうち最も低い軸（${minVal}%）が掛け算全体の足を引っ張っています。まずは「③心から向かいたい」と「④できる確信」の空気圧をグッと高めましょう。` };
+      return { tag: '🚀 これから大きく描ける伸びしろ', tagColor: 'text-amber-300 bg-amber-500/15', advice: `これからあなたが自由にエネルギーを注ぎ、大きく育てていける余白がある領域です。まずは「③心から向かいたい」と「④できる確信」から自由に膨らませてみましょう。` };
     }
 
     // =========================================================================
@@ -723,14 +707,14 @@
           <button type="button" onclick="toggleInsideDomain(${idx})"
             class="p-3 rounded-xl border text-left transition flex items-center justify-between gap-2 ${
               inside
-                ? 'border-rose-500 bg-rose-500/20 text-rose-200 font-bold'
+                ? 'border-amber-500 bg-amber-500/20 text-amber-200 font-bold'
                 : 'border-slate-800 bg-slate-900/90 text-slate-200 hover:border-slate-700'
             }">
             <div class="flex items-center gap-2 min-w-0">
               <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dom.color}"></span>
               <span class="text-xs sm:text-sm truncate">${dom.id}. ${dom.name}</span>
             </div>
-            <span class="text-xs px-2 py-0.5 rounded shrink-0 ${inside ? 'bg-rose-500 text-white font-black' : 'bg-emerald-500/20 text-emerald-300 font-bold'}">
+            <span class="text-xs px-2 py-0.5 rounded shrink-0 ${inside ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-300 font-bold'}">
               ${inside ? '現状の内側' : '現状の外'}
             </span>
           </button>
@@ -754,7 +738,9 @@
       const canvas = document.getElementById('crosshairCircleCanvas');
       if (!canvas) return;
       const dpr = window.devicePixelRatio || 1;
-      const size = 288;
+      // Responsive compact size for iPhone SE
+      const isMobile = window.innerWidth < 400;
+      const size = isMobile ? 224 : 256;
       canvas.width = size * dpr;
       canvas.height = size * dpr;
 
@@ -764,12 +750,11 @@
 
       const cx = size / 2;
       const cy = size / 2;
-      const maxR = size * 0.34; // Leaves generous room outside the circle for ①, ②, ③, ④ labels
+      const maxR = size * 0.33; // Generous room for outer labels on small screens
 
       const dVal = domainData[currentStep];
       const domColor = DOMAINS[currentStep].color;
 
-      // Compute real-time CLPT manifestation for this domain (incorporating boundary gate Gamma_k)
       const mNow = calculateUnderlyingCLPT();
       const productPowerPct = (mNow.s_list[currentStep] * 100).toFixed(1);
       const areaBadge = document.getElementById('quadrantAreaBadge');
@@ -777,50 +762,48 @@
         areaBadge.textContent = `${productPowerPct}%`;
       }
 
-      // 1. Draw Outer Circle & 50% Guide Ring
+      // Outer Circle
       ctx.beginPath();
       ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
       ctx.fill();
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 2;
       ctx.strokeStyle = '#e2e8f0';
       ctx.stroke();
 
-      // 50% Default Reference Ring (dashed)
+      // 50% Dashed Ring
       ctx.beginPath();
       ctx.arc(cx, cy, maxR * 0.5, 0, Math.PI * 2);
-      ctx.setLineDash([4, 4]);
+      ctx.setLineDash([3, 3]);
       ctx.lineWidth = 1;
       ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // 2. Draw Vertical & Horizontal Crosshair Axes inside the Circle
+      // Vertical & Horizontal Crosshairs
       ctx.beginPath();
-      // Vertical axis (① Top to ③ Bottom)
       ctx.moveTo(cx, cy - maxR);
       ctx.lineTo(cx, cy + maxR);
-      // Horizontal axis (④ Left to ② Right)
       ctx.moveTo(cx - maxR, cy);
       ctx.lineTo(cx + maxR, cy);
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'rgba(226, 232, 240, 0.75)';
       ctx.stroke();
 
-      // Axis ticks at 25%, 50%, 75%
+      // Ticks
       [0.25, 0.5, 0.75].forEach(t => {
         const d = maxR * t;
         ctx.beginPath();
-        ctx.moveTo(cx - 4, cy - d); ctx.lineTo(cx + 4, cy - d);
-        ctx.moveTo(cx - 4, cy + d); ctx.lineTo(cx + 4, cy + d);
-        ctx.moveTo(cx - d, cy - 4); ctx.lineTo(cx - d, cy + 4);
-        ctx.moveTo(cx + d, cy - 4); ctx.lineTo(cx + d, cy + 4);
-        ctx.lineWidth = 1.2;
+        ctx.moveTo(cx - 3, cy - d); ctx.lineTo(cx + 3, cy - d);
+        ctx.moveTo(cx - 3, cy + d); ctx.lineTo(cx + 3, cy + d);
+        ctx.moveTo(cx - d, cy - 3); ctx.lineTo(cx - d, cy + 3);
+        ctx.moveTo(cx + d, cy - 3); ctx.lineTo(cx + d, cy + 3);
+        ctx.lineWidth = 1;
         ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
         ctx.stroke();
       });
 
-      // 3. Calculate the 4 Vertex Coordinates on the Cross Axes
+      const labelOffset = isMobile ? 18 : 22;
       const pTop = {
         key: 'A',
         val: dVal.A,
@@ -830,7 +813,7 @@
         label: '①',
         subLabel: 'しっくりくる',
         lx: cx,
-        ly: cy - maxR - 23
+        ly: cy - maxR - labelOffset
       };
       const pRight = {
         key: 'P',
@@ -840,7 +823,7 @@
         color: '#34d399',
         label: '②',
         subLabel: 'リアル感',
-        lx: cx + maxR + 26,
+        lx: cx + maxR + labelOffset + 2,
         ly: cy
       };
       const pBottom = {
@@ -852,7 +835,7 @@
         label: '③',
         subLabel: '心から向かいたい',
         lx: cx,
-        ly: cy + maxR + 23
+        ly: cy + maxR + labelOffset
       };
       const pLeft = {
         key: 'E',
@@ -862,13 +845,13 @@
         color: '#a78bfa',
         label: '④',
         subLabel: 'できる確信',
-        lx: cx - maxR - 26,
+        lx: cx - maxR - labelOffset - 2,
         ly: cy
       };
 
       const pts = [pTop, pRight, pBottom, pLeft];
 
-      // 4. Connect the 4 Points with Straight Lines to Form the Quadrilateral (Diamond)
+      // Form Polygon
       ctx.beginPath();
       ctx.moveTo(pTop.x, pTop.y);
       ctx.lineTo(pRight.x, pRight.y);
@@ -876,60 +859,55 @@
       ctx.lineTo(pLeft.x, pLeft.y);
       ctx.closePath();
 
-      const polyGrad = ctx.createRadialGradient(cx, cy, 4, cx, cy, maxR);
+      const polyGrad = ctx.createRadialGradient(cx, cy, 3, cx, cy, maxR);
       polyGrad.addColorStop(0, `${domColor}95`);
       polyGrad.addColorStop(1, 'rgba(34, 211, 238, 0.30)');
       ctx.fillStyle = polyGrad;
       ctx.fill();
 
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 2.5;
       ctx.strokeStyle = '#38bdf8';
       ctx.stroke();
 
-      // 5. Draw Active Axis Segments from Center to Vertex + Large Finger-Friendly Handles
       pts.forEach(pt => {
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(pt.x, pt.y);
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3;
         ctx.strokeStyle = pt.color;
         ctx.stroke();
 
-        // Outer Glow Halo around Thumb Handle
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 14, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, isMobile ? 11 : 13, 0, Math.PI * 2);
         ctx.fillStyle = `${pt.color}33`;
         ctx.fill();
 
-        // Draggable Handle Circle on Axis
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 9.5, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, isMobile ? 7.5 : 9, 0, Math.PI * 2);
         ctx.fillStyle = pt.color;
         ctx.fill();
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = 2;
         ctx.strokeStyle = '#ffffff';
         ctx.stroke();
 
-        // Outer Axis Labels (① Top, ② Right, ③ Bottom, ④ Left)
         ctx.fillStyle = pt.color;
-        ctx.font = '900 14px "Noto Sans JP", sans-serif';
+        ctx.font = isMobile ? '900 11px "Noto Sans JP", sans-serif' : '900 13px "Noto Sans JP", sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(`${pt.label}${pt.val}%`, pt.lx, pt.ly - 7);
+        ctx.fillText(`${pt.label}${pt.val}%`, pt.lx, pt.ly - (isMobile ? 5 : 6));
 
         ctx.fillStyle = '#e2e8f0';
-        ctx.font = 'bold 11.5px "Noto Sans JP", sans-serif';
-        ctx.fillText(pt.subLabel, pt.lx, pt.ly + 9);
+        ctx.font = isMobile ? 'bold 9.5px "Noto Sans JP", sans-serif' : 'bold 11px "Noto Sans JP", sans-serif';
+        ctx.fillText(pt.subLabel, pt.lx, pt.ly + (isMobile ? 6 : 8));
       });
 
-      // Center Intersection Dot
       ctx.beginPath();
-      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
       ctx.fillStyle = '#f8fafc';
       ctx.fill();
     }
 
-    // Direct Touch/Drag on the 4 Crosshair Axes (① Top, ② Right, ③ Bottom, ④ Left)
+    // Direct Touch/Drag on Crosshair Axes
     (function setupCircleTouchInteraction() {
       document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('crosshairCircleCanvas');
@@ -937,10 +915,10 @@
         let activeAxisKey = null;
 
         const axisMeta = {
-          A: { name: '① しっくりくる（自然に受け入れられる）', color: '#22d3ee' },
-          P: { name: '② リアル感（すでにそこにある臨場感）', color: '#34d399' },
-          Q: { name: '③ 心から向かいたい（内側から湧く望ましさ）', color: '#fbbf24' },
-          E: { name: '④ できる確信（自分なら達成できる）', color: '#a78bfa' }
+          A: { name: '① しっくりくる', color: '#22d3ee' },
+          P: { name: '② リアル感', color: '#34d399' },
+          Q: { name: '③ 心から向かいたい', color: '#fbbf24' },
+          E: { name: '④ できる確信', color: '#a78bfa' }
         };
 
         function pickNearestAxis(x, y) {
@@ -957,7 +935,7 @@
           const clientY = e.touches ? e.touches[0].clientY : e.clientY;
           const x = clientX - rect.left - rect.width / 2;
           const y = clientY - rect.top - rect.height / 2;
-          const maxR = rect.width * 0.34;
+          const maxR = rect.width * 0.33;
 
           if (isStart || !activeAxisKey) {
             activeAxisKey = pickNearestAxis(x, y);
@@ -969,7 +947,6 @@
           else if (activeAxisKey === 'Q') projDist = Math.max(0, y);
           else if (activeAxisKey === 'E') projDist = Math.max(0, -x);
 
-          // Snap to 5% increments for smooth, satisfying feel
           const rawPct = Math.min(100, Math.max(5, Math.round((projDist / maxR) * 100)));
           const pct = Math.round(rawPct / 5) * 5;
 
@@ -1017,15 +994,15 @@
         const isStarved = m.b_list[idx] < 0.055;
         const axisDiag = diagnoseDomainAxisPattern(dVal);
         return `
-          <div class="p-3 rounded-xl bg-slate-900/90 border ${dVal.isInside || isStarved ? 'border-rose-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-2">
+          <div class="p-3 rounded-xl bg-slate-900/90 border ${dVal.isInside || isStarved ? 'border-amber-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-2">
             <div class="flex items-center gap-2 min-w-0 flex-wrap">
               <span class="w-3 h-3 rounded-full shrink-0" style="background:${dom.color}"></span>
               <span class="font-bold text-slate-100 truncate">${dom.id}. ${dom.name}</span>
-              ${dVal.isInside ? '<span class="px-2 py-0.5 text-xs rounded bg-rose-500/20 text-rose-300 font-bold">⚠️ 現状の内側</span>' : '<span class="px-2 py-0.5 text-xs rounded bg-emerald-500/15 text-emerald-300 font-bold">現状の外</span>'}
+              ${dVal.isInside ? '<span class="px-2 py-0.5 text-xs rounded bg-amber-500/20 text-amber-300 font-bold">🌱 現状の外へ広げる余白</span>' : '<span class="px-2 py-0.5 text-xs rounded bg-emerald-500/15 text-emerald-300 font-bold">現状の外</span>'}
               <span class="px-2 py-0.5 text-xs rounded font-bold ${axisDiag.tagColor}">${axisDiag.tag}</span>
             </div>
             <div class="flex items-center gap-3 shrink-0 font-bold">
-              <span class="${isStarved ? 'text-rose-400' : 'text-emerald-300'}">${sharePct}%</span>
+              <span class="${isStarved ? 'text-amber-300' : 'text-emerald-300'}">${sharePct}%</span>
               <span class="text-xs text-slate-300 w-24 text-right">出力 ${domPowerPct}%</span>
             </div>
           </div>
@@ -1046,7 +1023,7 @@
       const strongest = ranked[ranked.length - 1];
 
       // =====================================================================
-      // 8 DISTINCT VERDICT REPORT TYPES BASED ON §10.4 & §11.4 (A, P, Q, E)
+      // 8 DISTINCT TELEMETRY REPORT TYPES BASED ON §10.4, §11.4 & §17 ETHIC
       // =====================================================================
       let badgeText = '';
       let badgeClass = '';
@@ -1058,83 +1035,83 @@
       const axisSpread = maxAvgAxis - minAvgAxis;
 
       if (m.insideDomains.length > 0) {
-        // [TYPE 1] Puncture Warning: 1 or more domains inside Status Quo
+        // [TYPE 1] Horizon Expansion Opportunity
         const insideNames = m.insideDomains.map(d => `「${d.name}」`).join('・');
-        badgeText = 'TYPE 01 // パンク警報（現状の内側混入型）';
-        badgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
-        titleText = `【パンク警報】${insideNames}が「現状の内側」になっています！1つでも現状の内側があると車輪はパンクします。`;
+        badgeText = 'TYPE 01 // さらなる飛躍の余白（現状の外への拡張フェーズ）';
+        badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        titleText = `【さらなる飛躍の余白】${insideNames}の領域に、これから「現状の外」へ大きく飛び出せる余白があります！`;
         storyParagraphs = [
-          `ゴールは10領域すべてが「現状の外側」である必要があります。どれだけ他の領域の出力が高くても、<strong>${insideNames}</strong>に「今の延長線（現状の内側）」が混ざっていると、無意識のホメオスタシスが現状維持へ引き戻され、そこからタイヤがパンクしてしまいます。`,
-          `まずは現状の内側に留まっている領域のゴールを、<strong>「今のやり方の延長では達成方法が全く分からない未来（現状の外）」</strong>へと設定し直しましょう！`
+          `10領域すべてに「現状の外側（今の延長線上にない未来）」のゴールを置くことで、無意識のホメオスタシスが未来側へと力強く働き始めます。いま<strong>${insideNames}</strong>に「現状の延長線」が残っているということは、そこがあなたにとって<strong>最も大きく飛躍できる伸びしろ</strong>だということです。`,
+          `ぜひこの領域にも、<strong>「今のやり方の延長では達成方法がまだ分からないほどワクワクする未来（現状の外）」</strong>を自由に描いてみましょう！`
         ];
       } else if (m.imbKL > 0.15) {
-        // [TYPE 2] High Imbalance (KL divergence > 0.15): One-Wheel Spin
-        badgeText = 'TYPE 02 // 片輪スピン（アライメント偏り型）';
-        badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
-        titleText = `【片輪スピン警報】「${strongest.name}」にエネルギーが集中し、「${weakest1.name}・${weakest2.name}」が手薄になっています！`;
+        // [TYPE 2] High Energy Concentration & Unexplored Potential
+        badgeText = 'TYPE 02 // エネルギーの集中と新たな伸びしろ';
+        badgeClass = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
+        titleText = `【エネルギーの集中と伸びしろ】「${strongest.name}」に強い情熱が注がれています。ここに「${weakest1.name}・${weakest2.name}」の未来が加わると、車輪はさらに大きく回り始めます！`;
         storyParagraphs = [
-          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に強い臨場感とエネルギーが注がれている一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>の存在感が薄くなっています（不均衡ズレ Imb = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
-          `心理的バランスとは「時計の時間配分」ではなく、<strong>10領域すべてのゴールが心の中で均等なリアリティと確信を持って存在している状態</strong>です。手薄になっている領域にも心から向かいたいゴールを設定し、円グラフを均等な10等分（各10%・Imb = 0）へ近づけましょう！`
+          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に素晴らしい臨場感とエネルギーが注がれています。一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>には、まだ手つかずの大きな余白が残っています（バランス距離 Imb = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
+          `10領域のすべてにあなたが心から望むゴールを配置したとき、特定の領域だけでなく人生全体の車輪が互いに引き合い、驚くほどスムーズに自動収束し始めます。いま余白がある領域にこそ、新しい未来を自由に描いてみましょう！`
         ];
       } else if (m.avgP >= 62 && m.avgQ >= 62 && m.avgE === minAvgAxis && axisSpread >= 12) {
-        // [TYPE 3] §11.4 P High, Q High, E Low -> Yearning / Anxiety / Self-Doubt (憧れ・焦り・空回り型)
-        badgeText = 'TYPE 03 // 憧れ・焦り（エフィカシー不足型）';
+        // [TYPE 3] §11.4 P High, Q High, E Growth Opportunity -> Efficacy Awakening
+        badgeText = 'TYPE 03 // エフィカシー開花のタイミング';
         badgeClass = 'bg-pink-500/20 text-pink-300 border-pink-500/40';
-        titleText = '【憧れ・焦りモード】未来のリアル感と「向かいたい気持ち」は高いのに、「自分にはできる確信」がブレーキになっています！';
+        titleText = '【エフィカシー開花の好機】未来のビジョンと情熱はすでに十分です。あとは「自分ならそこに住める」という確信を添えるだけです！';
         storyParagraphs = [
-          `あなたの4軸平均を見ると、<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>と<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>が高い一方で、<strong>「④できる確信・エフィカシー（平均 ${m.avgE.toFixed(0)}%）」</strong>が一番低くなっています。`,
-          `理想の未来がリアルに思い描けて、心からそこへ向かいたいのに「自分にはまだ無理かもしれない」と感じているとき、心の中ではその未来が<strong>「憧れ」「焦り」「不安」</strong>に変わり、無意識がアクセルとブレーキを同時に踏んでしまいます。`,
-          `あなたに必要なのは「やり方（How）を探すこと」ではなく、<strong>「自分はその未来へ到達できるし、そこに当たり前に住み続けられる」という自己評価（エフィカシー）を徹底的に引き上げること</strong>です！`
+          `あなたの4軸平均を見ると、<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>と<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>がすでに高く、望ましい未来を鮮明に描けています。ここからさらに飛躍する鍵は、<strong>「④できる確信・エフィカシー（平均 ${m.avgE.toFixed(0)}%）」</strong>にあります。`,
+          `ビジョンと情熱があるのに「まだ自分には早いかもしれない」と感じていると、せっかくの推進力が「憧れ」に留まってしまいます。`,
+          `今のあなたに必要なのは「具体的なやり方（How）」を探すことではなく、<strong>「自分はその未来へ到達できるし、そこに当たり前に住み続けられる人間だ」という自己評価（エフィカシー）を自ら許可すること</strong>です！`
         ];
       } else if (m.avgQ >= 62 && m.avgE >= 62 && m.avgP === minAvgAxis && axisSpread >= 12) {
-        // [TYPE 4] §11.4 P Low, Q High, E High -> Armchair Theory (机上の空論・リアリティ不足型)
-        badgeText = 'TYPE 04 // 机上の空論（リアリティ不足型）';
+        // [TYPE 4] §11.4 Q High, E High, P Growth Opportunity -> Presence Upgrade
+        badgeText = 'TYPE 04 // 臨場感アップデートの好機';
         badgeClass = 'bg-sky-500/20 text-sky-300 border-sky-500/40';
-        titleText = '【机上の空論モード】「向かいたい気持ち」と「できる確信」は高いのに、未来の「リアル感（臨場感）」がまだ追いついていません！';
+        titleText = '【臨場感アップデートの好機】「向かいたい意欲」も「できる確信」も整っています。その未来を五感で味わうほど現実が動き出します！';
         storyParagraphs = [
-          `あなたの4軸平均では、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>と<strong>「④できる確信（平均 ${m.avgE.toFixed(0)}%）」</strong>がしっかり備わっている一方で、<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>がボトルネックになっています。`,
-          `「自分なら達成できそうだし、望ましい」と思っていても、その未来世界が「いま目の前の現実」よりリアルに感じられていなければ、脳のホメオスタシスは現在の快適圏に留まり続け、ゴールは<strong>「机上の空論（頭で考えただけの計画）」</strong>になってしまいます。`,
-          `すでにそのゴールを達成した世界で「どんな景色を見ているか、誰とどんな会話をしているか、どんな身体感覚か」を五感で味わい、<strong>現在の現実よりも未来側の臨場感を高く書き換えましょう！</strong>`
+          `あなたの4軸平均では、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>と<strong>「④できる確信（平均 ${m.avgE.toFixed(0)}%）」</strong>という強力なエンジンがすでに備わっています。ここからの最大の伸びしろは<strong>「②リアル感（平均 ${m.avgP.toFixed(0)}%）」</strong>です。`,
+          `人は「いま目の前の現実」よりも「自分がよりリアルに感じる世界」へと自然に移動します。`,
+          `すでにそのゴールを達成した世界で「どんな景色を見ているか、誰とどんな会話をしているか、どんな空気や身体感覚か」を五感で味わい、<strong>未来側の臨場感を楽しく高めていきましょう！</strong>`
         ];
       } else if ((m.avgP >= 60 || m.avgE >= 60) && m.avgQ === minAvgAxis && axisSpread >= 12) {
-        // [TYPE 5] §11.4 Q+ Low -> Have-to / Obligation (義務感・ガス欠型)
-        badgeText = 'TYPE 05 // 義務感・ガス欠（want to 不足型）';
+        // [TYPE 5] §11.4 Q+ Growth Opportunity -> Pure Want-to Liberation
+        badgeText = 'TYPE 05 // 本音のwant to解放フェーズ';
         badgeClass = 'bg-orange-500/20 text-orange-300 border-orange-500/40';
-        titleText = '【義務感・ガス欠モード】達成する力やリアルさはあるのに、「心から向かいたい（want to）」のガソリンが不足しています！';
+        titleText = '【本音のwant to解放フェーズ】達成する力やリアルさは十分にあります。「やるべき」を手放し、心から望む未来を自由に描ける段階です！';
         storyParagraphs = [
-          `あなたの4軸平均を見ると、リアル感（${m.avgP.toFixed(0)}%）やできる確信（${m.avgE.toFixed(0)}%）に対して、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>が最も低くなっています。`,
-          `どれだけ達成可能でリアルな目標であっても、内側から湧き上がる「心からそこへ向かいたい！」という価値（want to）が低ければ、それは<strong>「やらなければならない（have to）の義務」</strong>になり、走るほどエネルギーが消耗してしまいます。`,
-          `世間の常識や「こうあるべき」を一度すべて脇に置き、<strong>「誰に止められても思わずやってしまうほど、自分が心から望む未来」</strong>へとゴールを更新しましょう！`
+          `あなたの4軸平均を見ると、リアル感（${m.avgP.toFixed(0)}%）やできる確信（${m.avgE.toFixed(0)}%）という高い能力がある一方で、<strong>「③心から向かいたい（平均 ${m.avgQ.toFixed(0)}%）」</strong>にさらなる解放の余白があります。`,
+          `責任感が強く優秀な方ほど、無意識のうちに「やるべきこと（have to）」をゴールに置いてしまいがちです。`,
+          `世間の常識や「こうあるべき」を一度すべて脇に置き、<strong>「誰に止められても思わずやってしまうほど、あなた自身が心から望む未来」</strong>を自由に選び取っていいタイミングです！`
         ];
       } else if (m.avgA === minAvgAxis && axisSpread >= 12 && m.avgA < 68) {
-        // [TYPE 6] §10.4 A_{P,k} Low -> Borrowed Goal / Acceptance Gap (借り物ゴール・違和感型)
-        badgeText = 'TYPE 06 // 借り物ゴール（しっくり感不足型）';
+        // [TYPE 6] §10.4 A_{P,k} Growth Opportunity -> Self-Determined Tuning
+        badgeText = 'TYPE 06 // 自己決定へのチューニング';
         badgeClass = 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40';
-        titleText = '【借り物ゴール警報】意欲や確信はあるものの、ゴールが今の自分に「しっくりくる（受容できる）」感覚が薄くなっています！';
+        titleText = '【自己決定へのチューニング】高い意欲と確信があります。あとは「あなた自身が心からしっくりくる言葉・映像」に馴染ませるだけです！';
         storyParagraphs = [
-          `あなたの4軸平均では、他の軸に比べて<strong>「①しっくりくる（平均 ${m.avgA.toFixed(0)}%）」</strong>が最も低くなっています。`,
-          `頭では「すごいゴールだ」「達成したい」と思っていても、自分の身体感覚としてしっくり受け入れられていない（他人の成功モデルや借り物の言葉をそのまま置いている）とき、無意識の境界で強い違和感や抵抗が生まれます。`,
-          `現在の自分の延長線ではない「現状の外」でありながらも、<strong>思い出せば自然と背筋が伸びて身体が馴染むような「自分自身の言葉・映像」</strong>でゴールを再設計しましょう！`
+          `あなたの4軸平均では、他の軸に比べて<strong>「①しっくりくる（平均 ${m.avgA.toFixed(0)}%）」</strong>に伸びしろがあります。`,
+          `世の中の成功モデルや誰かの言葉をそのままゴールに置いていると、頭では「素晴らしい」と思っていても身体感覚としてしっくり馴染まないことがあります。`,
+          `現在の延長線ではない「現状の外」でありながらも、<strong>思い浮かべた瞬間にあなた自身の心が自然と頷くような「あなただけの言葉・映像」</strong>へと自由にデザインし直してみましょう！`
         ];
       } else if (m.powerScorePct < 24) {
-        // [TYPE 7] Balanced ratio b_k^E, but overall low product s_k^E (空気圧不足・ミニチュア車輪型)
-        badgeText = 'TYPE 07 // 空気圧不足（ミニチュア車輪型）';
+        // [TYPE 7] Balanced ratio b_k^E, Ready for Power Expansion
+        badgeText = 'TYPE 07 // 車輪の出力拡大フェーズ';
         badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
-        titleText = '【ミニチュア車輪タイプ】円グラフは10等分に見えますが、4軸の掛け算パワー（空気圧）がまだ小さくまとまっています！';
+        titleText = '【出力拡大フェーズ】10領域のバランスが綺麗に整っています！ここから車輪全体のサイズ（4軸の掛け算パワー）を大きく広げていける段階です！';
         storyParagraphs = [
-          `円グラフの不均衡ズレ（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）は小さく均等に見えますが、正十角形チャートの推進パワー（平均 <strong>${m.powerScorePct}%</strong>）が中心に小さく縮こまっています。`,
-          `4つの感覚（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）は<strong>掛け算</strong>で働くため、すべて50%だと推進パワーは <strong>6.25%</strong>（すべて60%でも <strong>13.0%</strong>）しか出ません。「全部そこそこ同じくらい控えめだから、比率上は10等分に見えている」という状態です。`,
-          `まずは各領域で「③心から向かいたい」と「④できる確信」の空気圧を80%以上へグッと高め、車輪そのものを大きく膨らませましょう！`
+          `円グラフのバランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）が小さく、10領域を偏りなく見渡せる素晴らしい土台があります。ここからさらに楽しくなるのは、正十角形チャートの推進パワー（現在平均 <strong>${m.powerScorePct}%</strong>）を大きく膨らませていくプロセスです。`,
+          `4つの感覚（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）は<strong>掛け算</strong>で働くため、それぞれの軸を少しずつ引き上げるだけで、車輪全体の推進力は一気に何倍にも拡大します。`,
+          `まずはあなたが一番ワクワクする領域から、「③心から向かいたい」と「④できる確信」のメモリを80%以上へ自由に広げてみましょう！`
         ];
       } else {
         // [TYPE 8] All 10 Outside Status Quo, Low Imb, High Power across all 4 axes
         badgeText = 'TYPE 08 // 高出力フルバランス（高次役割フェーズ）';
         badgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
-        titleText = '【フルスペック車輪】全10領域が「現状の外」に設定され、4軸の掛け算パワーと10等分バランスが高い次元で揃っています！';
+        titleText = '【フルスペック車輪】全10領域が「現状の外」に描かれ、4軸の掛け算パワーと10等分バランスが高い次元で調和しています！';
         storyParagraphs = [
-          `10領域すべてが「現状の外」に設定され、不均衡ズレ（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
-          `リアル感（平均 ${m.avgP.toFixed(0)}%）・望ましさ（平均 ${m.avgQ.toFixed(0)}%）・エフィカシー（平均 ${m.avgE.toFixed(0)}%）の3条件が同時に満たされており、未来のコンフォートゾーンへ向かって強力に自動収束していく状態です。`,
-          `ただし、<strong>「車輪が丸く均等に膨らんでいること」と、「いま履いているタイヤが、あなたが世界で本来果たすべき役割と本当に合致しているか」は別問題</strong>です。自分一人では気づけないスコトーマ（盲点）の外側にある役割については、セッションまたはご自身のメンターに相談されることをお勧めします。`
+          `10領域すべてが「現状の外」に設定され、バランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
+          `リアル感（平均 ${m.avgP.toFixed(0)}%）・望ましさ（平均 ${m.avgQ.toFixed(0)}%）・エフィカシー（平均 ${m.avgE.toFixed(0)}%）の3条件が同時に満たされており、あなたが選んだ未来のコンフォートゾーンへ向かって力強く自動収束していく状態です。`,
+          `この段階からさらに視座を高めるポイントは、<strong>「いま描いている10領域のゴール群を束ねる『より高次の役割（利他・社会への機能提供）』としてどんな新しい地平が見えるか」</strong>です。自分一人では見えにくいスコトーマ（盲点）の外側にある役割については、セッションまたはご自身のメンターとの壁打ちを通じてさらに自由に探求されることをお勧めします。`
         ];
       }
 
@@ -1144,9 +1121,105 @@
       document.getElementById('resTitle').textContent = titleText;
       document.getElementById('resStoryBody').innerHTML = storyParagraphs.map(p => `<p>${p}</p>`).join('');
 
-      // Bottleneck Box with 4-Axis Specific Feedback
+      // Check Finance (id:6) & Health (id:7) specific high / low / cross-imbalance patterns
+      const top1 = ranked[ranked.length - 1];
+      const top2 = ranked[ranked.length - 2];
+      const avgS = m.totalS / 10;
+
+      const sWork = m.s_list[0];   // 1. 仕事・職業
+      const sFin  = m.s_list[5];   // 6. ファイナンス・資産
+      const sHeal = m.s_list[6];   // 7. 健康・美容
+
+      const isFinTop = (
+        (top1.id === 6 && top1.s > avgS * 1.15 && m.imbKL > 0.03) ||
+        (top2.id === 6 && top2.s > avgS * 1.25 && m.imbKL > 0.04)
+      );
+      const isHealTop = (
+        (top1.id === 7 && top1.s > avgS * 1.15 && m.imbKL > 0.03) ||
+        (top2.id === 7 && top2.s > avgS * 1.25 && m.imbKL > 0.04)
+      );
+
+      const isFinBottom  = (weakest1.id === 6 || weakest2.id === 6);
+      const isHealBottom = (weakest1.id === 7 || weakest2.id === 7);
+
+      // Pattern C: Finance (or Work) is high while Health has room to grow
+      const isFinOrWorkHighVsHealLow = (
+        (sFin > avgS * 1.1 || sWork > avgS * 1.15) &&
+        (isHealBottom || sHeal < avgS * 0.65) &&
+        m.imbKL > 0.03
+      );
+      // Reverse Pattern C: Health is prominent while Finance is bottom
+      const isHealHighVsFinLow = (
+        isHealTop && isFinBottom
+      );
+
+      let finHealthBoxHtml = '';
+      if (isFinOrWorkHighVsHealLow) {
+        const highTargetName = (sFin >= sWork) ? '「ファイナンス・資産」' : '「仕事・職業（およびファイナンス）」';
+        finHealthBoxHtml = `
+          <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
+            <div class="font-extrabold text-amber-300 text-xs sm:text-sm flex items-center gap-1.5">
+              <span>💡</span>
+              <span>ファイナンス（仕事）と健康・美容を連動させるヒント</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              いま${highTargetName}に素晴らしいエネルギーが注がれています。ファイナンスと健康はどちらも<strong>「他のすべてのゴールを達成するために不可欠な両輪（インフラ）」</strong>であり、本来は掲げるゴールの大きさに合わせて両方とも必然的に高まるものです。大きなゴールを長期にわたって軽やかに楽しみ続けるために、それに見合う「理想の健康・美容」のゴールもセットで描いてみましょう。
+            </p>
+          </div>
+        `;
+      } else if (isHealHighVsFinLow) {
+        finHealthBoxHtml = `
+          <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
+            <div class="font-extrabold text-amber-300 text-xs sm:text-sm flex items-center gap-1.5">
+              <span>💡</span>
+              <span>健康・美容とファイナンスの連動に関するヒント</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              いま<strong>「健康・美容」</strong>への意識が高く充実しています。もう一つの不可欠な土台である<strong>「ファイナンス・資産」</strong>についても、その高いエネルギーや健康状態を活かしてどんな社会的ゴールを実現し、そのためにどれだけの資金調達（ファイナンス）が必要になるかを連動させて描いてみましょう。
+            </p>
+          </div>
+        `;
+      } else if (isFinTop || isHealTop) {
+        const highNames = (isFinTop && isHealTop)
+          ? '「ファイナンス・資産」と「健康・美容」'
+          : (isFinTop ? '「ファイナンス・資産」' : '「健康・美容」');
+        const highShort = (isFinTop && isHealTop)
+          ? 'ファイナンス（資金調達）や健康'
+          : (isFinTop ? 'ファイナンス（資金調達）' : '健康・美容');
+        finHealthBoxHtml = `
+          <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
+            <div class="font-extrabold text-amber-300 text-xs sm:text-sm flex items-center gap-1.5">
+              <span>💡</span>
+              <span>${highShort}の推進力をさらに活かすヒント</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              いま<strong>${highNames}</strong>の出力が他の領域よりも高くなっています。本来、${highShort}は<strong>「他の大きなゴールを達成するために不可欠な土台」</strong>であり、<strong>自分が大きく掲げる他ゴールの大きさに合わせて必然的に決まるもの</strong>です。その豊かな土台を使って「社会や他者にどんな機能を提供し、どんな世界を実現したいのか（職業・社会貢献・趣味・利他など）」という他の領域のゴールをさらに大きく掲げることで、${highShort}のゴールもより一層輝きを増します。
+            </p>
+          </div>
+        `;
+      } else if (isFinBottom || isHealBottom) {
+        const lowNames = (isFinBottom && isHealBottom)
+          ? 'ファイナンス（資金調達）や健康・美容'
+          : (isFinBottom ? 'ファイナンス・資産（資金調達）' : '健康・美容');
+        const lowTargetRequirement = (isFinBottom && isHealBottom)
+          ? '資産規模・収入源や健康状態'
+          : (isFinBottom ? '資産規模や新たな収入源' : 'バランスのとれた健康・エネルギー状態');
+        finHealthBoxHtml = `
+          <div class="mt-3 p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 space-y-1.5">
+            <div class="font-extrabold text-cyan-300 text-xs sm:text-sm flex items-center gap-1.5">
+              <span>💡</span>
+              <span>${lowNames}を自然に引き上げるヒント</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <strong>${lowNames}</strong>は、<strong>「他のすべてのゴールを達成するために不可欠な極めて重要なゴール」</strong>です。単体で無理にひねり出すものではなく、<strong>「自分が大きく掲げる他ゴールの大きさに合わせて必然的に決まる」</strong>という性質があります。「他の領域の大きなゴール群を実現するために、どんな${lowTargetRequirement}が必然的に求められるか？」という視点で連動させると、一気にリアリティと確信が立ち上がります。
+            </p>
+          </div>
+        `;
+      }
+
+      // Growth Opportunity Box with 4-Axis Specific Feedback + Finance/Health Linkage Hint
       document.getElementById('resBottleneckBox').innerHTML = `
-        <div class="font-bold text-amber-300 mb-2 text-base">🔧 4項目の入力バランスから見た「優先チューニング領域」</div>
+        <div class="font-bold text-cyan-300 mb-2 text-base">🌱 あなたが次に新しい未来を大きく描ける「伸びしろ領域」</div>
         <div class="space-y-2.5 text-slate-200 leading-relaxed">
           <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
             <div class="font-bold text-white flex items-center justify-between flex-wrap gap-1">
@@ -1163,6 +1236,7 @@
             <p class="text-xs sm:text-sm text-slate-300 mt-1">${weakest2.diag.advice}</p>
           </div>
         </div>
+        ${finHealthBoxHtml}
       `;
     }
 
@@ -1331,7 +1405,7 @@
           { A: 40, P: 35, Q: 50, E: 40, isInside: false }, // 7. 健康
           { A: 65, P: 60, Q: 70, E: 60, isInside: false }, // 8. 抽象度
           { A: 80, P: 75, Q: 80, E: 75, isInside: false }, // 9. リーダーシップ
-          { A: 25, P: 20, Q: 35, E: 25, isInside: false }  // 10. 密教
+          { A: 25, P: 20, Q: 35, E: 25, isInside: false }  // 10. 精神性
         ];
       } else if (type === 'miniature') {
         domainData = DOMAINS.map(() => ({ A: 50, P: 50, Q: 50, E: 50, isInside: false }));
@@ -1359,17 +1433,17 @@
       const m = calculateUnderlyingCLPT();
       const title = document.getElementById('resTitle').textContent.trim();
       const lines = [
-        '【未来確信舎 — BWピット診断シート】',
-        `🏁 判定: ${title}`,
-        `・不均衡ズレ (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
+        '【未来確信舎 — BW未来臨場感チャート】',
+        `🧭 チャート結果: ${title}`,
+        `・バランス距離 (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
         `・車輪の推進パワー: ${m.powerScorePct}%`,
-        `・現状の外クリア: ${m.outsideCount} / 10領域`,
-        '--- 10領域の心理的バランス構成比 (推進パワー) ---'
+        `・現状の外の領域: ${m.outsideCount} / 10領域`,
+        '--- 10領域の未来臨場感構成比 (推進パワー) ---'
       ];
       DOMAINS.forEach((d, idx) => {
         const sharePct = (m.b_list[idx] * 100).toFixed(1);
         const pwrPct = (m.s_list[idx] * 100).toFixed(1);
-        const flagStr = domainData[idx].isInside ? ' [⚠️現状の内側]' : ' [現状の外]';
+        const flagStr = domainData[idx].isInside ? ' [🌱現状の外へ広げる余白]' : ' [現状の外]';
         lines.push(`${d.id}. ${d.name}: 構成比${sharePct}% (出力${pwrPct}%)${flagStr}`);
       });
 
