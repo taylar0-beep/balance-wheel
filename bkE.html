@@ -149,13 +149,13 @@
 
         <div class="space-y-1.5">
           <span class="inline-block px-3 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
-            心理的臨場感の分布を鑑定します
+            タイヤのことならタイヤ屋、BWなら未来確信舎
           </span>
           <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
             あなたの「未来へ渡る車輪」<br>いまどんな形をしていますか？
           </h2>
           <p class="text-sm text-slate-300 leading-relaxed">
-            ここでいうF1のピットは、トップを走るドライバーが<strong>自らの意志でさらに異次元のスピードを出すために新しいタイヤ（未来のゴール）へと履き替える場</strong>です。
+            F1のピットは「壊れた車を修理する場所」ではなく、トップを走るドライバーが<strong>自らの意志でさらに異次元のスピードを出すために新しいタイヤ（未来のゴール）へと履き替える作戦室</strong>です。
           </p>
         </div>
 
@@ -227,8 +227,8 @@
             👆 十字の軸（①しっくり・②リアル・③向かいたい・④確信）をタップ
           </div>
 
-          <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center select-none">
-            <canvas id="crosshairCircleCanvas" class="w-56 h-56 sm:w-64 sm:h-64 cursor-pointer touch-none"></canvas>
+          <div class="relative w-[264px] h-[220px] sm:w-[300px] sm:h-[252px] flex items-center justify-center select-none">
+            <canvas id="crosshairCircleCanvas" class="w-[264px] h-[220px] sm:w-[300px] sm:h-[252px] cursor-pointer touch-none"></canvas>
           </div>
         </div>
 
@@ -302,7 +302,7 @@
         <!-- 3 Friendly Score Gauges (Zero arbitrary constants) -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 text-center">
-            <div class="text-xs font-bold text-slate-300">バランス距離 (I)</div>
+            <div class="text-xs font-bold text-slate-300">バランス距離 (Imb)</div>
             <div id="scoreBalance" class="text-2xl font-black text-emerald-400 mt-1">0.000</div>
             <div id="scoreBalanceSub" class="text-xs text-slate-400 mt-0.5">0に近いほど10等分</div>
           </div>
@@ -322,7 +322,7 @@
         <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 space-y-5">
           <div class="border-b border-slate-800 pb-3">
             <h3 class="text-base font-extrabold text-white">10領域の未来臨場感チャート（円グラフ ＆ 出力サイズ）</h3>
-            <p class="text-xs text-slate-300 mt-1 leading-relaxed">バランスウィールとは時計の時間配分ではなく、10領域すべてにどれだけ「未来のゴールの臨場感と確信」が分布・存在しているかを表す構造です</p>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">バランスウィールとは時計の時間配分ではなく、10領域すべてにどれだけ「未来のゴールの臨場感と確信」が分散・存在しているかを表す構造です</p>
           </div>
 
           <div class="flex flex-col gap-6 items-center">
@@ -382,7 +382,7 @@
                 <span>このアプリで分かること・分からないこと（正直な測定範囲）</span>
               </div>
               <p class="text-slate-200 leading-relaxed">
-                このアプリの設問から正確に算出できるのは、4つの感覚の掛け算から導かれる<strong>「10領域への未来臨場感の分布（バランス配分）」</strong>のみです。無意識のしきい値などは、アンケートの設問からは算出できません。
+                このアプリの設問から正確に算出できるのは、4つの感覚の掛け算から導かれる<strong>「10領域への未来臨場感の分散（バランス配分）」</strong>のみです。無意識のしきい値などは、アンケートの設問からは算出できません。
               </p>
             </div>
 
@@ -405,7 +405,7 @@
                 バランスウィールとは、人生全体に未来ゴールの臨場感を分散させ、それらを<strong>より高次の自己像（人生の意味・本来果たすべき役割）へと統合するための構造</strong>です。この高次の役割については、人間のスコトーマ（盲点）に隠れるため自分一人では見えにくい性質があります。
               </p>
               <p class="text-cyan-300 font-bold leading-relaxed">
-                10領域のゴールをより高次の未来へと統合していくためには、セッションまたはご自身のメンターに相談されることをお勧めします。
+                10領域のゴールをより高次の未来へと統合していくための壁打ちとして、セッションまたはご自身のメンターに相談されることをお勧めします。
               </p>
             </div>
           </div>
@@ -571,21 +571,21 @@
       const maxVal = Math.max(A, P, Q, E);
 
       if (minVal >= 75) {
-        return { tag: '🔥 強く向かう（4軸充足）', tagColor: 'text-emerald-300 bg-emerald-500/15', advice: '4つの感覚（しっくり・リアル・向かいたい・できる確信）がすべて高く、あなたが選んだ未来のコンフォートゾーンへ力強く駆動しています。' };
+        return { tag: '🔥 4軸充足', tagColor: 'text-emerald-300 bg-emerald-500/15', advice: '4つの感覚（しっくり・リアル・向かいたい・できる確信）がすべて高く、あなたが選んだ未来のコンフォートゾーンへ力強く駆動しています。' };
       }
       if (P >= 65 && Q >= 65 && E <= minVal + 5 && E < 65) {
-        return { tag: '🌱 確信（エフィカシー）開花の余白', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}%)と向かいたい気持ち(${Q}%)がすでに豊かに備わっています。あとは「④できる確信(${E}%)」——自分ならその未来へ到達し当たり前に住み続けられるという感覚を添えるだけで、一気に推進力が開花します。` };
+        return { tag: '🌱 確信の余白', tagColor: 'text-pink-300 bg-pink-500/15', advice: `リアル感(${P}%)と向かいたい気持ち(${Q}%)がすでに豊かに備わっています。あとは「④できる確信(${E}%)」——自分ならその未来へ到達し当たり前に住み続けられるという感覚を添えるだけで、一気に推進力が開花します。` };
       }
       if (Q >= 65 && E >= 65 && P <= minVal + 5 && P < 65) {
-        return { tag: '✨ 臨場感アップデートの好機', tagColor: 'text-sky-300 bg-sky-500/15', advice: `向かいたい気持ち(${Q}%)とできる確信(${E}%)がしっかり整っています。あとは「②リアル感(${P}%)」として、すでにその未来に住んでいる五感の風景を味わうほど、現実が自然に動き出します。` };
+        return { tag: '✨ 臨場感UP', tagColor: 'text-sky-300 bg-sky-500/15', advice: `向かいたい気持ち(${Q}%)とできる確信(${E}%)がしっかり整っています。あとは「②リアル感(${P}%)」として、すでにその未来に住んでいる五感の風景を味わうほど、現実が自然に動き出します。` };
       }
       if ((P >= 60 || E >= 60) && Q <= minVal + 5 && Q < 65) {
-        return { tag: '💫 本音のwant toを描く余白', tagColor: 'text-orange-300 bg-orange-500/15', advice: `リアルさや達成する力は十分にあります。「③心から向かいたい(${Q}%)」をさらに満たすために、「やるべき」を手放してあなた自身が心からワクワクする未来を自由に選び直せるタイミングです。` };
+        return { tag: '💫 本音解放', tagColor: 'text-orange-300 bg-orange-500/15', advice: `リアルさや達成する力は十分にあります。「③心から向かいたい(${Q}%)」をさらに満たすために、「やるべき」を手放してあなた自身が心からワクワクする未来を自由に選び直せるタイミングです。` };
       }
       if (A <= minVal + 5 && A < 65 && maxVal - A >= 15) {
-        return { tag: '🧭 自分らしい言葉へ馴染ませる余白', tagColor: 'text-indigo-300 bg-indigo-500/15', advice: `意欲や確信は高い状態です。「①しっくりくる(${A}%)」をさらに高めるために、外側の基準ではなく、あなた自身の身体感覚に自然としっくり馴染む言葉や映像へと自由にデザインし直してみましょう。` };
+        return { tag: '🧭 しっくり感', tagColor: 'text-indigo-300 bg-indigo-500/15', advice: `意欲や確信は高い状態です。「①しっくりくる(${A}%)」をさらに高めるために、外側の基準ではなく、あなた自身の身体感覚に自然としっくり馴染む言葉や映像へと自由にデザインし直してみましょう。` };
       }
-      return { tag: '🚀 これから大きく描ける伸びしろ', tagColor: 'text-amber-300 bg-amber-500/15', advice: `これからあなたが自由にエネルギーを注ぎ、大きく育てていける余白がある領域です。まずは「③心から向かいたい」と「④できる確信」から自由に膨らませてみましょう。` };
+      return { tag: '🚀 伸びしろ大', tagColor: 'text-amber-300 bg-amber-500/15', advice: `これからあなたが自由にエネルギーを注ぎ、大きく育てていける余白がある領域です。まずは「③心から向かいたい」と「④できる確信」から自由に膨らませてみましょう。` };
     }
 
     // =========================================================================
@@ -705,17 +705,14 @@
         const inside = domainData[idx].isInside;
         return `
           <button type="button" onclick="toggleInsideDomain(${idx})"
-            class="p-3 rounded-xl border text-left transition flex items-center justify-between gap-2 ${
+            class="px-2 py-2.5 rounded-xl border text-left transition flex items-center justify-between gap-1 ${
               inside
                 ? 'border-amber-500 bg-amber-500/20 text-amber-200 font-bold'
                 : 'border-slate-800 bg-slate-900/90 text-slate-200 hover:border-slate-700'
             }">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dom.color}"></span>
-              <span class="text-xs sm:text-sm truncate">${dom.id}. ${dom.name}</span>
-            </div>
-            <span class="text-xs px-2 py-0.5 rounded shrink-0 ${inside ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-300 font-bold'}">
-              ${inside ? '現状の内側' : '現状の外'}
+            <span class="text-[11px] sm:text-xs font-bold truncate">${dom.id}.${dom.name}</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded shrink-0 ${inside ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-300 font-bold'}">
+              ${inside ? '現状内' : '現状外'}
             </span>
           </button>
         `;
@@ -738,19 +735,20 @@
       const canvas = document.getElementById('crosshairCircleCanvas');
       if (!canvas) return;
       const dpr = window.devicePixelRatio || 1;
-      // Responsive compact size for iPhone SE
+      // Responsive compact size for iPhone SE (wider horizontally so left/right labels never clip)
       const isMobile = window.innerWidth < 400;
-      const size = isMobile ? 224 : 256;
-      canvas.width = size * dpr;
-      canvas.height = size * dpr;
+      const width = isMobile ? 264 : 300;
+      const height = isMobile ? 220 : 252;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
 
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, size, size);
+      ctx.clearRect(0, 0, width, height);
 
-      const cx = size / 2;
-      const cy = size / 2;
-      const maxR = size * 0.33; // Generous room for outer labels on small screens
+      const cx = width / 2;
+      const cy = height / 2;
+      const maxR = isMobile ? 64 : 74; // Ample horizontal & vertical margin for outer text
 
       const dVal = domainData[currentStep];
       const domColor = DOMAINS[currentStep].color;
@@ -803,7 +801,8 @@
         ctx.stroke();
       });
 
-      const labelOffset = isMobile ? 18 : 22;
+      const vOffset = isMobile ? 18 : 21;
+      const hOffset = isMobile ? 33 : 38;
       const pTop = {
         key: 'A',
         val: dVal.A,
@@ -813,7 +812,7 @@
         label: '①',
         subLabel: 'しっくりくる',
         lx: cx,
-        ly: cy - maxR - labelOffset
+        ly: cy - maxR - vOffset
       };
       const pRight = {
         key: 'P',
@@ -823,7 +822,7 @@
         color: '#34d399',
         label: '②',
         subLabel: 'リアル感',
-        lx: cx + maxR + labelOffset + 2,
+        lx: cx + maxR + hOffset,
         ly: cy
       };
       const pBottom = {
@@ -835,7 +834,7 @@
         label: '③',
         subLabel: '心から向かいたい',
         lx: cx,
-        ly: cy + maxR + labelOffset
+        ly: cy + maxR + vOffset
       };
       const pLeft = {
         key: 'E',
@@ -845,7 +844,7 @@
         color: '#a78bfa',
         label: '④',
         subLabel: 'できる確信',
-        lx: cx - maxR - labelOffset - 2,
+        lx: cx - maxR - hOffset,
         ly: cy
       };
 
@@ -935,7 +934,8 @@
           const clientY = e.touches ? e.touches[0].clientY : e.clientY;
           const x = clientX - rect.left - rect.width / 2;
           const y = clientY - rect.top - rect.height / 2;
-          const maxR = rect.width * 0.33;
+          const isMobile = window.innerWidth < 400;
+          const maxR = isMobile ? 64 : 74;
 
           if (isStart || !activeAxisKey) {
             activeAxisKey = pickNearestAxis(x, y);
@@ -994,16 +994,16 @@
         const isStarved = m.b_list[idx] < 0.055;
         const axisDiag = diagnoseDomainAxisPattern(dVal);
         return `
-          <div class="p-3 rounded-xl bg-slate-900/90 border ${dVal.isInside || isStarved ? 'border-amber-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2 min-w-0 flex-wrap">
-              <span class="w-3 h-3 rounded-full shrink-0" style="background:${dom.color}"></span>
-              <span class="font-bold text-slate-100 truncate">${dom.id}. ${dom.name}</span>
-              ${dVal.isInside ? '<span class="px-2 py-0.5 text-xs rounded bg-amber-500/20 text-amber-300 font-bold">🌱 現状の外へ広げる余白</span>' : '<span class="px-2 py-0.5 text-xs rounded bg-emerald-500/15 text-emerald-300 font-bold">現状の外</span>'}
-              <span class="px-2 py-0.5 text-xs rounded font-bold ${axisDiag.tagColor}">${axisDiag.tag}</span>
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border ${dVal.isInside || isStarved ? 'border-amber-500/40' : 'border-slate-800/80'} flex items-center justify-between gap-1.5">
+            <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dom.color}"></span>
+              <span class="font-bold text-xs sm:text-sm text-slate-100 truncate">${dom.id}. ${dom.name}</span>
+              ${dVal.isInside ? '<span class="px-1.5 py-0.5 text-[10px] rounded bg-amber-500/20 text-amber-300 font-bold shrink-0">現状内</span>' : '<span class="px-1.5 py-0.5 text-[10px] rounded bg-emerald-500/15 text-emerald-300 font-bold shrink-0">現状外</span>'}
+              <span class="px-1.5 py-0.5 text-[10px] rounded font-bold shrink-0 ${axisDiag.tagColor}">${axisDiag.tag}</span>
             </div>
-            <div class="flex items-center gap-3 shrink-0 font-bold">
+            <div class="flex items-center gap-2 shrink-0 font-bold text-xs sm:text-sm">
               <span class="${isStarved ? 'text-amber-300' : 'text-emerald-300'}">${sharePct}%</span>
-              <span class="text-xs text-slate-300 w-24 text-right">出力 ${domPowerPct}%</span>
+              <span class="text-[11px] text-slate-300 w-16 sm:w-20 text-right">出力${domPowerPct}%</span>
             </div>
           </div>
         `;
@@ -1050,7 +1050,7 @@
         badgeClass = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
         titleText = `【エネルギーの集中と伸びしろ】「${strongest.name}」に強い情熱が注がれています。ここに「${weakest1.name}・${weakest2.name}」の未来が加わると、車輪はさらに大きく回り始めます！`;
         storyParagraphs = [
-          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に素晴らしい臨場感とエネルギーが注がれています。一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>には、まだ手つかずの大きな余白が残っています（バランス距離 I = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
+          `いまあなたの心の中では、<strong>「${strongest.name}（構成比 ${(strongest.b*100).toFixed(1)}%）</strong>に素晴らしい臨場感とエネルギーが注がれています。一方で、<strong>「${weakest1.name}（構成比 ${(weakest1.b*100).toFixed(1)}%）」「${weakest2.name}（構成比 ${(weakest2.b*100).toFixed(1)}%）</strong>には、まだ手つかずの大きな余白が残っています（バランス距離 Imb = <strong>${m.imbKL.toFixed(3)}</strong>）。`,
           `10領域のすべてにあなたが心から望むゴールを配置したとき、特定の領域だけでなく人生全体の車輪が互いに引き合い、驚くほどスムーズに自動収束し始めます。いま余白がある領域にこそ、新しい未来を自由に描いてみましょう！`
         ];
       } else if (m.avgP >= 62 && m.avgQ >= 62 && m.avgE === minAvgAxis && axisSpread >= 12) {
@@ -1099,7 +1099,7 @@
         badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
         titleText = '【出力拡大フェーズ】10領域のバランスが綺麗に整っています！ここから車輪全体のサイズ（4軸の掛け算パワー）を大きく広げていける段階です！';
         storyParagraphs = [
-          `円グラフのバランス距離（I = <strong>${m.imbKL.toFixed(3)}</strong>）が小さく、10領域を偏りなく見渡せる素晴らしい土台があります。ここからさらに楽しくなるのは、正十角形チャートの推進パワー（現在平均 <strong>${m.powerScorePct}%</strong>）を大きく膨らませていくプロセスです。`,
+          `円グラフのバランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）が小さく、10領域を偏りなく見渡せる素晴らしい土台があります。ここからさらに楽しくなるのは、正十角形チャートの推進パワー（現在平均 <strong>${m.powerScorePct}%</strong>）を大きく膨らませていくプロセスです。`,
           `4つの感覚（①しっくりくる・②リアル感・③心から向かいたい・④できる確信）は<strong>掛け算</strong>で働くため、それぞれの軸を少しずつ引き上げるだけで、車輪全体の推進力は一気に何倍にも拡大します。`,
           `まずはあなたが一番ワクワクする領域から、「③心から向かいたい」と「④できる確信」のメモリを80%以上へ自由に広げてみましょう！`
         ];
@@ -1109,7 +1109,7 @@
         badgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
         titleText = '【フルスペック車輪】全10領域が「現状の外」に描かれ、4軸の掛け算パワーと10等分バランスが高い次元で調和しています！';
         storyParagraphs = [
-          `10領域すべてが「現状の外」に設定され、バランス距離（I = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
+          `10領域すべてが「現状の外」に設定され、バランス距離（Imb = <strong>${m.imbKL.toFixed(3)}</strong>）も小さく、4つの感覚（しっくり・リアル感・向かいたい・できる確信）の掛け算による推進パワー（<strong>${m.powerScorePct}%</strong>）も力強く満ちています！`,
           `リアル感（平均 ${m.avgP.toFixed(0)}%）・望ましさ（平均 ${m.avgQ.toFixed(0)}%）・エフィカシー（平均 ${m.avgE.toFixed(0)}%）の3条件が同時に満たされており、あなたが選んだ未来のコンフォートゾーンへ向かって力強く自動収束していく状態です。`,
           `この段階からさらに視座を高めるポイントは、<strong>「いま描いている10領域のゴール群を束ねる『より高次の役割（利他・社会への機能提供）』としてどんな新しい地平が見えるか」</strong>です。自分一人では見えにくいスコトーマ（盲点）の外側にある役割については、セッションまたはご自身のメンターとの壁打ちを通じてさらに自由に探求されることをお勧めします。`
         ];
@@ -1435,7 +1435,7 @@
       const lines = [
         '【未来確信舎 — BW未来臨場感チャート】',
         `🧭 チャート結果: ${title}`,
-        `・バランス距離 (I): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
+        `・バランス距離 (Imb): ${m.imbKL.toFixed(3)} (0に近いほど均等)`,
         `・車輪の推進パワー: ${m.powerScorePct}%`,
         `・現状の外の領域: ${m.outsideCount} / 10領域`,
         '--- 10領域の未来臨場感構成比 (推進パワー) ---'
